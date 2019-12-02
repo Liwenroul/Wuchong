@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var data=require('../data.json.js');
+var data=require('../data.json');
 var List=data.chapterList;
 router.get('/', function(req, res, next) {
   res.render('login', { title:'吾宠后台管理系统' });
