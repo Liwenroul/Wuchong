@@ -22,16 +22,24 @@ export default class chat extends Component {
                     ]}
                 >username</NavBar>
                     
-                        <Link to='/play' className='userschat'>
+                    <Link to='/play' className='userschat'>
                         <img src={img} style={{height:'40px',width:'40px',marginTop:"50px"}}/>
                         <div className='novel'>
                             hello
                         </div>
                     </Link> 
+                    <Link to='/play'>
+                    <img src={img} style={{height:'40px',width:'40px',marginTop:"50px",marginLeft:'300px'}}/>
+                        <div className='novel' style={{marginLeft:'300px'}}>
+                            hello
+                        </div>
+                    </Link>
                     
+                    <div style={{position:"absolute",top:636,width:300,height:30,backgroundColor:'#fff',opacity:1}}>
+                    <input style={{position:"absolute",width:300,height:30}}/>
+                    <button style={{position:"absolute",left:310,width:60,height:30}}>发送</button>
+                    </div>
                     
-                    <input style={{marginTop:430,width:300,height:30,float:'left'}}/>
-                    <button style={{marginTop:430,width:60,height:30}}>发送</button>
             </div>
         )
     }
