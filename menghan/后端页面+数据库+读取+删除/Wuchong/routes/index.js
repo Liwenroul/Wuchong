@@ -25,6 +25,7 @@ router.get('/dongtai', function(req, res, next) {
       console.log(err);
     }
     else{
+     
       res.render("dongtaiM",{dynamic:result});
       // console.log(result);
     }
@@ -33,6 +34,71 @@ router.get('/dongtai', function(req, res, next) {
 router.get('/zhuce', function(req, res, next) {
   res.render('zhuceM', {List:List});
 });
+router.post('/add',function(req,res,next){
+    var mName=req.body.user;
+    var mRealName= req.body.username;
+    var mPwd=req.body.pwd;
+    var mSex=req.body.mSex;
+    var mTel=req.body.mTel;
+    var mEmail=req.body.mEmail;
+    con.query("insert into manager(mId,mName,mRealName,mSex,mTel,mEmail,mPwd) values(?,?,?,?,?,?,?)",[parseInt((Math.random()*1000)),mName,mRealName,mSex,mTel,mEmail,mPwd],function(err,result){
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log(result);
+        res.redirect("/system");
+      }
+    });
+  });
+  router.get('/del',function(req,res,next){
+      var mId=req.query.mId;
+      con.query("delete from manager where mId=?",[mId],function(err,result){
+        if(err){
+          console.log(err);
+        }
+        else{
+          console.log(result);
+        res.redirect("/system");
+        }
+      });
+    });
+    router.get('/dela',function(req,res,next){
+      var activeId=req.query.activeId;
+      con.query("delete from active where activeId=?",[activeId],function(err,result){
+        if(err){
+          console.log(err);
+        }
+        else{
+          console.log(result);
+        res.redirect("/activity");
+        }
+      });
+    });    
+    router.get('/deld',function(req,res,next){
+      var dynamicId=req.query.dynamicId;
+      con.query("delete from dynamic where dynamicId=?",[dynamicId],function(err,result){
+        if(err){
+          console.log(err);
+        }
+        else{
+          console.log(result);
+        res.redirect("/dongtai");
+        }
+      });
+    });
+    router.get('/delu',function(req,res,next){
+      var userId=req.query.userId;
+      con.query("delete from userinfo where userId=?",[userId],function(err,result){
+        if(err){
+          console.log(err);
+        }
+        else{
+          console.log(result);
+        res.redirect("/userguanli");
+        }
+      });
+    });
 router.get('/activity', function(req, res, next) {
   con.query("select * from active",function(err,result){
     if(err){

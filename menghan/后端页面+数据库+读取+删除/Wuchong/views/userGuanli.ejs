@@ -151,7 +151,7 @@
                             <td><button onclick="showDaka()">打卡表</button></td>
                             <td>
                                     <button>编辑</button>
-                                    <button>删除</button>
+                                    <button><a href="/delu?userId=<%= userinfo[i]["userId"]%>">删除</a></button>
                             </td>
                         </tr>
                     <%}%>
@@ -173,11 +173,7 @@
                     </td>
                     
                   </table>
-                  <div class="bottom">
-                        <label><input type="radio" name="0" >全选</label>
-                        <button class="btn1">批量删除</button>
-                        <button class="btn2">批量操作</button>
-                  </div>
+                  
                   
             </div>
         </div>

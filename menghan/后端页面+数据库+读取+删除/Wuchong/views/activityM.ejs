@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>动态管理</title>
+    <title>娱乐管理</title>
     <link rel="stylesheet" href="../stylesheets/css.css">
 </head>
 <body>
@@ -17,10 +17,10 @@
             <div class="a">
                     <h1 onclick="showSystem()">系统管理</h1>
                 </div>
-                <div class="a" style="background: #1daea9;">
+                <div class="a">
                     <h1  onclick="showDongTai()">动态管理</h1>
                 </div>
-                <div class="a">
+                <div class="a" style="background: #1daea9;">
                     <h1 onclick="showAct()">娱乐管理</h1>
             </div>
             <div class="a">
@@ -29,57 +29,66 @@
         </div>
         <div class="main">
             <div class="top">
-                <h1>动态管理</h1>
+                <h1>活动管理</h1>
                 <button>查找和替换</button>
             </div>
-            <div class="botton">
+            <div class="bottonA">
                 <table>
                     <tr>
-                        <th style="width:6px;"> </th>
-                        <th>动态ID</th>
-                        <th>标题</th>
+                        <th style="width:2px;"> </th>
+                        <th>活动ID</th>
+                        <th>活动名</th>
+                        <th style="width: 300px;">活动内容</th>
                         <th>图片</th>
-                        <th>点赞次数</th>
-                        <th>用户ID</th>
-                        <th>操作</th>
+                        <th>活动城市</th>
+                        <th>报名者信息</th>
+                        <th>活动地址</th>
+                        <th>联系方式</th>
+                        <th style="width:100px;">操作</th>
                     </tr>
-                    <%for(var i=0;i < dynamic.length;i++){%>
+                    <%for(var i=0;i < active.length;i++){%>
                         <tr>
                             <td style="width:6px"><input type="checkbox"></td>
                             <td>
-                                <%= dynamic[i]["dynamicId"]%>
+                                <%= active[i]["activeId"]%>
                             </td>
                             <td>
-                                <%= dynamic[i]["dynamicContent"]%>
+                                <%= active[i]["activeName"]%>
+                            </td>
+                            <td style="width: 300px;">
+                                    <%= active[i]["acContent"]%>
+                            </td>
+                            <td><img src="../images/tou.png" alt="">
+                                <!-- <%= active[i]["acImg"]%> -->
                             </td>
                             <td>
-                                <!-- <%= dynamic[i]["dynamicImg"]%> -->
+                                <%= active[i]["acAddress"]%>
+                            </td>
+                            <td><button style="width: 60px;" onclick="showBaoming()">报名表</button></td>
+                            <td>
+                                <%= active[i]["acCity"]%>
                             </td>
                             <td>
-                                <%= dynamic[i]["likeNum"]%>
+                                <%= active[i]["acContact"]%>
                             </td>
-                            <td>
-                            <%= dynamic[i]["userid"]%>
-                            </td>
-                            <td>
+                            <!-- <td>
+                            <%= active[i]["userId"]%>
+                            </td> -->
+                            <td style="width:100px;">
                                     <button>编辑</button>
-                                    <button>删除</button>
+                                    <button><a href="/dela?activeId=<%= active[i]["activeId"]%>">删除</a></button>
                             </td>
                         </tr>
                     <%}%>
                     
                 </table>
-                <div class="bottom">
-                    <input type="checkbox" class="quanxuan"> 全选
-                    <button>批量删除</button>
-                    <button>批量操作</button>
-                </div>
+                
             </div>
         </div>
     </div>
 </body>
 <script>
-function showSystem() {
+    function showSystem() {
         window.location = "http://localhost:3000/system";
     }
     function showDongTai() {
@@ -90,6 +99,9 @@ function showSystem() {
     }
     function showUser() {
         window.location = "http://localhost:3000/userguanli";
+    }
+    function showBaoming() {
+        window.location = "http://localhost:3000/listb";
     }
 </script>
 </html>
