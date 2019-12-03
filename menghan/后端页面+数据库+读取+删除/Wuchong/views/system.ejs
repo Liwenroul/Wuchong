@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #login_form{
+    width:100%;
+    height:100%;
+    background-color:#fff;
+    margin:0 auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.title{
+    width:100%;
+    height:80px;
+    float: left;
+    color:#ffffff;
+    margin-bottom: 3%;
+    background-color:#1daea9;
+    border-bottom:1px solid #ffffff;
+    font-size:20pt;
+    font-family:"微软雅黑";
+    line-height:80px;				
+}
+.title img{
+    margin-top:10px;
+    margin-right: 7%;
+    margin-left: 1%;
+    width: 50px;
+    float: left;
+}
+.left{
+    height: 450px;
+    width: 250px;
+    border: 1px solid rgb(185, 183, 183);
+    float: left;
+}
+.a{
+    height: 100px;
+    width: 250px;
+    background-color: rgb(185, 183, 183);
+    margin-top: 10px;
+    float: left;
+    color: #fff;
+    text-align:center;
+}
+.main{
+    height: 450px;
+    width: 1000px;
+    border: 1px solid rgb(185, 183, 183);
+    float: left;
+    margin-left: 10px;
+}
+.top{
+    height: 100px;
+    width: 1000px;
+    border-bottom: 1px solid rgb(185, 183, 183);
+    float: left;
+}
+.botton{
+    text-align: center;
+}
+.botton button{
+    background-color: #1daea9;
+}
+.btn{
+    height: 50px;
+    width: 200px;
+    font-size: 15px;
+    text-align: center;
+    float: right;
+    margin-right: 100px;
+    margin-top: 50px;
+}
+.bottom{
+    bottom: 70px;
+    left: 300px;
+    position: absolute;
+}
+.btn1{
+    margin-left: 600px;
+}
+.btn2{
+    margin-left: 20px;
+}
+
+    </style>
+</head>
+<body>
+    <div id="login_form">
+        <div class="title">
+            <img src='../images/qi-4.png'/>	
+            吾宠后台管理系统			
+        </div>
+        <div class="left">
+            <div class="a" style="background: #1daea9;">
+                    <h1 onclick="showSystem()">系统管理</h1>
+                </div>
+                <div class="a">
+                    <h1  onclick="showDongTai()">动态管理</h1>
+                </div>
+                <div class="a">
+                    <h1 onclick="showAct()">娱乐管理</h1>
+            </div>
+            <div class="a">
+                <h1 onclick="showUser()">用户管理</h1>
+            </div>
+        </div>
+        <div class="main">
+            <div class="top">
+
+            </div>
+            <div class="botton">
+                <table cellspacing=5 cellpadding=10 width=900>
+                
+                    <tr>
+                      <th>ID</th>
+                      <th>用户名</th>
+                      <th>真实姓名</th>
+                      <th>性别</th>
+                      <th>手机号</th>
+                      <th>邮箱</th>
+                      <th>操作</th>
+                    </tr>
+                    <%for(var i=0;i < manager.length;i++){%>
+                        <tr>
+                            <td>
+                                <%= manager[i]["mId"]%>
+                            </td>
+                            <td>
+                                <%= manager[i]["mName"]%>
+                            </td>
+                            <td>
+                                <%= manager[i]["mRealName"]%>
+                            </td>
+                            <td>
+                                <%= manager[i]["mSex"]%>
+                            </td>
+                            <td>
+                            <%= manager[i]["mTel"]%>
+                            </td>
+                            <td><%= manager[i]["mEmail"]%></td>
+                            <td>
+                                    <button>编辑</button>
+                                    <button><a href="/del?mId=<%= manager[i]["mId"]%>">删除</a></button>
+                            </td>
+                        </tr>
+                    <%}%>
+                    
+                  </table>
+                  <button class="btn" onclick="showZhuce()">添加人员</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+function showSystem() {
+        window.location = "http://localhost:3000/system";
+    }
+function showZhuce() {
+        window.location = "http://localhost:3000/zhuce";
+    }
+    function showDongTai() {
+        window.location = "http://localhost:3000/dongtai";
+    }
+    function showAct() {
+        window.location = "http://localhost:3000/activity";
+    }
+    function showUser() {
+        window.location = "http://localhost:3000/userguanli";
+    }
+</script>
+</html>

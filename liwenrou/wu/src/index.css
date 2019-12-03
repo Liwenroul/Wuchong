@@ -1,0 +1,23 @@
+
+@import '~antd/dist/antd.css';
+
+*{
+  padding:0;
+  margin:0;
+}
+body{
+  
+  background-color:#fff;
+  
+}
+/* .content {
+  widows: 1200px;
+  margin:30px auto 0;
+} */
+
+.avatar-uploader>.ant-upload {
+  width:128px;
+  height: 128px;
+  border-radius: 64px;
+  overflow: hidden;
+}
