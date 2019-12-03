@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { NavBar, Icon, Tabs,Carousel } from 'antd-mobile';
 import { SearchBar, Button, WhiteSpace, WingBlank } from 'antd-mobile';
 import image from '../images/inner.png';
+import img1 from '../images/lg.png';
+import img2 from '../images/banner1.png';
+import img3 from '../images/banner2.png';
 import { List } from 'antd-mobile';
 import Chat from './guanzhu/chat';
 import {withRouter} from 'react-router-dom'
@@ -53,6 +56,21 @@ class AppGuanzhu extends Component {
                         {/* <Route path='/chat' component={Chat}> */}
                             <img src={image} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}} onClick={this.add}/>
                         {/* </Route> */}
+                        <div>
+                        <Item extra={'time'}>username</Item>
+                        <Item extra={'content'}>worldnum</Item>
+                        </div>      
+                        <img src={img1} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}} onClick={this.add}/>
+                        <div>
+                        <Item extra={'time'}>username</Item>
+                        <Item extra={'content'}>worldnum</Item>
+                        </div>
+                        <img src={img2} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}} onClick={this.add}/>
+                        <div>
+                        <Item extra={'time'}>username</Item>
+                        <Item extra={'content'}>worldnum</Item>
+                        </div>
+                        <img src={img3} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}} onClick={this.add}/>
                         <div>
                         <Item extra={'time'}>username</Item>
                         <Item extra={'content'}>worldnum</Item>
