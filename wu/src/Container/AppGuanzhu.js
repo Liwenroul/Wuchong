@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import { NavBar, Icon, Tabs,Carousel } from 'antd-mobile';
 import { SearchBar, Button, WhiteSpace, WingBlank } from 'antd-mobile';
-import image from '../images/inner.png';
-import img1 from '../images/lg.png';
-import img2 from '../images/banner1.png';
-import img3 from '../images/banner2.png';
+import image from '../img/images/tou.png';
 import { List } from 'antd-mobile';
-import Chat from './guanzhu/chat';
+// import Chat from './guanzhu/Chat';
 import {withRouter} from 'react-router-dom'
 import { BrowserRouter as Router,Route,Link} from 'react-router-dom';
 const Item = List.Item;
@@ -31,14 +28,20 @@ class AppGuanzhu extends Component {
       handleClick = () => {
         this.manualFocusInst.focus();
       };
+      change2 = () => {
+        this.props.history.push('/tab')
+      }
      
     render() {
         return (
             <div>
                 <NavBar
-                    style={{backgroundColor:'#3fcccb',color:'#000',height:'88px'}}
+                    style={{width:'100%',height:50,backgroundColor:'rgb(29,174,169)',color:'#fff',fontSize:'20px'}}
                     rightContent={[
                         <i style={{fontSize:22}} className='iconfont icon-gouwuche'></i>,
+                    ]}
+                    leftContent={[
+                        <i style={{fontSize:22}} className='iconfont icon-back' onClick={this.change2}></i>,
                     ]}
                 >关注</NavBar>
             <div style={{ padding: '15px 0' }}>
@@ -58,22 +61,7 @@ class AppGuanzhu extends Component {
                         {/* </Route> */}
                         <div>
                         <Item extra={'time'}>username</Item>
-                        <Item extra={'content'}>worldnum</Item>
-                        </div>      
-                        <img src={img1} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}} onClick={this.add}/>
-                        <div>
-                        <Item extra={'time'}>username</Item>
-                        <Item extra={'content'}>worldnum</Item>
-                        </div>
-                        <img src={img2} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}} onClick={this.add}/>
-                        <div>
-                        <Item extra={'time'}>username</Item>
-                        <Item extra={'content'}>worldnum</Item>
-                        </div>
-                        <img src={img3} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}} onClick={this.add}/>
-                        <div>
-                        <Item extra={'time'}>username</Item>
-                        <Item extra={'content'}>worldnum</Item>
+                        <Item extra={'content'}>wordnum</Item>
                         </div>
                     </List>
                     {/* <Route exact path='/chat' component={Chat}/> */}
