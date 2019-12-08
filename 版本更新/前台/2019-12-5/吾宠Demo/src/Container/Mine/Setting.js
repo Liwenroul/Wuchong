@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { List } from 'antd-mobile';
-import {Link} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 
 const Item = List.Item;
 const Brief = Item.Brief;
-export default class Setting extends Component {
+class Setting extends Component {
+    constructor(props){
+        super(props);
+    }
+    enter=()=>{
+        this.props.history.push("/UserSelf")
+    }
     render() {
         return (
             <div>
@@ -59,3 +65,5 @@ export default class Setting extends Component {
         )
     }
 }
+Setting=withRouter(Setting);
+export default Setting;

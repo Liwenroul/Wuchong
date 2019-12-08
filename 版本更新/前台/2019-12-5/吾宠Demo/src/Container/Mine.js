@@ -101,17 +101,7 @@ class Mine extends Component {
                     >
                      设置
                     </Item>
-                </List>
-      
-
-
-
-
-
-
-
-
-                
+                </List>  
             </div>
         )
     }

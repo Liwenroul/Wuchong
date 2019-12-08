@@ -10,7 +10,7 @@ class PersonalInfo extends Component {
         super(props);
     }
     edit=()=>{
-        this.props.history.push("/personalInfo/editUserInfo");
+        this.props.history.push("/editUserInfo");
     }
     render() {
         return (
@@ -24,12 +24,12 @@ class PersonalInfo extends Component {
                     <UploadImg/>
                 </div>
                 <div>
-                        <div style={{float:"left"}}>
-                            <span style={{fontSize:20,color:'black',position:'relative',top:'30%',left:'-280px'}}>用户名</span>
+                        <div style={{float:"left",position:'relative'}}>
+                            <span style={{fontSize:20,color:'black',position:'absolute',top:2,left:50}}>用户名</span>
                             <div style={{width:200,height:40,fontSize:20,float:'left',borderRadius:25,textAlign:'center',color:'#fff',marginLeft:130,backgroundColor:'rgb(29,174,169)',paddingTop:5}}>用户名</div>
                         </div>
-                        <div style={{float:"left"}}>
-                            <span style={{fontSize:20,color:'black',position:'relative',top:30,left:50}}>吾宠号</span>
+                        <div style={{float:"left",position:'relative',marginTop:20}}>
+                            <span style={{fontSize:20,color:'black',position:'absolute',left:50}}>吾宠号</span>
                             <div style={{width:200,height:40,fontSize:20,borderRadius:25,textAlign:'center',color:'#fff',marginLeft:130,backgroundColor:'rgb(29,174,169)',paddingTop:5}}>7657e89</div>
                         </div>
                         <div style={{float:"left"}}>

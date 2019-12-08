@@ -25,9 +25,12 @@ router.get('/dongtai', function(req, res, next) {
       console.log(err);
     }
     else{
+      // var a=result[0].dynamicImg;
      
+      // res.writeHead(200,{"Content-Type":"image/jpg"})
+      // var b=res.write(a,'binary');
       res.render("dongtaiM",{dynamic:result});
-      // console.log(result);
+      // console.log(b);
     }
   });
 });

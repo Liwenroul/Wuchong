@@ -34,6 +34,7 @@ import Setting from './Container/Mine/Setting';
 // import UploadImg from './Container/Mine/UploadImg';
 import EditUserInfo from './Container/Mine/EditUserInfo';
 import Mine from './Container/Mine';
+import UserSelf from './Container/Mine/Mchildren/UserSelf';
 
 
 
@@ -71,7 +72,7 @@ export default class App extends Component {
                     <Route path ='/play' component={Play}/>
 
                     {/* <Route path='/' component={Apptab} exact/> */}
-                    
+                    <Route path="/wode" component={Apptab}/>
                     <Route path='/mine' component={Mine}/>
                     <Route path='/personalInfo' component={PersonalInfo}/>
                     <Route path='/petInfo' component={PetInfo}/>
@@ -80,7 +81,7 @@ export default class App extends Component {
                     <Route path='/myAttention' component={MyAttention}/>
                     <Route path='/setting' component={Setting}/>
                     <Route path='/EditUserInfo' component={EditUserInfo}/>
-
+                    <Route path='/UserSelf' component={UserSelf}/>
                 </div>
             </Router>
         )
