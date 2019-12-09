@@ -20,8 +20,9 @@ export default class Play extends Component {
         this.state={
             value:0,
             points:'已关注',
-            mName:'',
-            mId:''
+            userName:'',
+            userAvatar:'',
+            userId:''
         }
     }
     change = () =>{
@@ -47,13 +48,24 @@ export default class Play extends Component {
     }
     componentDidMount(){
         // let page = this.props.match.params.id;
-        fetch('/manager')
+        fetch('/userinfo')
             .then((res)=>res.json())
             .then((res)=>{
                 console.log(res)
                 this.setState({
-                    mName:res[0].mName,
-                    mId:res[0].mId
+                    userName:res[0].userName,
+                    userAvatar:res[0].userAvatar,
+                    userId:res[0].userId
+                });
+            })
+            fetch('/dynamic')
+            .then((res)=>res.json())
+            .then((res)=>{
+                console.log(res)
+                this.setState({
+                    dynamicImg:res[0].dynamicImg,
+                    dynamicContent:res[0].dynamicContent
+                    
                 });
             })
     }
@@ -67,10 +79,10 @@ export default class Play extends Component {
                     ]}
                 >wuchongxiu</NavBar>
                 <div style={{heigth:'100px',width:'100%'}} className='userPlay'>
-                    <img src={img} style={{height:'100px',width:'100px',position:'relative',left:'0px'}}/>
+                    <img src={this.state.userAvatar} style={{height:'100px',width:'100px',position:'relative',left:'0px'}}/>
                     <div style={{width:'200px',position:'absolute',left:'120px',top:'122px'}}>
-                        <p>{this.state.mName}</p>
-                        <p>{this.state.mId}</p>
+                        <p>{this.state.userName}</p>
+                        <p>{this.state.userId}</p>
                     </div>
                 <div style={{fontSize:22,paddingTop:'30px',width:'200px',heigth:'100px',position:'relative',top:-90,left:280}} onClick={this.changeValue}>{this.state.points}</div>
                 </div>
@@ -78,11 +90,11 @@ export default class Play extends Component {
                         <Grid data={data1}
                         columnNum={2}
                         renderItem={dataItem => (
+
                             <div style={{height:175}}>
-                                <img src={img} style={{ width: '135px', height: '100px' ,marginTop:0}} alt="" className='space'/>
+                                <img src={this.state.dynamicImg} style={{ width: '135px', height: '100px' ,marginTop:0}} alt="" className='space'/>
                                 <div style={{ color: '#888', fontSize: '14px', marginTop: '12px' }}>
-                                    cum
-                                    <i style={{fontSize:22}} className='icon-svg-'></i>
+                                    {this.state.dynamicContent}
                                 </div>
                             </div>
                         )}

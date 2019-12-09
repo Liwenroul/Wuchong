@@ -16,7 +16,9 @@ class AppGuanzhu extends Component {
     constructor(props){
         super(props);
         this.state = {
-            mName:''
+            userName:'',
+            userAvatar:'',
+            userId:''
         }
     }
     add=()=>{
@@ -36,14 +38,17 @@ class AppGuanzhu extends Component {
       }
       componentDidMount(){
         // let page = this.props.match.params.id;
-        fetch('/manager')
+        fetch('/userinfo')
             .then((res)=>res.json())
             .then((res)=>{
                 console.log(res)
                 this.setState({
-                    mName:res[0].mName
+                    userName:res[0].userName,
+                    userAvatar:res[0].userAvatar,
+                    userId:res[0].userId
                 });
             })
+        
     }
     render() {
         return (
@@ -69,11 +74,12 @@ class AppGuanzhu extends Component {
             <div>
                 <div>
                     <List renderHeader={() => '我的消息'} className="my-list">
+                        
                         {/* <Route path='/chat' component={Chat}> */}
-                            <img src={image} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}} onClick={this.add}/>
+                            <img src={this.state.userAvatar} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}} onClick={this.add}/>
                         {/* </Route> */}
                         <div>
-                        <Item extra={'time'}>{this.state.mName}</Item>
+                        <Item extra={'time'}>{this.state.userName}</Item>
                         <Item extra={'content'}>wordnum</Item>
                         </div>
                     </List>

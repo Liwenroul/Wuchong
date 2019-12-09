@@ -7,7 +7,26 @@ import img from '../../img/images/tou.png';
 export default class Chat extends Component {
     constructor(props){
         super();
+        this.state={
+            userName:'',
+            userAvatar:'',
+            userId:''
+        }
     }
+        componentDidMount(){
+            // let page = this.props.match.params.id;
+            fetch('/userinfo')
+                .then((res)=>res.json())
+                .then((res)=>{
+                    console.log(res)
+                    this.setState({
+                        userName:res[0].userName,
+                        userAvatar:res[0].userAvatar,
+                        userId:res[0].userId
+                    });
+                })
+            
+        }
     change=()=>{
         this.props.history.push('/follow')
     }
@@ -23,7 +42,7 @@ export default class Chat extends Component {
                 >username</NavBar>
                     
                         <Link to='/play' className='userschat'>
-                        <img src={img} style={{height:'40px',width:'40px',marginTop:"50px"}}/>
+                        <img src={this.state.userAvatar} style={{height:'40px',width:'40px',marginTop:"50px"}}/>
                         <div className='novel'>
                             hello
                         </div>
