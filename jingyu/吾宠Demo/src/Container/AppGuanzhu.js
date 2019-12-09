@@ -16,7 +16,6 @@ class AppGuanzhu extends Component {
     constructor(props){
         super(props);
         this.state = {
-            data:[],
             mName:''
         }
     }
@@ -42,8 +41,7 @@ class AppGuanzhu extends Component {
             .then((res)=>{
                 console.log(res)
                 this.setState({
-                    data: res.data.content,
-                    mName:res.data.mName
+                    mName:res[0].mName
                 });
             })
     }
@@ -75,7 +73,7 @@ class AppGuanzhu extends Component {
                             <img src={image} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}} onClick={this.add}/>
                         {/* </Route> */}
                         <div>
-                        <Item extra={'time'}>mName</Item>
+                        <Item extra={'time'}>{this.state.mName}</Item>
                         <Item extra={'content'}>wordnum</Item>
                         </div>
                     </List>

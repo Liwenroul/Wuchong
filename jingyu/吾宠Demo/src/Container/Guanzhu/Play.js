@@ -19,7 +19,9 @@ export default class Play extends Component {
         super();
         this.state={
             value:0,
-            points:'已关注'
+            points:'已关注',
+            mName:'',
+            mId:''
         }
     }
     change = () =>{
@@ -43,6 +45,18 @@ export default class Play extends Component {
             }
         })
     }
+    componentDidMount(){
+        // let page = this.props.match.params.id;
+        fetch('/manager')
+            .then((res)=>res.json())
+            .then((res)=>{
+                console.log(res)
+                this.setState({
+                    mName:res[0].mName,
+                    mId:res[0].mId
+                });
+            })
+    }
     render() {
         return (
             <div>
@@ -55,8 +69,8 @@ export default class Play extends Component {
                 <div style={{heigth:'100px',width:'100%'}} className='userPlay'>
                     <img src={img} style={{height:'100px',width:'100px',position:'relative',left:'0px'}}/>
                     <div style={{width:'200px',position:'absolute',left:'120px',top:'122px'}}>
-                        <p>username</p>
-                        <p>userId</p>
+                        <p>{this.state.mName}</p>
+                        <p>{this.state.mId}</p>
                     </div>
                 <div style={{fontSize:22,paddingTop:'30px',width:'200px',heigth:'100px',position:'relative',top:-90,left:280}} onClick={this.changeValue}>{this.state.points}</div>
                 </div>
