@@ -25,12 +25,9 @@ router.get('/dongtai', function(req, res, next) {
       console.log(err);
     }
     else{
-      // var a=result[0].dynamicImg;
      
-      // res.writeHead(200,{"Content-Type":"image/jpg"})
-      // var b=res.write(a,'binary');
       res.render("dongtaiM",{dynamic:result});
-      // console.log(b);
+      // console.log(result);
     }
   });
 });
@@ -322,6 +319,18 @@ router.get('/listd', function(req, res, next) {
     }
     else{
       res.render("listd",{clockin:result});
+      // console.log(result);
+    }
+  });
+});
+router.get('/liste', function(req, res, next) {
+  var userId=req.query.userId
+  con.query("select * from clockin where userId=?",[userId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("liste",{clockin:result});
       // console.log(result);
     }
   });

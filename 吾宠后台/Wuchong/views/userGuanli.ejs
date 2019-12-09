@@ -141,7 +141,7 @@
                             </td>
                             <td><button><a href="/listp?userId=<%= userinfo[i]["userId"]%>">信息</a></button></td>
                             <td>ID</td>
-                            <td>123</td>
+                            <td><button onclick="showGuanzhu()">关注表</button></td>
                             <td>
                                     <%= userinfo[i]["userTel"]%>
                             </td>
@@ -163,7 +163,7 @@
                       <td>abc</td>
                       <td><button onclick="showPet()">信息</button></td>
                       <td>ID</td>
-                      <td>123</td>
+                      <td><button onclick="showGuanzhu()">关注表</button></td>
                       <td>123××××××××</td>
                       <td>******</td>
                       <td><button onclick="showDaka()">打卡表</button></td>
@@ -197,6 +197,9 @@ function showSystem() {
     }
     function showDaka() {
         window.location = "http://localhost:3000/listd";
+    }
+    function showGuanzhu() {
+        window.location = "http://localhost:3000/liste";
     }
 </script>
 </html>
