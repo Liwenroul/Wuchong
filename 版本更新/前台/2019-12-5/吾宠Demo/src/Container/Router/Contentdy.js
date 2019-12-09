@@ -13,13 +13,12 @@ export default class Contentdy extends React.Component{
     }
     componentDidMount(){
         let url = '/dynamic'
-        
         fetch(url)
             .then((res)=>res.json())
             .then((res)=>{
                 console.log(res);
                 this.setState({
-                    data:res,
+                    data:res
                     
                 })
             })

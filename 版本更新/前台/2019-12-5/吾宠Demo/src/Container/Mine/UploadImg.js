@@ -30,7 +30,6 @@ export default class UploadImg extends Component {
     loading: false,
     imageUrl:""
   };
-
   handleChange = info => {
     if (info.file.status === 'uploading') {
       this.setState({ loading: true });
@@ -47,6 +46,13 @@ export default class UploadImg extends Component {
     }
   };
   componentDidMount(){
+    fetch("/userinfo")
+    .then((res)=>res.json())
+    .then((res)=>{
+        this.setState({
+            imageUrl:res[0].userAvatar,
+        })
+    })
     this.setState({
       imageUrl:this.state.imageUrl,
       loading: false,
@@ -55,6 +61,7 @@ export default class UploadImg extends Component {
   render() {
     const uploadButton = (
       <div>
+        <img src={this.state.imageUrl}/>
         {/* <Icon type={this.state.loading ? 'loading' : 'plus'} />
         <div className="ant-upload-text">Upload</div> */}
         {/* <Avatar size={100} icon="user" /> */}

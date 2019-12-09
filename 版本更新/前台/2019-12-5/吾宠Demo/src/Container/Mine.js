@@ -4,6 +4,7 @@ import { List } from 'antd-mobile';
 import { Avatar,Upload, Icon, message } from 'antd';
 import {withRouter} from 'react-router-dom';
 import UploadImg from './Mine/UploadImg';
+// import M1 from './Mine/Component/M1';
 
 
 const Item = List.Item;
@@ -13,13 +14,22 @@ class Mine extends Component {
     constructor(props){
         super(props);
         this.state={
-            imageUrl:require("../img/images/2_05.png")
+            imageUrl:"",
+            data:[]
         }
     }
-    // img=(imageUrl)=>{
-    //     console.log(imageUrl);
-    //     return imageUrl;
-    // }
+    componentDidMount(){
+        fetch("/userinfo")
+        .then((res)=>res.json())
+        .then((res)=>{
+            // console.log(res[0].userId);
+            
+            this.setState({
+                imageUrl:res[0].userAvatar,
+                data:res[0].userName
+            })
+        })
+    }
     enter=()=>{
         this.props.history.push("/personalInfo");
 
@@ -51,9 +61,9 @@ class Mine extends Component {
                     <i style={{fontSize:22,color:'#fff'}} className='iconfont icon-back' onClick={this.change2}></i>
                 </div>
                 <div style={{width:80,height:80,borderRadius:40,position:'absolute',left:20,top:150,overflow:'hidden'}}>
-                    <img src={this.state.imageUrl}/>
+                    <img src={this.state.imageUrl} style={{width:80}}/>
                 </div>
-                <p style={{marginLeft:130,fontSize:20,fontWeight:'bolder'}}>用户名</p>
+    <p style={{marginLeft:130,fontSize:20,fontWeight:'bolder'}}>{this.state.data}</p>
                 <List>
                     <Item 
                         // activeStyle={{color:'rgb(29,174,169)'}}
