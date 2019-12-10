@@ -98,9 +98,35 @@ app.get('/active',function(err,res){
           console.log('[SELECT ERROR] - ', err.message);
           return;
       }
-      res.json(result); 
+      else{
+        res.json(result);
+        console.log(result[0].activeId);
+        // for(var i=0;i<result.length;i++){
+        //   app.get(`/active/ac${result[i]}`,function(err,res){
+        //     console.log("a");
+        //     con.query('select * from active where activeId=?',[result[i].activeId],function(err,result){
+        //         if(err){
+        //             console.log('[SELECT ERROR] - ', err.message);
+        //             return;
+        //         }
+        //         res.json(result); 
+        //     }); 
+        //   }) ;
+        // }
+      }
   }); 
 }) ;
+
+// app.get('/active/ac0',function(err,res){
+//   con.query('select * from active where activeId=?',["1"],function(err,result){
+//       if(err){
+//           console.log('[SELECT ERROR] - ', err.message);
+//           return;
+//       }
+//       res.json(result); 
+//   }); 
+// }) ;
+
 
 app.get('/clockin',function(err,res){
   con.query('select * from clockin',function(err,result){
@@ -184,6 +210,8 @@ app.get('/denglu',jsonParser,(req,res)=>{
   }); 
 }) 
 
+
+
 app.post('/userinfo1',(req,res)=>{
   let data=req.body;
   console.log(data);
@@ -223,6 +251,43 @@ app.post('/petinfo',(req,res)=>{
   })
 })
 
+app.post('/denglu',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  // let insertData = {
+  //   userId:data.userId,
+  // }
+  con.query("select * from denglu",function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+      if(result==[]){
+        con.query('insert into denglu(userId) values(?)',[data.userId],function(err,result){
+          if(err){
+                console.log(err);
+            }else{
+              console.log(result);
+              res.json(result);
+            }
+               
+        })
+      }
+      else{
+        con.query('update denglu set userId=?',[data.userId],function(err,result){
+          if(err){
+                console.log(err);
+            }else{
+              console.log(result);
+              res.json(result); 
+            }
+              
+        })
+      }
+    }
+  })
+  
+})
 
 var server = app.listen(8081, function () {
 
