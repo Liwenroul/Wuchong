@@ -50,6 +50,7 @@ CREATE TABLE `clockin` (
   `clockTime` varchar(20) NOT NULL,
   `userId` varchar(20) NOT NULL,
   `clockImg` varchar(100) DEFAULT NULL,
+  `clockCycle` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`clockId`),
   UNIQUE KEY `PK_ClockIn` (`clockId`),
   KEY `FK_ClockIn_UserInfo` (`userId`),
@@ -58,7 +59,7 @@ CREATE TABLE `clockin` (
 
 /*Data for the table `clockin` */
 
-insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`) values ('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg');
+insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`) values ('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('3','遛一遛',3,'11:30','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每周');
 
 /*Table structure for table `dynamic` */
 
