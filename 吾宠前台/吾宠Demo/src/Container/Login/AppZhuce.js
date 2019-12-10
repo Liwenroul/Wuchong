@@ -34,7 +34,7 @@ export default class AppZhuce extends Component {
         console.log(this.state.userName);
         const registerValue = {"userName":this.state.userName,"userTel": this.state.userTel,"userPassword": this.state.userPassword}
        
-        if(this.state.userName!=""&&this.state.userTel!=""&&this.states.userPassword!=""){
+        if(this.state.userName!=""&&this.state.userTel!=""&&this.state.userPassword!=""){
            fetch('/userinfo1', {
                  method: "POST",
                  headers: {
