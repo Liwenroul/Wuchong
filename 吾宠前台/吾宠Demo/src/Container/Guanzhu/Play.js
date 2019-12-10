@@ -53,7 +53,11 @@ export default class Play extends Component {
     }
     componentDidMount(){
         // let page = this.props.match.params.id;
-        let id = 1;
+        // let id = this.props.match.params.userId;
+        // let id=1;
+        let ip0 =this.props.location.search;
+        let id = ip0.slice(8);
+        // console.log("ip:",ip);
         fetch('/userinfo')
             .then((res)=>res.json())
             .then((res)=>{

@@ -6,6 +6,7 @@ import { List } from 'antd-mobile';
 // import Chat from './guanzhu/Chat';
 import {withRouter} from 'react-router-dom'
 import { BrowserRouter as Router,Route,Link} from 'react-router-dom';
+import Chat from './Guanzhu/Chat';
 const Item = List.Item;
 const Brief = Item.Brief;
 
@@ -26,9 +27,9 @@ class AppGuanzhu extends Component {
             num:[]
         }
     }
-    add=()=>{
-        this.props.history.push('/chat')
-    }
+    // add=()=>{
+    //     this.props.history.push('/chat?username=')
+    // }
       onChange= (value) => {
         this.setState({ value });
       };
@@ -95,23 +96,13 @@ class AppGuanzhu extends Component {
                         }
                     }
                 }
-                // for(var i =0;i<res.length;i++){
-                //     for(var j = 0;j<this.state.guanzhuId.length;i++){
-                //         if(res[i].userId == this.state.guanzhuId[j]){
-                //             this.setState({
-                //                 userName1:[...this.state.userName1,res[i].userName],
-                //                 userAvatar1:[...this.state.userAvatar1,res[i].userAvatar],
-                //                 userId:[...this.state.userId1,res[i].userId]
-                //             });
-                //         }   
-                //     }
-                    
-                // }
                 console.log("username:",this.state.userName,"userId:",this.state.userId);
             })
     }
     render() {
+        let {url} = this.props.match;
         return (
+            
             <div>
                 <NavBar
                     style={{width:'100%',height:50,backgroundColor:'rgb(29,174,169)',color:'#fff',fontSize:'20px'}}
@@ -142,20 +133,19 @@ class AppGuanzhu extends Component {
                             this.state.num.map((i)=>{
                                 return(
                                     <div>
-                                        <img src={this.state.userAvatar1[i]} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}} onClick={this.add}/>
+                                        <Link to={`/chat?userId:`+this.state.userId1[i]}>
+                                        <img src={this.state.userAvatar1[i]} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}}/>
+                                        </Link>
                                         <div>
                                             <Item extra={'time'}>{this.state.userName1[i]}</Item>
                                             <Item extra={'content'}>wordnum</Item>
                                         </div>
+                                        <Route path={url+'?userId:userId'} component={Chat}/>
                                     </div>
                                 )
                         
                             })
                         }
-                        {/* <div>
-                        <Item extra={'time'}>{this.state.userName}</Item>
-                        <Item extra={'content'}>wordnum</Item>
-                        </div> */}
                     </List>
                     {/* <Route exact path='/chat' component={Chat}/> */}
                 </div>
