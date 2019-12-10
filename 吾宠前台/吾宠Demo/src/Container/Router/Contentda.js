@@ -23,8 +23,15 @@ export default class Contentda extends React.Component{
                 })
             })
     }
-    bianji = () => {
+    bianji = (item) => {
         window.location='/bianji';
+
+    }
+    daka = () => {
+        alert('打卡成功');
+        var clock = document.getElementById('clock');
+        var clockStr = JSON.parse(clock.innerHTML)
+        clock.innerHTML = clockStr+1;
     }
     render(){
         return (
@@ -35,10 +42,10 @@ export default class Contentda extends React.Component{
                             {/* <img  src={require('../../img/images/img0.png')} style={{ width: '60px', height: '60px' }} alt="" /> */}
                             <div style={{ color: '#888', fontSize: '14px'}}>
                                 
-                                <div  style={{width:"65px",height:"60px",marginLeft:"28%",marginBottom:"15px",border:"3px dashed gray",borderRadius:"30px"}}>
-                                    <img src={item.clockImg} style={{ width: '60px', height: '60px' }} alt=""/>
+                                <div  style={{width:"70px",height:"70px",marginLeft:"28%",marginBottom:"15px",border:"3px dashed gray",borderRadius:"50%"}}>
+                                    <img src={item.clockImg} style={{ width: '60px', height: '60px',borderRadius:'50%' }} alt=""/>
                                 </div>
-                                <div style={{textAlign:'center'}}><button className='btn'>{item.clockName}</button>{item.clockNum}<button className='btn' onClick={this.bianji}>编辑</button></div>
+                                <div style={{textAlign:'center'}}><button className='btn' onClick={this.daka}>{item.clockName}</button><span style={{marginLeft:'10px'}} id='clock'>{item.clockNum}</span><button className='btn' onClick={()=>this.bianji(item)}>编辑</button></div>
                                 
                             </div> 
                             

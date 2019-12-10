@@ -112,6 +112,7 @@ export default class Contentda extends React.Component{
             </div>
           );
           const { imageUrl } = this.state;
+          console.log(this.state.data)
         return (
             <div>
                 {
@@ -121,18 +122,6 @@ export default class Contentda extends React.Component{
                             <div className='to'>
                                 <img src={item.clockImg} style={{ width: '105px', height: '105px',borderRadius:'50%' }} alt=""/>
                                 
-                                {/* <Upload
-                                    name="avatar"
-                                    listType="picture-card"
-                                    className="avatar-uploader"
-                                    showUploadList={false}
-                                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                    beforeUpload={beforeUpload}
-                                    onChange={this.handleChange}
-                                    // beforeUpload={this.handleBeforeUpload}
-                                >
-                                    {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '90px',height:'90px',borderRadius:'50%',marginLeft:'-8px',marginTop:'-8px'}} /> : uploadButton}
-                                </Upload> */}
                             </div>
                             <input type="text" placeholder={item.clockName} style={{textAlign:'center',marginLeft:'110px',marginTop:'20px',borderRadius:'5px',background:'#eee'}}/>
                         </div>
