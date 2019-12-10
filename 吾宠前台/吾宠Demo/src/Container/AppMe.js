@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import { NavBar,Flex,WhiteSpace} from 'antd-mobile';
 import activity1 from '../img/images/huodong1.jpg';
 import activity2 from '../img/images/huodong2.jpg';
-import {Link,Router,Route} from 'react-router-dom';  
+import {Link,Router,Route} from 'react-router-dom'; 
+import ContentAc from './Active/ContentAc' 
+import Detail1 from './Active/Detail1'
 // import Detail1 from './container/Detail1'
 
 export default class AppMe extends Component {
+
     render() {
         return (
             <div>
@@ -16,7 +19,7 @@ export default class AppMe extends Component {
                     </Link>
                 </NavBar>
                 <div className='container'>
-                    <WhiteSpace size="lg" />
+                    {/* <WhiteSpace size="lg" />
                     <Link to={`/detail1`}>
                         <Flex>
                             <Flex.Item><img src={activity1} style={{width:'100%'}}/></Flex.Item>
@@ -26,8 +29,10 @@ export default class AppMe extends Component {
                     <Flex>
                         <Flex.Item><img src={activity2} style={{width:'100%'}}/></Flex.Item>
                     </Flex>
-                    <WhiteSpace size="lg" />
+                    <WhiteSpace size="lg" /> */}
+                    <ContentAc/>
                 </div>
+                
             </div>
         )
     }

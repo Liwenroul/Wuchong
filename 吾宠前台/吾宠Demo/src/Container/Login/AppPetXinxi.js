@@ -13,7 +13,7 @@ export default class AppPetXinxi extends Component {
                         <Icon type="right" key="0"  />
                         // </Link>
                     ]}
-                    onClick={() => {window.location.href = 'http://localhost:3000/tab'}}
+                    onClick={() => {window.location='/tab'}}
                     >添加宠物
                 </NavBar>
                 <WingBlank>

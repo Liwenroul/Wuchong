@@ -7,9 +7,20 @@ import {WingBlank, WhiteSpace} from 'antd-mobile'
 export default class Detail1 extends React.Component{
     constructor(){
         super();
-        this.state = {
-            data: []
+        this.state={
+            data:[]
         }
+    }
+    componentDidMount(){
+        let url='/active';
+        fetch(url)
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res);
+            this.setState({
+                data:res
+            })
+        })
     }
     // back=()=>{
     //     window.history.back();
@@ -21,7 +32,7 @@ export default class Detail1 extends React.Component{
                     <i style={{float:'right',fontSize:'30px',color:'#1daea9'}} 
                     className='iconfont icon-icon-' key='close'></i>  
                 </Link>
-                <div className='title'>
+                {/* <div className='title'>
                     <WingBlank size='lg'>
                         <h2 style={{fontSize:'30px'}}>爱牙牙</h2>
                         <WhiteSpace size='sm'/>
@@ -40,6 +51,25 @@ export default class Detail1 extends React.Component{
                                 重视；提高大家对宠物口腔疾病预防的意识。让宠
                                 物主任都行动起来--健康养宠生活，从爱护她们的
                                 牙齿开始！
+                            </p>
+                        </WingBlank>
+                    </div>
+                </div> */}
+                <div className='title'>
+                    <WingBlank size='lg'>
+                        <h2 style={{fontSize:'30px'}}>{this.state.data.activeName}</h2>
+                        <WhiteSpace size='sm'/>
+                        {/* <p style={{color:'grey'}}>活动地点：{this.state.acAddress}</p> */}
+                    </WingBlank>
+                </div>
+                <WhiteSpace size='lg'/>
+                <img src={ayy} style={{width:'100%'}}/>
+                <div className='content'>
+                    <div className='container' style={{width:'90%',margin:'0 auto'}}>
+                        <WhiteSpace size='sm'/>
+                        <WingBlank>
+                            <p style={{fontSize:'22px',lineHeight:'35px'}}>&nbsp;&nbsp;&nbsp;
+                                {/* {this.state.acContent} */}
                             </p>
                         </WingBlank>
                     </div>

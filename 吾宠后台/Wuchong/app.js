@@ -30,6 +30,7 @@ var listtRouter = require('./routes/list');
 var listpRouter = require('./routes/index');
 var listbRouter = require('./routes/index');
 var listdRouter = require('./routes/index');
+var listeRouter = require('./routes/index');
 var dongtaiRouter = require('./routes/index');
 var zhuceRouter = require('./routes/index');
 var editMRouter = require('./routes/index');
@@ -59,6 +60,7 @@ app.use('/listt', listtRouter);
 app.use('/listp', listpRouter);
 app.use('/listb', listbRouter);
 app.use('/listd', listdRouter);
+app.use('/liste', listeRouter);
 app.use('/zhuce', zhuceRouter);
 app.use('/editM', editMRouter);
 app.use('/editD', editDRouter);
@@ -135,6 +137,16 @@ app.get('/petinfo',function(err,res){
       }
       res.json(result); 
   }); 
+});
+
+app.get('/guanzhu',function(req,res){
+  con.query('select * from guanzhu',function(err,result){
+    if(err){
+      console.log('[SELECT ERROR]-',err.message);
+      return;
+    }
+    res.json(result);
+  });
 });
 
 app.get('/signup',function(err,res){

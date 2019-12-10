@@ -25,12 +25,9 @@ router.get('/dongtai', function(req, res, next) {
       console.log(err);
     }
     else{
-      // var a=result[0].dynamicImg;
      
-      // res.writeHead(200,{"Content-Type":"image/jpg"})
-      // var b=res.write(a,'binary');
       res.render("dongtaiM",{dynamic:result});
-      // console.log(b);
+      // console.log(result);
     }
   });
 });
@@ -263,6 +260,20 @@ router.post('/add',function(req,res,next){
         }
       });
     });
+    router.get('/delguanzhu',function(req,res,next){
+      var clockId=req.query.clockId;
+      var userId=req.query.userId;
+      con.query("SET FOREIGN_KEY_CHECKS=0")
+      con.query("delete from guanzhu where userId=?",[userId],function(err,result){
+        if(err){
+          console.log(err);
+        }
+        else{
+          console.log(result);
+        res.redirect(`/liste?userId=${userId}`);
+        }
+      });
+    });
 router.get('/activity', function(req, res, next) {
   con.query("select * from active",function(err,result){
     if(err){
@@ -322,6 +333,18 @@ router.get('/listd', function(req, res, next) {
     }
     else{
       res.render("listd",{clockin:result});
+      // console.log(result);
+    }
+  });
+});
+router.get('/liste', function(req, res, next) {
+  var userId=req.query.userId
+  con.query("select * from guanzhu where userId=?",[userId],function(err,result){
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("liste",{guanzhu:result});
       // console.log(result);
     }
   });

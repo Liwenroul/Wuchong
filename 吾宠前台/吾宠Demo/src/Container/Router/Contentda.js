@@ -36,7 +36,7 @@ export default class Contentda extends React.Component{
                             <div style={{ color: '#888', fontSize: '14px'}}>
                                 
                                 <div  style={{width:"65px",height:"60px",marginLeft:"28%",marginBottom:"15px",border:"3px dashed gray",borderRadius:"30px"}}>
-                                    <img src={require('../../img/images/shop1.png')} style={{ width: '60px', height: '60px' }} alt=""/>
+                                    <img src={item.clockImg} style={{ width: '60px', height: '60px' }} alt=""/>
                                 </div>
                                 <div style={{textAlign:'center'}}><button className='btn'>{item.clockName}</button>{item.clockNum}<button className='btn' onClick={this.bianji}>编辑</button></div>
                                 

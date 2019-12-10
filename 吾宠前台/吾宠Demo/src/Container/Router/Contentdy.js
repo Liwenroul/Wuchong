@@ -51,7 +51,7 @@ export default class Contentdy extends React.Component{
                     this.state.data.map((item)=>(
                         <div key={item.id} style={{height: '400px',background:'#eee'}}>
                             <img
-                                src={require('../../img/images/shoutu.png')}
+                                src={item.dynamicImg}
                                 alt=""
                                 style={{ width: '100%', verticalAlign: 'top' }}
                                 onLoad={() => {
