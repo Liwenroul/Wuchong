@@ -61,6 +61,17 @@ CREATE TABLE `clockin` (
 
 insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`) values ('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('3','遛一遛',3,'11:30','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每周');
 
+/*Table structure for table `denglu` */
+
+DROP TABLE IF EXISTS `denglu`;
+
+CREATE TABLE `denglu` (
+  `userId` varchar(20) NOT NULL,
+  PRIMARY KEY (`userId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+/*Data for the table `denglu` */
+
 /*Table structure for table `dynamic` */
 
 DROP TABLE IF EXISTS `dynamic`;
