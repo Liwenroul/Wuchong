@@ -68,29 +68,22 @@
             </thead>
 
             <tbody id="result"></tbody>
-            <%for(var i=0;i < clockin.length;i++){%>
+            <%for(var i=0;i < guanzhu.length;i++){%>
                 <tr>
                     <td>
-                                <%= clockin[i]["userId"]%>
+                                <%= guanzhu[i]["userId"]%>
                     </td>
                     <td>
-                        <%= clockin[i]["clockId"]%>
+                        <%= guanzhu[i]["guanzhuId"]%>
                     </td>
-                    <td>
-                        <%= clockin[i]["clockName"]%>
-                    </td>
-                    <td>
-                            <%= clockin[i]["clockNum"]%>
-                    </td>
-                    <td>
-                        <%= clockin[i]["clockTime"]%>
-                    </td><td></td>
+                    
+                    <td></td>
                     <td>
                     <button>
                         编辑
                     </button></td><td></td>
                     <td>
-                            <button><a href="/delclock?clockId=<%=clockin[i]["clockId"]%>&&userId=<%=clockin[i]["userId"]%>">
+                            <button><a href="/delGuanzhu?Id=<%=guanzhu[i]["Id"]%>&&userId=<%=guanzhu[i]["userId"]%>">
                                 删除</a>
                             </button>
                     </td>
@@ -99,7 +92,7 @@
             
         </table>
         <div id="foot">
-            <p style="float: left;"onclick="showUser()">返回上一页</p>
+            <p style="float: left;" onclick="showUser()">返回上一页</p>
             <p style="float: right;">确认</p>
         </div>
         

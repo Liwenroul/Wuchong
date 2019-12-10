@@ -139,6 +139,16 @@ app.get('/petinfo',function(err,res){
   }); 
 });
 
+app.get('/guanzhu',function(req,res){
+  con.query('select * from guanzhu',function(err,result){
+    if(err){
+      console.log('[SELECT ERROR]-',err.message);
+      return;
+    }
+    res.json(result);
+  });
+});
+
 app.get('/signup',function(err,res){
   con.query('select * from signup',function(err,result){
       if(err){
