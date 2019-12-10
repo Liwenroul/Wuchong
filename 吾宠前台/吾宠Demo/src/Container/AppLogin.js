@@ -5,27 +5,57 @@ import {Link,Route} from 'react-router-dom'
 import AppTab from './Apptab'
 import  AppZhuce from './Login/AppZhuce'
 import AppForget from './Login/AppForget';
-import Data from '../data.json'
+// import Data from '../data.json'
 export default class AppLogin extends Component {
-    
+    constructor(){
+        super();
+        this.state={
+            data:[],
+        }
+    }
+    componentDidMount(){
+    let url = '/userinfo'
+        
+        fetch(url)
+            .then((res)=>res.json())
+            .then((res)=>{
+                console.log(res);
+                this.setState({
+                    data:res,
+                })
+            })
+        }
      check=()=>{
         var loginname = document.getElementById("username");
         var password = document.getElementById("pwd");
-            if(loginname.value===Data.users[0].username && password.value===Data.users[0].password){
-                alert("success!");
-                window.location = 'tab';
+        
+        if(loginname.value!==null){
+            for(var i=1;i<this.state.data.length;i++){
+                if(loginname.value===this.state.data[i].userName && password.value===this.state.data[i].userPassword){
+                    alert("success!");
+                    window.location = 'tab';
+                }
+                if(loginname.value===this.state.data[i].userName && password.value!==this.state.data[i].userPassword){
+                    alert("error!");
+                }
+                // else if(loginname.value===this.state.data[1].userName && password.value===this.state.data[1].userPassword){
+                //     alert("success!");
+                //     window.location = 'tab';
+                // }
+                // else if(loginname.value===this.state.data[2].userName && password.value===this.state.data[2].userPassword){
+                //     alert("success!");
+                //     window.location = 'tab';
+                // }
+                // else if(loginname.value===this.state.data[3].userName && password.value===this.state.data[3].userPassword){
+                //     alert("success!");
+                //     window.location = 'tab';
+                // }
+                
             }
-            else if(loginname.value===Data.users[1].username && password.value===Data.users[1].password){
-                alert("success!");
-                window.location = 'tab';
-            }
-            else if(loginname.value===Data.users[2].username && password.value===Data.users[2].password){
-                alert("success!");
-                window.location = 'tab';
-            }
-            else{
-                alert("未完成验证");
-            }
+        }
+        else{
+            alert("未完成验证");
+        }
     }
     render() {
         return (
