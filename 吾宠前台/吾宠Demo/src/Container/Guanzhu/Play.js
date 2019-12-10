@@ -5,10 +5,10 @@ import { Grid } from 'antd-mobile';
 // import Chat from './chat'
 import './guanzhu.css'
 
-const data = Array.from(new Array(2)).map((_val, i) => ({
-  icon: require('../../img/images/1.jpg'),
-  text: `name${i}`,
-}));
+// const data = Array.from(new Array(2)).map((_val, i) => ({
+//   icon: require('../../img/images/1.jpg'),
+//   text: `name${i}`,
+// }));
 
 const data1 = Array.from(new Array(2)).map(() => ({
   icon: 'https://gw.alipayobjects.com/zos/rmsportal/WXoqXTHrSnRcUwEaQgXJ.png',
@@ -16,13 +16,18 @@ const data1 = Array.from(new Array(2)).map(() => ({
 
 export default class Play extends Component {
     constructor(props){
-        super();
+        super(props);
         this.state={
             value:0,
             points:'已关注',
+            data:[],
             userName:'',
             userAvatar:'',
-            userId:''
+            userId:'',
+            dynamicImg:[],
+            dynamicContent:[],
+            dynamicId:[],
+            num:[]
         }
     }
     change = () =>{
@@ -48,25 +53,42 @@ export default class Play extends Component {
     }
     componentDidMount(){
         // let page = this.props.match.params.id;
+        let id = 1;
         fetch('/userinfo')
             .then((res)=>res.json())
             .then((res)=>{
                 console.log(res)
-                this.setState({
-                    userName:res[0].userName,
-                    userAvatar:res[0].userAvatar,
-                    userId:res[0].userId
-                });
+                for(var i =0;i<res.length;i++){
+                    if(res[i].userId == id){
+                        this.setState({
+                            userName:res[i].userName,
+                            userAvatar:res[i].userAvatar,
+                            userId:res[i].userId
+                        });
+                    }   
+                }
+                console.log("username:",this.state.userName,"userId:",this.state.userId);
+                
             })
             fetch('/dynamic')
             .then((res)=>res.json())
             .then((res)=>{
                 console.log(res)
-                this.setState({
-                    dynamicImg:res[0].dynamicImg,
-                    dynamicContent:res[0].dynamicContent
-                    
-                });
+                for(var i = 0;i<res.length;i++){
+                    if(res[i].userid == this.state.userId){
+                        this.setState({
+                            dynamicImg:[...this.state.dynamicImg,res[i].dynamicImg],
+                            dynamicContent:[...this.state.dynamicContent,res[i].dynamicContent]
+                        });
+                    }
+                }
+                for(var i = 0;i<this.state.dynamicContent.length;i++){
+                    this.setState({
+                        num:[...this.state.num,i],
+                    })
+                }
+                console.log("dynamicImg:",this.state.dynamicImg,"dynamicContent:",this.state.dynamicContent);
+                console.log("num:",this.state.num)
             })
     }
     render() {
@@ -87,7 +109,19 @@ export default class Play extends Component {
                 <div style={{fontSize:22,paddingTop:'30px',width:'200px',heigth:'100px',position:'relative',top:-90,left:280}} onClick={this.changeValue}>{this.state.points}</div>
                 </div>
                 <div className='userspace'>
-                        <Grid data={data1}
+                    {
+                        this.state.num.map((i)=>{
+                            return(
+                                <div style={{height:175}}>
+                                    <img src={this.state.dynamicImg[i]} style={{ width: '135px', height: '100px' ,marginTop:0}} alt="" className='space'/>
+                                    <div style={{ color: '#888', fontSize: '14px', marginTop: '12px' }}>
+                                        {this.state.dynamicContent[i]}
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                        {/* <Grid data={data1}
                         columnNum={2}
                         renderItem={dataItem => (
 
@@ -98,7 +132,17 @@ export default class Play extends Component {
                                 </div>
                             </div>
                         )}
-                        />
+                        /> */}
+                        
+                        {/* {this.state.num.map(()=>{
+                            <div style={{height:175}}>
+                            <img src={this.state.dynamicImg} style={{ width: '135px', height: '100px' ,marginTop:0}} alt="" className='space'/>
+                            <div style={{ color: '#888', fontSize: '14px', marginTop: '12px' }}>
+                                {this.state.dynamicContent}
+                            </div>
+                            </div>
+
+                        })}  */}
                 </div>
             </div>
         )

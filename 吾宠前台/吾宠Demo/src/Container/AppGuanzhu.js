@@ -18,7 +18,12 @@ class AppGuanzhu extends Component {
         this.state = {
             userName:'',
             userAvatar:'',
-            userId:''
+            userId:'',
+            userName1:[],
+            userAvatar1:[],
+            userId1:[],
+            guanzhuId:[],
+            num:[]
         }
     }
     add=()=>{
@@ -38,17 +43,72 @@ class AppGuanzhu extends Component {
       }
       componentDidMount(){
         // let page = this.props.match.params.id;
+        let id = 1;
         fetch('/userinfo')
             .then((res)=>res.json())
             .then((res)=>{
                 console.log(res)
-                this.setState({
-                    userName:res[0].userName,
-                    userAvatar:res[0].userAvatar,
-                    userId:res[0].userId
-                });
+                for(var i =0;i<res.length;i++){
+                    if(res[i].userId == id){
+                        this.setState({
+                            userName:res[i].userName,
+                            userAvatar:res[i].userAvatar,
+                            userId:res[i].userId
+                        });
+                    }   
+                }
+                console.log("username:",this.state.userName,"userId:",this.state.userId);
             })
-        
+            fetch('/guanzhu')
+            .then((res)=>res.json())
+            .then((res)=>{
+                console.log(res);
+                for(var i = 0;i<res.length;i++){
+                    if(res[i].userId == this.state.userId){
+                        this.setState({
+                            guanzhuId:[...this.state.guanzhuId,res[i].guanzhuId]
+                        })
+                    }
+                    
+                }
+                console.log("关注ID:",this.state.guanzhuId);
+                for(var i =0;i<this.state.guanzhuId.length;i++){
+                    this.setState({
+                        num:[...this.state.num,i]
+                    })
+                    
+                }
+                console.log("num:",this.state.num);
+            })
+            fetch('/userinfo')
+            .then((res)=>res.json())
+            .then((res)=>{
+                console.log(res);
+                for(var i=0;i<this.state.guanzhuId.length;i++){
+                    for(var j=0;j<res.length;j++){
+                        if(res[j].userId == this.state.guanzhuId[i]){
+                            this.setState({
+                                userId1:[...this.state.userId1,res[j].userId],
+                                userAvatar1:[...this.state.userAvatar1,res[j].userAvatar],
+                                userName1:[...this.state.userName1,res[j].userName]
+                            })
+                        }
+                    }
+                }
+                // for(var i =0;i<res.length;i++){
+                //     for(var j = 0;j<this.state.guanzhuId.length;i++){
+                //         if(res[i].userId == this.state.guanzhuId[j]){
+                //             this.setState({
+                //                 userName1:[...this.state.userName1,res[i].userName],
+                //                 userAvatar1:[...this.state.userAvatar1,res[i].userAvatar],
+                //                 userId:[...this.state.userId1,res[i].userId]
+                //             });
+                //         }   
+                //     }
+                    
+                // }
+                console.log("username:",this.state.userName,"userId:",this.state.userId);
+            })
     }
     render() {
         return (
@@ -76,12 +136,26 @@ class AppGuanzhu extends Component {
                     <List renderHeader={() => '我的消息'} className="my-list">
                         
                         {/* <Route path='/chat' component={Chat}> */}
-                            <img src={this.state.userAvatar} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}} onClick={this.add}/>
+                            {/* <img src={this.state.userAvatar} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}} onClick={this.add}/> */}
                         {/* </Route> */}
-                        <div>
+                        {
+                            this.state.num.map((i)=>{
+                                return(
+                                    <div>
+                                        <img src={this.state.userAvatar1[i]} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}} onClick={this.add}/>
+                                        <div>
+                                            <Item extra={'time'}>{this.state.userName1[i]}</Item>
+                                            <Item extra={'content'}>wordnum</Item>
+                                        </div>
+                                    </div>
+                                )
+                        
+                            })
+                        }
+                        {/* <div>
                         <Item extra={'time'}>{this.state.userName}</Item>
                         <Item extra={'content'}>wordnum</Item>
-                        </div>
+                        </div> */}
                     </List>
                     {/* <Route exact path='/chat' component={Chat}/> */}
                 </div>
