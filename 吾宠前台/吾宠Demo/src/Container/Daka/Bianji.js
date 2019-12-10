@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavBar,DatePickerView} from 'antd-mobile';
 import { Upload, Icon, message,Modal } from 'antd';
+import Contentbianji from '../Router/Contentbianji';
 
 function getBase64(img, callback) {
     const reader = new FileReader();
@@ -97,7 +98,8 @@ export default class Add extends Component {
                             leftContent={<i style={{fontSize:22,color:'white'}} className='iconfont icon-back' onClick={this.clockin}></i>}
                             rightContent={<i style={{fontSize:22,color:'white'}} className='iconfont icon-duihao' onClick={this.clockin}></i> }
                         >编辑</NavBar>
-                    <div className="add">
+                    <Contentbianji/>
+                    {/* <div className="add">
                         <div className='to'>
                             <Upload
                                 name="avatar"
@@ -135,7 +137,7 @@ export default class Add extends Component {
                             mode='time'
                             itemStyle={{color:'rgb(29,174,169)',fontSize:20}}
                         />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         )
