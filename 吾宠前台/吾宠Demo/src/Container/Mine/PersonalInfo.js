@@ -8,6 +8,23 @@ import {withRouter} from 'react-router-dom';
 class PersonalInfo extends Component {
     constructor(props){
         super(props);
+        this.state={
+            imageUrl:"",
+            userName:"",
+            userId:"",
+        }
+    }
+    componentDidMount(){
+        fetch("/userinfo")
+        .then((res)=>res.json())
+        .then((res)=>{
+            // console.log(res[0].userId);
+            this.setState({
+                imageUrl:res[0].userAvatar,
+                userName:res[0].userName,
+                userId:"wuchong"+res[0].userId
+            })
+        })
     }
     edit=()=>{
         this.props.history.push("/editUserInfo");
@@ -26,11 +43,11 @@ class PersonalInfo extends Component {
                 <div>
                         <div style={{float:"left",position:'relative'}}>
                             <span style={{fontSize:20,color:'black',position:'absolute',top:2,left:50}}>用户名</span>
-                            <div style={{width:200,height:40,fontSize:20,float:'left',borderRadius:25,textAlign:'center',color:'#fff',marginLeft:130,backgroundColor:'rgb(29,174,169)',paddingTop:5}}>用户名</div>
+        <div style={{width:200,height:40,fontSize:20,float:'left',borderRadius:25,textAlign:'center',color:'#fff',marginLeft:130,backgroundColor:'rgb(29,174,169)',paddingTop:5}}>{this.state.userName}</div>
                         </div>
                         <div style={{float:"left",position:'relative',marginTop:20}}>
                             <span style={{fontSize:20,color:'black',position:'absolute',left:50}}>吾宠号</span>
-                            <div style={{width:200,height:40,fontSize:20,borderRadius:25,textAlign:'center',color:'#fff',marginLeft:130,backgroundColor:'rgb(29,174,169)',paddingTop:5}}>7657e89</div>
+        <div style={{width:200,height:40,fontSize:20,borderRadius:25,textAlign:'center',color:'#fff',marginLeft:130,backgroundColor:'rgb(29,174,169)',paddingTop:5}}>{this.state.userId}</div>
                         </div>
                         <div style={{float:"left"}}>
                             <div onClick={this.edit} style={{width:300,height:40,fontSize:20,borderRadius:25,textAlign:'center',color:'#fff',marginLeft:37,marginTop:30,backgroundColor:'rgb(29,174,169)',paddingTop:5}}>编辑</div>

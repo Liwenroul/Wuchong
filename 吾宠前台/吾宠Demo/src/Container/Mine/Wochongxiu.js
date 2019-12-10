@@ -3,15 +3,36 @@ import {Link} from 'react-router-dom';
 import { Grid ,Modal, Button, WhiteSpace, WingBlank} from 'antd-mobile';
 const operation = Modal.operation;
 
-const data =["2_05.png","2_08.png"].map((_val, i) => ({
-    icon: require(`../../img/images/${_val}`),
-    text: `name${i}`,
-    dataId:`${i}`
-  }));
+const data =[];
 
 export default class Wochongxiu extends Component {
     componentDidMount(){
         this.render();
+    }
+    constructor(props){
+        super(props);
+        this.state={
+            dataImg:[]
+        }
+    }
+    componentDidMount(){
+        fetch("/dynamic")
+        .then((res)=>res.json())
+        .then((res)=>{
+            for(var i=0;i<res.length;i++){
+                if(res[i].userid="1"){
+                    this.setState({
+                        dataImg:[...this.state.dataImg,res[i].dynamicImg]
+                    })
+                }
+            }
+            console.log(this.state.dataImg);
+            data =this.state.dataImg.map((_val, i) => ({
+                icon: `${_val}`,
+                text: `name${i}`,
+                dataId:`${i}`
+            }));
+        })
     }
     render() {
         return (

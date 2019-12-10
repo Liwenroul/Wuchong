@@ -3,6 +3,49 @@ import { NavBar, Icon,WingBlank} from 'antd-mobile';
 import {Link,Route} from 'react-router-dom'
 
 export default class AppPetXinxi extends Component {
+    constructor(){
+        super();
+        this.state={
+            petName:"",
+            petSex:"",
+            petAge:""
+        }
+    }
+    nameChange=(e)=>{
+        console.log(e.target.value);
+        this.setState({
+            petName:e.target.value
+        })
+    }
+    sexChange=(e)=>{
+        console.log(e.target.value);
+        this.setState({
+            petSex:e.target.value
+        })
+    }
+    ageChange=(e)=>{
+        console.log(e.target.value);
+        this.setState({
+            petAge:e.target.value
+        })
+    }
+    register=()=>{
+        console.log(this.state.petName);
+        const registerValue = {"petName":this.state.petName,"petSex": this.state.petSex,"petAge": this.state.petAge}
+       
+        if(this.state.petName!=""&&this.state.petSex!=""&&this.state.petAge!=""){
+           fetch('/petinfo', {
+                 method: "POST",
+                 headers: {
+                     "Content-type":"application/json;charset=utf-8",
+                 },
+                 body:JSON.stringify(registerValue) ,
+            }).then( res => res.text())
+              .then( data => {
+                  console.log(data);
+              });
+            }
+     }
     render() {
         return (
             <div style={{background:'#fff'}}>
@@ -13,7 +56,7 @@ export default class AppPetXinxi extends Component {
                         <Icon type="right" key="0"  />
                         // </Link>
                     ]}
-                    onClick={() => {window.location='/tab'}}
+                    onClick={() => {window.location="/tab"}}
                     >添加宠物
                 </NavBar>
                 <WingBlank>
@@ -21,11 +64,11 @@ export default class AppPetXinxi extends Component {
                     <img style={{width:'80%',marginLeft:'25px'}} src={require('../../img/images/tou.png')}/>
                 </div>
                 <div style={{height: '350px',background:'#fff'}}>
-                    <input style={{width:'100%',margin:'0 auto',lineHeight:3,marginTop:20,borderRadius:'20px',textAlign:'center',border:'1px solid #33cccc'}} type='text' id='petname' name='petname' placeholder='宠物昵称' />
-                    <input style={{width:'100%',margin:'0 auto',lineHeight:3,marginTop:20,borderRadius:'20px',textAlign:'center',border:'1px solid #33cccc'}} type='text'  id='sex' name='sex' placeholder='性别' />
-                    <input style={{width:'100%',margin:'0 auto',lineHeight:3,marginTop:20,borderRadius:'20px',textAlign:'center',border:'1px solid #33cccc'}} type='text' id='age' name='age' placeholder='年龄' />
+                    <input onChange={this.nameChange} style={{width:'100%',margin:'0 auto',lineHeight:3,marginTop:20,borderRadius:'20px',textAlign:'center',border:'1px solid #33cccc'}} type='text' id='petname' name='petname' placeholder='宠物昵称' />
+                    <input onChange={this.sexChange} style={{width:'100%',margin:'0 auto',lineHeight:3,marginTop:20,borderRadius:'20px',textAlign:'center',border:'1px solid #33cccc'}} type='text'  id='sex' name='sex' placeholder='性别' />
+                    <input onChange={this.ageChange} style={{width:'100%',margin:'0 auto',lineHeight:3,marginTop:20,borderRadius:'20px',textAlign:'center',border:'1px solid #33cccc'}} type='text' id='age' name='age' placeholder='年龄' />
                     <Link to='/tab' style={{width:'100%',height:50,paddingLeft:'105px'}}>
-                    <input type='submit' style={{width:'45%',height:50,background:'#1daea9',color:'#fff',borderRadius:'40px',fontSize:25,marginTop:20}} value='确定'/>
+                    <input onClick={this.register} type='submit' style={{width:'45%',height:50,background:'#1daea9',color:'#fff',borderRadius:'40px',fontSize:25,marginTop:20}} value='确定'/>
                     </Link>
                     
                 </div>

@@ -2,6 +2,24 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
 
 export default class EditUserInfo extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            userName:"",
+            userId:"",
+        }
+    }
+    componentDidMount(){
+        fetch("/userinfo")
+        .then((res)=>res.json())
+        .then((res)=>{
+            // console.log(res[0].userId);
+            this.setState({
+                userName:res[0].userName,
+                userId:"wuchong"+res[0].userId
+            })
+        })
+    }
     render() {
         return (
             <div style={{background:'#fff'}}>
@@ -11,11 +29,11 @@ export default class EditUserInfo extends Component {
                 </div>
                 <div style={{color:'rgb(29,174,169)',fontSize:18,marginTop:20,marginLeft:20}}>
                     用户名：
-                    <input type='text' style={{border:'1px solid #fff',borderBottom:'1px solid rgb(29,174,169)'}}/>
+                    <input type='text' value={this.state.userName} style={{border:'1px solid #fff',borderBottom:'1px solid rgb(29,174,169)'}}/>
                 </div>
                 <div style={{color:'rgb(29,174,169)',fontSize:18,marginTop:20,marginLeft:20}}>
                     吾宠号：
-                    <input type='text' style={{border:'1px solid #fff',borderBottom:'1px solid rgb(29,174,169)'}}/>
+                    <input type='text' value={this.state.userId} style={{border:'1px solid #fff',borderBottom:'1px solid rgb(29,174,169)'}}/>
                 </div>
             </div>
         )
