@@ -260,20 +260,20 @@ router.post('/add',function(req,res,next){
         }
       });
     });
-    // router.get('/delguanzhu',function(req,res,next){
-    //   var clockId=req.query.clockId;
-    //   var userId=req.query.userId;
-    //   con.query("SET FOREIGN_KEY_CHECKS=0")
-    //   con.query("delete from guanzhu where userId=?",[userId],function(err,result){
-    //     if(err){
-    //       console.log(err);
-    //     }
-    //     else{
-    //       console.log(result);
-    //     res.redirect(`/liste?userId=${userId}`);
-    //     }
-    //   });
-    // });
+    router.get('/delguanzhu',function(req,res,next){
+      var clockId=req.query.clockId;
+      var userId=req.query.userId;
+      con.query("SET FOREIGN_KEY_CHECKS=0")
+      con.query("delete from guanzhu where userId=?",[userId],function(err,result){
+        if(err){
+          console.log(err);
+        }
+        else{
+          console.log(result);
+        res.redirect(`/liste?userId=${userId}`);
+        }
+      });
+    });
 router.get('/activity', function(req, res, next) {
   con.query("select * from active",function(err,result){
     if(err){
