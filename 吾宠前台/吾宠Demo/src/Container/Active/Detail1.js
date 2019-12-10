@@ -2,17 +2,22 @@ import React from 'react';
 import {Link,Route} from 'react-router-dom';
 import ayy from '../../img/images/ayy.jpg'
 // import children from '..../images/ji.jpg'
-import {WingBlank, WhiteSpace} from 'antd-mobile'
+
+
 // 无状态组件
 export default class Detail1 extends React.Component{
     constructor(){
         super();
         this.state={
-            data:[]
+            data:[],
         }
     }
     componentDidMount(){
-        let url='/active';
+        let page = this.props.match.params.activeId;
+        console.log(page)
+        let url='/active/ac'+page;
+       
+
         fetch(url)
         .then((res)=>res.json())
         .then((res)=>{
@@ -20,7 +25,10 @@ export default class Detail1 extends React.Component{
             this.setState({
                 data:res
             })
+            console.log(this.state.data[0].acContent)
         })
+        
+        
     }
     // back=()=>{
     //     window.history.back();
@@ -32,6 +40,22 @@ export default class Detail1 extends React.Component{
                     <i style={{float:'right',fontSize:'30px',color:'#1daea9'}} 
                     className='iconfont icon-icon-' key='close'></i>  
                 </Link>
+                <div style={{marginTop:'20px'}} >
+                {
+                    this.state.data.map((item)=>(
+                        <div key={item.activeId} style={{height:'550px',width:'100%'}}>
+                            <h2>{item.activeName}</h2>
+                            <p>{item.acAddress}</p>
+                            <img src={item.acImg} style={{width:'100%',height:'350px'}}/>
+                            <div>
+                                {item.acContent}
+                            </div>
+                            {/* {this.state.data[0].acContent} */}
+                        </div>
+                    ))
+                }
+                
+                </div>
                 {/* <div className='title'>
                     <WingBlank size='lg'>
                         <h2 style={{fontSize:'30px'}}>爱牙牙</h2>
@@ -55,25 +79,6 @@ export default class Detail1 extends React.Component{
                         </WingBlank>
                     </div>
                 </div> */}
-                <div className='title'>
-                    <WingBlank size='lg'>
-                        <h2 style={{fontSize:'30px'}}>{this.state.data.activeName}</h2>
-                        <WhiteSpace size='sm'/>
-                        {/* <p style={{color:'grey'}}>活动地点：{this.state.acAddress}</p> */}
-                    </WingBlank>
-                </div>
-                <WhiteSpace size='lg'/>
-                <img src={ayy} style={{width:'100%'}}/>
-                <div className='content'>
-                    <div className='container' style={{width:'90%',margin:'0 auto'}}>
-                        <WhiteSpace size='sm'/>
-                        <WingBlank>
-                            <p style={{fontSize:'22px',lineHeight:'35px'}}>&nbsp;&nbsp;&nbsp;
-                                {/* {this.state.acContent} */}
-                            </p>
-                        </WingBlank>
-                    </div>
-                </div>
                 <Link to='/signup' style={{color:'#3fcccb',float:'right'}}>点此报名</Link>
             </div>
         )

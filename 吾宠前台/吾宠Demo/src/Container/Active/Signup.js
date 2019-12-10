@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {NavBar, WingBlank,WhiteSpace} from 'antd-mobile'
 import {Link} from 'react-router-dom'
+import { Item } from 'rc-menu';
 
 
  const handleChange=()=>{
@@ -22,7 +23,15 @@ export default class Signup extends Component {
             <div style={{background:'#fff'}}>
                 <NavBar style={{width:'100%',height:50,backgroundColor:'rgb(29,174,169)',color:'#fff',fontSize:'20px'}}
                     rightContent={[
-                    <Link to='/detail1' key='signup'><i style={{color:'white',fontSize:'30px'}} className='iconfont icon-icon-' key='close1'></i></Link>
+                    
+                        <i style={{color:'white',fontSize:'30px'}} className='iconfont icon-icon-' key='close1'
+                            onClick={
+                                ()=>{
+                                    window.history.back();
+                                }
+                            }
+                        ></i>
+                        
                     ]} key='signup'
                 >报名</NavBar>
                 <WhiteSpace size='lg'/>

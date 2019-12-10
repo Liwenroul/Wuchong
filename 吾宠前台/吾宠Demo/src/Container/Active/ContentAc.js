@@ -7,7 +7,7 @@ export default class ContentAc extends Component {
         super();
         this.state={
             data:[]
-        }
+        }           
     }
     componentDidMount(){
         let url='/active';
@@ -27,7 +27,7 @@ export default class ContentAc extends Component {
                     this.state.data.map((item)=>(
                         <div key={item.activeId} style={{height:'150px'}}>
                             <WhiteSpace size="lg" />
-                                <Link to={`/detail1`}>
+                                <Link to={`/detail1/`+item.activeId}>
                                     <Flex>
                                         <Flex.Item><img src={item.acImg} style={{width:'100%',height:'130px',borderRadius:'10px'}}/>
                                         <h1 style={{color:'white',position:'relative',top:'-80px',left:'20px'}}>{item.activeName}</h1>

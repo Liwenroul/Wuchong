@@ -31,6 +31,7 @@ export default class AppMe extends Component {
                     </Flex>
                     <WhiteSpace size="lg" /> */}
                     <ContentAc/>
+                    {/* <Route path='/detail1/:activeId' component={Detail1}/> */}
                 </div>
                 
             </div>
