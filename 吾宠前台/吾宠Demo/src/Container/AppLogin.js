@@ -14,9 +14,9 @@ export default class AppLogin extends Component {
         }
     }
     componentDidMount(){
-    let url = '/userinfo'
+    // let url = '/userinfo'
         
-        fetch(url)
+        fetch('/userinfo')
             .then((res)=>res.json())
             .then((res)=>{
                 console.log(res);
@@ -32,6 +32,18 @@ export default class AppLogin extends Component {
         if(loginname.value!==null){
             for(var i=1;i<this.state.data.length;i++){
                 if(loginname.value===this.state.data[i].userName && password.value===this.state.data[i].userPassword){
+                    const registerValue = {"userId":this.state.data[i].userId}
+                    fetch('/denglu', {
+                        method: "POST",
+                        headers: {
+                            "Content-type":"application/json;charset=utf-8",
+                        },
+                        body:JSON.stringify(registerValue) ,
+                   }).then( res => res.text())
+                     .then( data => {
+                         console.log(data);
+                     });
+                   
                     alert("success!");
                     window.location = 'tab';
                 }
