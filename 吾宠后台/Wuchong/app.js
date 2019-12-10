@@ -12,6 +12,9 @@ var logger = require('morgan');
 var app = express();
 con.connect();
 
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
+
 
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -159,7 +162,8 @@ app.get('/signup',function(err,res){
   }); 
 });
 
-app.get('/userinfo',function(err,res){
+app.get('/userinfo',jsonParser,(req,res)=>{
+  // console.log(req.body);
   con.query('select * from userinfo',function(err,result){
       if(err){
           console.log('[SELECT ERROR] - ', err.message);
@@ -168,6 +172,46 @@ app.get('/userinfo',function(err,res){
       res.json(result); 
   }); 
 }) 
+
+app.post('/userinfo1',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  let insertData = {
+    userId:"wuchong"+parseInt(Math.random()*1000000),
+    userName:data.userName,
+    userTel:data.userTel,
+    userPassword:data.userPassword,
+    userAvatar:""
+  }
+  con.query('insert into userinfo(userId,userName,userTel,userPassword,userAvatar) values(?,?,?,?,?)',[insertData.userId,insertData.userName,insertData.userTel,insertData.userPassword,insertData.userAvatar],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+
+app.post('/petinfo',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  let insertData = {
+    petId:"pet"+parseInt(Math.random()*1000000),
+    petName:data.petName,
+    petSex:data.petSex,
+    petAge:data.petAge,
+    userId:"1",
+    petImg:""
+  }
+  con.query('insert into petinfo(petId,petName,petSex,petAge,userId,petImg) values(?,?,?,?,?,?)',[insertData.petId,insertData.petName,insertData.petSex,insertData.petAge,insertData.userId,insertData.petImg],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+
 
 var server = app.listen(8081, function () {
 
