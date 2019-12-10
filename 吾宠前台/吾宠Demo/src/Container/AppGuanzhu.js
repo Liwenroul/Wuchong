@@ -7,6 +7,7 @@ import { List } from 'antd-mobile';
 import {withRouter} from 'react-router-dom'
 import { BrowserRouter as Router,Route,Link} from 'react-router-dom';
 import Chat from './Guanzhu/Chat';
+import { message } from 'antd';
 const Item = List.Item;
 const Brief = Item.Brief;
 
@@ -42,6 +43,21 @@ class AppGuanzhu extends Component {
       change2 = () => {
         this.props.history.push('/tab')
       }
+    //   searchClick=()=>{
+    //       if(this.state.condition.searchStr == ''){
+    //           message.warning('请输入查询条件！')
+    //           return;
+    //       }
+    //       else{
+              
+    //       }
+    //   }
+    //   handleKeydown = (e) =>{
+    //     console.log("yes");
+    //     if(e.keyCode === 13){
+    //         this.searchClick()
+    //     }
+    //   }
       componentDidMount(){
         // let page = this.props.match.params.id;
         let id = 1;
@@ -117,13 +133,15 @@ class AppGuanzhu extends Component {
                 <WingBlank>
                     {/* <PlaceHolder /> */}
                     <div>
-                        <SearchBar placeholder="搜索" maxLength={8} />
+                        <SearchBar placeholder="搜索" maxLength={8}
+                        //  onKeydown={this.handleKeydown}
+                          />
                         <WhiteSpace />
                     </div>
                 </WingBlank>
             </div>
             <div>
-                <div>
+                <div className='Mylist'>
                     <List renderHeader={() => '我的消息'} className="my-list">
                         
                         {/* <Route path='/chat' component={Chat}> */}
