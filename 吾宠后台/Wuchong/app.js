@@ -173,6 +173,17 @@ app.get('/userinfo',jsonParser,(req,res)=>{
   }); 
 }) 
 
+app.get('/denglu',jsonParser,(req,res)=>{
+  // console.log(req.body);
+  con.query('select * from denglu',function(err,result){
+      if(err){
+          console.log('[SELECT ERROR] - ', err.message);
+          return;
+      }
+      res.json(result); 
+  }); 
+}) 
+
 app.post('/userinfo1',(req,res)=>{
   let data=req.body;
   console.log(data);
