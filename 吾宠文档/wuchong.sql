@@ -28,16 +28,13 @@ CREATE TABLE `active` (
   `acAddress` varchar(50) NOT NULL,
   `acCity` varchar(20) NOT NULL,
   `acContact` varchar(50) NOT NULL,
-  `userid` varchar(20) NOT NULL,
   PRIMARY KEY (`activeId`),
-  UNIQUE KEY `PK_Active` (`activeId`),
-  KEY `FK_Active_UserInfo` (`userid`),
-  CONSTRAINT `active_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `userinfo` (`userId`)
+  UNIQUE KEY `PK_Active` (`activeId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `active` */
 
-insert  into `active`(`activeId`,`activeName`,`acContent`,`acImg`,`acAddress`,`acCity`,`acContact`,`userid`) values ('1','爱牙牙','      牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。让宠物主人都行动起 来——健康养宠生活，从爱护它们的 牙齿开始！ ','https://liwenroul.github.io/Wuchong/img/active/d5.jpeg','石家庄市裕华区','石家庄','756273648','1'),('2','狗狗运动会','      牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。让宠物主人都行动起 来——健康养宠生活，从爱护它们的 牙齿开始！ ','https://liwenroul.github.io/Wuchong/img/active/d4.jpeg','石家庄市建设路','石家庄','324537887','2');
+insert  into `active`(`activeId`,`activeName`,`acContent`,`acImg`,`acAddress`,`acCity`,`acContact`) values ('1','爱牙牙','      牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。让宠物主人都行动起 来——健康养宠生活，从爱护它们的 牙齿开始！ ','https://liwenroul.github.io/Wuchong/img/active/d5.jpeg','石家庄市裕华区','石家庄','756273648'),('2','狗狗运动会','      牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。让宠物主人都行动起 来——健康养宠生活，从爱护它们的 牙齿开始！ ','https://liwenroul.github.io/Wuchong/img/active/d4.jpeg','石家庄市建设路','石家庄','324537887');
 
 /*Table structure for table `clockin` */
 
@@ -59,7 +56,7 @@ CREATE TABLE `clockin` (
 
 /*Data for the table `clockin` */
 
-insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`) values ('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('3','遛一遛',3,'11:30','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每周');
+insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`) values ('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('3','遛一遛',3,'11:30','2','https://liwenroul.github.io/Wuchong/img/active/d4.jpeg','每周');
 
 /*Table structure for table `denglu` */
 
@@ -72,6 +69,8 @@ CREATE TABLE `denglu` (
 
 /*Data for the table `denglu` */
 
+insert  into `denglu`(`userId`) values ('4');
+
 /*Table structure for table `dynamic` */
 
 DROP TABLE IF EXISTS `dynamic`;
@@ -81,16 +80,16 @@ CREATE TABLE `dynamic` (
   `dynamicImg` varchar(100) DEFAULT NULL,
   `dynamicContent` text NOT NULL,
   `likeNum` int(10) DEFAULT NULL,
-  `userid` varchar(20) NOT NULL,
+  `userId` varchar(20) NOT NULL,
   PRIMARY KEY (`dynamicId`),
   UNIQUE KEY `PK_Dynamic` (`dynamicId`),
-  KEY `FK_Dynamic_UserInfo` (`userid`),
+  KEY `FK_Dynamic_UserInfo` (`userId`),
   CONSTRAINT `dynamic_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `userinfo` (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `dynamic` */
 
-insert  into `dynamic`(`dynamicId`,`dynamicImg`,`dynamicContent`,`likeNum`,`userid`) values ('1','https://liwenroul.github.io/Wuchong/img/dynamic/d1.jpeg','带狗狗晒太阳喽！！！',3,'3'),('2','https://liwenroul.github.io/Wuchong/img/dynamic/d2.jpeg','      牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。',200,'1');
+insert  into `dynamic`(`dynamicId`,`dynamicImg`,`dynamicContent`,`likeNum`,`userId`) values ('1','https://liwenroul.github.io/Wuchong/img/dynamic/d1.jpeg','带狗狗晒太阳喽！！！',3,'4'),('2','https://liwenroul.github.io/Wuchong/img/dynamic/d2.jpeg','牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。',200,'1'),('3','https://liwenroul.github.io/Wuchong/img/dynamic/d2.jpeg','今天带狗狗美容啦，可爱吗？',NULL,'4');
 
 /*Table structure for table `guanzhu` */
 
@@ -105,7 +104,7 @@ CREATE TABLE `guanzhu` (
 
 /*Data for the table `guanzhu` */
 
-insert  into `guanzhu`(`Id`,`guanzhuId`,`userId`) values ('1','1','2'),('',NULL,NULL);
+insert  into `guanzhu`(`Id`,`guanzhuId`,`userId`) values ('1','1','2'),('2','1','4'),('3','2','4'),('4','3','4');
 
 /*Table structure for table `manager` */
 
@@ -146,7 +145,7 @@ CREATE TABLE `petinfo` (
 
 /*Data for the table `petinfo` */
 
-insert  into `petinfo`(`petId`,`petName`,`petSex`,`petAge`,`userId`,`petImg`) values ('2','爱爱','男',4,'1','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('3','团子','女',2,'2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg');
+insert  into `petinfo`(`petId`,`petName`,`petSex`,`petAge`,`userId`,`petImg`) values ('1','小小','女',2,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar1.jpeg'),('2','爱爱','男',4,'1','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('3','团子','女',2,'2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('4','可可','男',3,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('5','笑笑','女',4,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar2.jpeg'),('pet425125','兔兔','女',2,'1',''),('pet924184','小熊','男',3,'4','');
 
 /*Table structure for table `signup` */
 
@@ -161,7 +160,7 @@ CREATE TABLE `signup` (
   `spetKind` varchar(20) NOT NULL,
   `activeId` varchar(20) NOT NULL,
   `userId` varchar(20) NOT NULL,
-  PRIMARY KEY (`signName`),
+  PRIMARY KEY (`signId`),
   UNIQUE KEY `PK_SignUp` (`signName`),
   KEY `FK_SignUp_Active` (`activeId`),
   KEY `FK_SignUp_UserInfo` (`userId`),
@@ -171,7 +170,7 @@ CREATE TABLE `signup` (
 
 /*Data for the table `signup` */
 
-insert  into `signup`(`signId`,`signName`,`signTel`,`spetName`,`spetAge`,`spetKind`,`activeId`,`userId`) values ('1','小李','6756434789','黑子',5,'柯基','2','1');
+insert  into `signup`(`signId`,`signName`,`signTel`,`spetName`,`spetAge`,`spetKind`,`activeId`,`userId`) values ('1','小李','6756434789','黑子',5,'柯基','2','1'),('2','小黄','5748796898','可可',3,'博美','1','4');
 
 /*Table structure for table `userinfo` */
 
@@ -189,7 +188,7 @@ CREATE TABLE `userinfo` (
 
 /*Data for the table `userinfo` */
 
-insert  into `userinfo`(`userId`,`userName`,`userTel`,`userPassword`,`userAvatar`) values ('1','小李','27498749','123456','https://liwenroul.github.io/Wuchong/img/avatar/avatar1.jpeg'),('2','小赵','767569238','76476587','https://liwenroul.github.io/Wuchong/img/avatar/avatar2.jpeg'),('3','小郑','645788456','65656237','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('4','小黄','123456','123456','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg');
+insert  into `userinfo`(`userId`,`userName`,`userTel`,`userPassword`,`userAvatar`) values ('1','小李','27498749','123456','https://liwenroul.github.io/Wuchong/img/avatar/avatar1.jpeg'),('2','小赵','767569238','76476587','https://liwenroul.github.io/Wuchong/img/avatar/avatar2.jpeg'),('3','小郑','645788456','65656237','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('4','小黄','123456','123456','https://liwenroul.github.io/Wuchong/img/avatar/avatar2.jpeg');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
