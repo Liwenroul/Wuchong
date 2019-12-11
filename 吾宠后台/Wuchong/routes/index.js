@@ -3,6 +3,11 @@ var router = express.Router();
 var data=require('../data.json');var List=data.chapterList;
 var mysql=require('mysql');
 var dbconfig = require('../config/dbconfig.json');
+var bodyParser=require('body-parser');
+var app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 var con = mysql.createConnection(dbconfig);
 con.connect();
 router.get('/', function(req, res, next) {
@@ -19,18 +24,37 @@ router.get('/system', function(req, res, next) {
       }
     });
 });
+
+
 router.get('/dongtai', function(req, res, next) {
   con.query("select * from dynamic",function(err,result){
     if(err){
       console.log(err);
     }
     else{
-     
       res.render("dongtaiM",{dynamic:result});
       // console.log(result);
     }
   });
 });
+
+router.post('/dongtai',function(req,res,next){
+var search_result = JSON.stringify(req.body.search_Dongtai).slice(1,-1);
+console.log(search_result);
+  var selectSQL = "select * from dynamic where dynamicId=?";
+  console.log(selectSQL);
+  con.query(selectSQL,search_result,function(err,result){
+    console.log(result);
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("dongtaiM",{dynamic:result});
+    }
+  })
+})
+
+
 router.get('/zhuce', function(req, res, next) {
   res.render('zhuceM', {List:List});
 });
@@ -83,6 +107,7 @@ router.post('/editDynamic',function(req,res,next){
   var dynamicContent=req.body.content;
   var dynamicImg= req.body.img;
   var likeNum=req.body.num;
+ 
   con.query("update dynamic set dynamicContent=?,dynamicImg=?,likeNum=? where dynamicId=?",[dynamicContent,dynamicImg,likeNum,dynamicId],function(err,result){
     if(err){
       console.log(err);
@@ -349,10 +374,6 @@ router.get('/liste', function(req, res, next) {
     }
   });
 });
-var bodyParser=require('body-parser');
-var app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
 // /* POST 登录验证 && GET login page. */
 router.get('/login', function(req, res, next) {
