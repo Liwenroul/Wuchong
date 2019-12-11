@@ -322,6 +322,29 @@ app.post('/dynamic',(req,res)=>{
         res.json(result); 
   })
 })
+app.post('/signup1',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  let insertData = {
+    signId:"active"+parseInt(Math.random()*1000000),
+    signName:data.signName,
+    signTel:data.signTel,
+    spetName:data.spetName,
+    spetAge:data.spetAge,
+    spetKind:data.spetKind,
+    activeId:data.activeId,
+    userId:data.userId
+  }
+  con.query('insert into signup(signId,signName,signTel,spetName,spetAge,spetKind,activeId,userId) values(?,?,?,?,?,?,?,?)'
+  ,[insertData.signId,insertData.signName,insertData.signTel,insertData.spetName,insertData.spetAge
+  ,insertData.spetKind,insertData.activeId,insertData.userId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
 
 
 
