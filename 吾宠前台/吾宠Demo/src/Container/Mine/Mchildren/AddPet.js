@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { NavBar, Icon,WingBlank} from 'antd-mobile';
 import {Link,Route} from 'react-router-dom'
+import UploadImgPet from "../UploadImgPet";
 
 export default class AddPet extends Component {
     constructor(){
         super();
         this.state={
+            petImg:"",
             petName:"",
             petSex:"",
             petAge:"",
@@ -20,6 +22,12 @@ export default class AddPet extends Component {
             this.setState({
                 dengluId:res[0].userId
             })
+        })
+    }
+    addImg=(petImg)=>{
+        console.log(petImg);
+        this.setState({
+            petImg:petImg
         })
     }
     nameChange=(e)=>{
@@ -43,10 +51,10 @@ export default class AddPet extends Component {
 
     register=()=>{
         console.log(this.state.petName);
-        const registerValue = {"petName":this.state.petName,"petSex": this.state.petSex,"petAge": this.state.petAge,"userId":this.state.dengluId}
+        const registerValue = {"petImg":this.state.petImg,"petName":this.state.petName,"petSex": this.state.petSex,"petAge": this.state.petAge,"userId":this.state.dengluId}
        
         if(this.state.petName!=""&&this.state.petSex!=""&&this.state.petAge!=""){
-           fetch('/petinfo', {
+           fetch('/petinfo1', {
                  method: "POST",
                  headers: {
                      "Content-type":"application/json;charset=utf-8",
@@ -67,8 +75,8 @@ export default class AddPet extends Component {
                     {/* <Link to='/petinfo'><i className='iconfont icon-haibijiahao' style={{color:"#fff",float:'right',marginRight:15}}></i></Link> */}
                 </div>
                 <WingBlank>
-                <div style={{width:'100%',padding:'50px',background:'#fff'}}>
-                    <img style={{width:'80%',marginLeft:'25px'}} src={require('../../../img/images/tou.png')}/>
+                <div style={{marginLeft:125,marginTop:50,background:'#fff'}}>
+                    <UploadImgPet addImg={this.addImg}/>
                 </div>
                 <div style={{height: '350px',background:'#fff'}}>
                     <input onChange={this.nameChange} style={{width:'100%',margin:'0 auto',lineHeight:3,marginTop:20,borderRadius:'20px',textAlign:'center',border:'1px solid #33cccc'}} type='text' id='petname' name='petname' placeholder='宠物昵称' />

@@ -56,7 +56,7 @@ CREATE TABLE `clockin` (
 
 /*Data for the table `clockin` */
 
-insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`) values ('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('3','遛一遛',3,'11:30','2','https://liwenroul.github.io/Wuchong/img/active/d4.jpeg','每周');
+insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`) values ('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日');
 
 /*Table structure for table `denglu` */
 
@@ -145,7 +145,7 @@ CREATE TABLE `petinfo` (
 
 /*Data for the table `petinfo` */
 
-insert  into `petinfo`(`petId`,`petName`,`petSex`,`petAge`,`userId`,`petImg`) values ('1','小小','女',2,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar1.jpeg'),('2','爱爱','男',4,'1','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('3','团子','女',2,'2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('4','可可','男',3,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('5','笑笑','女',4,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar2.jpeg'),('pet425125','兔兔','女',2,'1',''),('pet924184','小熊','男',3,'4','');
+insert  into `petinfo`(`petId`,`petName`,`petSex`,`petAge`,`userId`,`petImg`) values ('1','小小','女',2,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar1.jpeg'),('2','爱爱','男',4,'1','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('3','团子','女',2,'2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('4','可可','男',3,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('5','笑笑','女',4,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar2.jpeg'),('pet323755','黑子','男',5,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar1.jpeg');
 
 /*Table structure for table `signup` */
 
