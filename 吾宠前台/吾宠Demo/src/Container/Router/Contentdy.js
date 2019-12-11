@@ -8,13 +8,22 @@ export default class Contentdy extends React.Component{
         super();
         this.state={
             data:[],
-            num:""
+            num:"",
+            likeNumState:0
         }
     }
     componentDidMount(){
-        let url = '/dynamic'
+        fetch("/denglu")
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res[0].userId)
+            this.setState({
+                dengluId:res[0].userId
+            })
+        })
         
-        fetch(url)
+        
+        fetch('/dynamic')
             .then((res)=>res.json())
             .then((res)=>{
                 console.log(res);
@@ -22,18 +31,22 @@ export default class Contentdy extends React.Component{
                     data:res,
                     
                 })
+                
             })
     }
-    // dianZan =()=> {            
-    //     var btn = document.getElementById("zan");
-    //         times++;
-    //         if (times % 2 === 1) {
-    //                 btn.style.color = "red";
-    //         }
-    //         if (times % 2 === 0) {
-    //                 btn.style.color = "gray";
-    //         }           
-    // };
+    dianZan =()=> {    
+            var zan = document.getElementById('zan');
+            var zanStr = JSON.parse(zan.innerHTML)
+            if(this.state.likeNumState==0){
+                zan.innerHTML = zanStr+1;
+                this.state.likeNumState=1;
+            }
+            else if(this.state.likeNumState==1){
+                zan.innerHTML = zanStr-1;
+                this.state.likeNumState=0;
+            }
+           
+    };
     guanZhu =()=> {            
         var btn = document.getElementById("zhu");
             num++;

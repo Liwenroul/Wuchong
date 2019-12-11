@@ -156,15 +156,13 @@
                 <input type="password" autocomplete="off" placeholder="请输入密码" class="txt"  id="pwd" name="pwd" />
                 
                 <label><img style="float: left;" src="../images/yanma.png"/></label>
-                <input type="text" id="vcode" placeholder="验证码" value="验证码" οnfοcus="this.value=''" οnblur="if(this.value=='')this.value='验证码'"/><span id="code" title="看不清，换一张"></span><span id="vvcode" title="看不清，换一张" onclick="changeImg()">换一张</span>
-                <button type="submit" class="el-button el-button--primary" id="login"><!----><!----><span>登录</span></button>
+                <input type="text" id="vcode" placeholder="验证码" ><span id="code" title="看不清，换一张"></span><span id="vvcode"  title="看不清，换一张" onclick="changeImg()">换一张</span>
+                <button type="submit" onclick="check()" class="el-button el-button--primary" id="login"><!----><!----><span>登录</span></button>
             </form>
             
         </div>
-    </div>
-		
-		</div>	
-	</body>	
+    </div>	
+</body>	
 	<script type="text/javascript">
 		var code='PCAE';//声明一个变量用于存储生成的验证码
 		document.getElementById("code").οnclick=changeImg;
@@ -203,6 +201,7 @@
 				return true;
 			}
 			alert("请输入正确的验证码!");
+			
 			//验证码不正确,表单不允许提交
 			return false;
 		}
@@ -210,5 +209,5 @@
 
 
     
-</script>
+
 </html>

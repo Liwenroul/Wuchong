@@ -371,6 +371,7 @@ var selectSQL = "select mRealName,mPwd from manager where mRealName = '"+req.que
     }
     else{
         res.redirect('/system');
+      
     }
   });
 });
