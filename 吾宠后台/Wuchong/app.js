@@ -345,8 +345,28 @@ app.post('/signup1',(req,res)=>{
         res.json(result); 
   })
 })
-
-
+app.post('/userinfo2',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  con.query('update userinfo set userAvatar=? where userId=?',[data.userAvatar,data.userId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+app.post('/userinfo3',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  con.query('update userinfo set userName=? where userId=?',[data.userName,data.userId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
 
 var server = app.listen(8081, function () {
 
