@@ -72,6 +72,7 @@ router.get('/editM', function(req, res, next) {
     }
   })
 });
+
 router.post('/editManager',function(req,res,next){
   var mId=req.query.mId;
   console.log(mId);
@@ -284,7 +285,10 @@ router.post('/add',function(req,res,next){
         res.redirect(`/listd?userId=${userId}`);
         }
       });
+
     });
+
+
     router.get('/delguanzhu',function(req,res,next){
       var clockId=req.query.clockId;
       var userId=req.query.userId;
@@ -299,6 +303,8 @@ router.post('/add',function(req,res,next){
         }
       });
     });
+
+
 router.get('/activity', function(req, res, next) {
   con.query("select * from active",function(err,result){
     if(err){
@@ -311,6 +317,24 @@ router.get('/activity', function(req, res, next) {
   });
 });
 
+router.post('/activeli',function(req,res,next){
+  console.log(req.body);
+  var search_result = JSON.stringify(req.body.search_Dongtai).slice(1,-1);
+  console.log(search_result);
+  var selectSQL = "select * from active where activeId=?";
+  console.log(selectSQL);
+  con.query(selectSQL,search_result,function(err,result){
+    console.log(result);
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("activityM",{active:result});
+    }
+  })
+  })
+
+
 router.get('/userguanli', function(req, res, next) {
   con.query("select * from userinfo",function(err,result){
     if(err){
@@ -322,6 +346,40 @@ router.get('/userguanli', function(req, res, next) {
     }
   });
 });
+router.post('/this_manager',function(req,res,next){
+  console.log(req.body);
+  var search_result = JSON.stringify(req.body.search_Dongtai).slice(1,-1);
+  console.log(search_result);
+  var selectSQL = "select * from userinfo where userId=?";
+  console.log(selectSQL);
+  con.query(selectSQL,search_result,function(err,result){
+    console.log(result);
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render("userGuanli",{userinfo:result});
+    }
+  })
+});
+
+router.post('/this_system',function(req,res,next){
+  console.log(req.body);
+  var search_result = JSON.stringify(req.body.search_Dongtai).slice(1,-1);
+  console.log(search_result);
+  var selectSQL = "select * from manager where mId=?";
+  console.log(selectSQL);
+  con.query(selectSQL,search_result,function(err,result){
+    console.log(result);
+    if(err){
+      console.log(err);
+    }
+    else{
+      res.render('editM',{editMList:result});
+    }
+  })
+});
+
 router.get('/listt', function(req, res, next) {
   res.render('listt', {title:'吾宠后台管理系统'});
   // res.render('list', {List:List});
