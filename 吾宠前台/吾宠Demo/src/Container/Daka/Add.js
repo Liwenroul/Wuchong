@@ -23,8 +23,36 @@ function getBase64(img, callback) {
 export default class Add extends Component {
     constructor(props){
         super(props);
+        this.state={
+          clockName:""
+        }
     }
-      
+    nameChange=(e)=>{
+
+      this.setState({
+        clockName:e.target.value
+      })
+    }
+    register=()=>{
+      // console.log(this.state.userName);
+      const registerValue = {"clockName":this.state.clockName}
+     
+      if(this.state.clockName!=""){
+         fetch('/clockin', {
+               method: "POST",
+               headers: {
+                   "Content-type":"application/json;charset=utf-8",
+               },
+               body:JSON.stringify(registerValue) ,
+          }).then( res => res.text())
+            .then( data => {
+                console.log(data);
+              //   if(data.success){
+              //       alert('register OK');
+              //   }
+            });
+          }
+   }
       state = {
         value: null,
       };
@@ -80,41 +108,7 @@ export default class Add extends Component {
         }
       };
 
-      // handleBeforeUpload = (file) => {
-      //   //限制图片 格式、size、分辨率
-      //   const isJPG = file.type === 'image/jpeg';
-      //   const isJPEG = file.type === 'image/jpeg';
-      //   const isGIF = file.type === 'image/gif';
-      //   const isPNG = file.type === 'image/png';
-
-      //   let filereader = new FileReader();
-      //   filereader.onload = e => {
-      //     let src = e.target.result;
-      //     const image = new Image();
-      //     image.onload = function() {
-      //       // 获取图片的宽高，并存放到file对象中
-      //       console.log(this);
-      //       this.width = 93;
-      //       //resolve();
-      //     };
-          
-      //     image.src = src;
-
-      //   }
-      //   filereader.readAsDataURL(file);
-
-      //   // file.style.height = '93px';
-      //   // file.style.width = '93px';
-      //   console.log(file.size)
-      //   if (!(isJPG || isJPEG || isGIF || isPNG)) {
-      //     Modal.error({
-      //       title: '只能上传JPG 、JPEG 、GIF、 PNG格式的图片~',
-      //     });
-      //     return;
-      //   }
-      //   return (isJPG || isJPEG || isGIF || isPNG);
-      // };
-    
+      
 
     render() {
         const uploadButton = (
@@ -130,7 +124,7 @@ export default class Add extends Component {
                     <NavBar
                             style={{backgroundColor:'rgb(29,174,169)',color:'#000'}}
                             leftContent={<i style={{fontSize:22,color:'white'}} className='iconfont icon-back' onClick={this.clockin}></i>}
-                            rightContent={<i style={{fontSize:22,color:'white'}} className='iconfont icon-duihao' onClick={this.clockin}></i> }
+                            rightContent={<i style={{fontSize:22,color:'white'}} className='iconfont icon-duihao' onClick={this.register}></i> }
                         >互动</NavBar>
                     <div className="add">
                         <div className='to'>
@@ -147,7 +141,7 @@ export default class Add extends Component {
                                 {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '90px',height:'90px',borderRadius:'50%',marginLeft:'-8px',marginTop:'-8px'}} /> : uploadButton}
                             </Upload>
                         </div>
-                        <input type="text" placeholder="给互动命名" style={{textAlign:'center',marginLeft:'110px',marginTop:'20px',borderRadius:'5px',background:'#eee'}}/>
+                        <input onChange={this.nameChange} type="text" placeholder="给互动命名" style={{textAlign:'center',marginLeft:'110px',marginTop:'20px',borderRadius:'5px',background:'#eee'}}/>
                     </div>
                     <div className="add2">
                         <span style={{fontSize:15,marginTop:'30px',marginLeft:'5px',float:'left',fontWeight:'bolder'}} id='span'>设置每日打卡次数：</span>
