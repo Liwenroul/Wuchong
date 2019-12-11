@@ -7,6 +7,53 @@ import { Avatar,Upload, Icon, message } from 'antd';
 const Item = List.Item;
 
 export default class MyAttention extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            dengluId:"",
+            guanzhuIdList:[],
+            userNameList:[]
+        }
+    }
+    componentDidMount(){
+        fetch("/denglu")
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res[0].userId)
+            this.setState({
+                dengluId:res[0].userId
+            })
+        })
+        fetch("/guanzhu")
+        .then((res)=>res.json())
+        .then((res)=>{
+            for(var i=0;i<res.length;i++){
+                if(res[i].userId==this.state.dengluId){
+                    this.setState({
+                        guanzhuIdList:[...this.state.guanzhuIdList,res[i].guanzhuId]
+                    })
+                }
+            }
+            console.log(this.state.guanzhuIdList);
+        })
+        // fetch('/userinfo')
+        // .then((res)=>res.json())
+        // .then((res)=>{
+        //     console.log(res);
+            // for(var i=0;i<this.state.guanzhuIdList.length;i++){
+            //     for(var j=0;j<res.length;i++){
+            //         if(res[j].userId==this.state.guanzhuIdList[i]){
+            //             this.setState({
+            //                 userNameList:[...this.state.userNameList,res[i].userName]
+            //             })
+            //         }
+            //     }
+            // }
+            // console.log(this.state.userNameList);
+        
+        // })
+        
+    }
     render() {
         return (
             <div>

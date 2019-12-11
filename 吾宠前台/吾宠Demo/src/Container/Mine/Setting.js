@@ -7,6 +7,7 @@ const Brief = Item.Brief;
 class Setting extends Component {
     constructor(props){
         super(props);
+        
     }
     enter=()=>{
         this.props.history.push("/UserSelf")

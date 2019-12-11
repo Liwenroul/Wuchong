@@ -7,17 +7,29 @@ export default class EditUserInfo extends Component {
         this.state={
             userName:"",
             userId:"",
+            dengluId:""
         }
     }
     componentDidMount(){
+        fetch("/denglu")
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res[0].dengluId)
+            this.setState({
+                dengluId:res[0].userId
+            })
+        })
         fetch("/userinfo")
         .then((res)=>res.json())
         .then((res)=>{
-            // console.log(res[0].userId);
-            this.setState({
-                userName:res[0].userName,
-                userId:"wuchong"+res[0].userId
-            })
+            for(var i=0;i<res.length;i++){
+                if(res[i].userId==this.state.dengluId){
+                    this.setState({
+                        userName:res[i].userName,
+                        userId:res[i].userId
+                    })
+                }
+            }
         })
     }
     render() {

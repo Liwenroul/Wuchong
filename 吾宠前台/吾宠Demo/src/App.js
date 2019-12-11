@@ -35,6 +35,7 @@ import Setting from './Container/Mine/Setting';
 import EditUserInfo from './Container/Mine/EditUserInfo';
 import Mine from './Container/Mine';
 import UserSelf from './Container/Mine/Mchildren/UserSelf';
+import Addpet from './Container/Mine/Mchildren/AddPet';
 
 
 
@@ -82,6 +83,7 @@ export default class App extends Component {
                     <Route path='/setting' component={Setting}/>
                     <Route path='/EditUserInfo' component={EditUserInfo}/>
                     <Route path='/UserSelf' component={UserSelf}/>
+                    <Route path="/addpet" component={Addpet}/>
                 </div>
             </Router>
         )

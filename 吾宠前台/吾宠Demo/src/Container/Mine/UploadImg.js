@@ -46,12 +46,24 @@ export default class UploadImg extends Component {
     }
   };
   componentDidMount(){
+    fetch("/denglu")
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res[0].dengluId)
+            this.setState({
+                dengluId:res[0].userId
+            })
+    })
     fetch("/userinfo")
     .then((res)=>res.json())
     .then((res)=>{
-        this.setState({
-            imageUrl:res[0].userAvatar,
+      for(var i=0;i<res.length;i++){
+        if(res[i].userId==this.state.dengluId){
+          this.setState({
+            imageUrl:res[i].userAvatar,
         })
+        }
+      }   
     })
     this.setState({
       imageUrl:this.state.imageUrl,
@@ -69,6 +81,7 @@ export default class UploadImg extends Component {
       </div>
     );
     const { imageUrl } = this.state;
+    console.log(this.state.imageUrl);
     return (
       // <Provider value={imageUrl}>
         

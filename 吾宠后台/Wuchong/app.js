@@ -257,7 +257,7 @@ app.post('/petinfo',(req,res)=>{
     petName:data.petName,
     petSex:data.petSex,
     petAge:data.petAge,
-    userId:"1",
+    userId:data.userId,
     petImg:""
   }
   con.query('insert into petinfo(petId,petName,petSex,petAge,userId,petImg) values(?,?,?,?,?,?)',[insertData.petId,insertData.petName,insertData.petSex,insertData.petAge,insertData.userId,insertData.petImg],function(err,result){
@@ -272,9 +272,6 @@ app.post('/petinfo',(req,res)=>{
 app.post('/denglu',(req,res)=>{
   let data=req.body;
   console.log(data);
-  // let insertData = {
-  //   userId:data.userId,
-  // }
   con.query("select * from denglu",function(err,result){
     if(err){
       console.log(err);

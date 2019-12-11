@@ -14,20 +14,33 @@ class Mine extends Component {
     constructor(props){
         super(props);
         this.state={
+            dengluId:"",
             imageUrl:"",
             data:[]
         }
     }
     componentDidMount(){
-        fetch("/userinfo")
+        fetch("/denglu")
         .then((res)=>res.json())
         .then((res)=>{
-            // console.log(res[0].userId);
-            
+            console.log(res[0].userId)
             this.setState({
-                imageUrl:res[0].userAvatar,
-                data:res[0].userName
+                dengluId:res[0].userId
             })
+        })
+        fetch("/userinfo")
+        .then((res)=>res.json())
+        .then((res)=>{  
+            // console.log(res);
+            for(var i=0;i<res.length;i++){
+                console.log(res);
+                if(res[i].userId==this.state.dengluId){
+                    this.setState({
+                        imageUrl:res[i].userAvatar,
+                        data:res[i].userName
+                    })
+                }
+            }
         })
     }
     enter=()=>{

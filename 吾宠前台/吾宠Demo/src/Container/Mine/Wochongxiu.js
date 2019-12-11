@@ -3,35 +3,38 @@ import {Link} from 'react-router-dom';
 import { Grid ,Modal, Button, WhiteSpace, WingBlank} from 'antd-mobile';
 const operation = Modal.operation;
 
-const data =[];
+let data =[];
 
 export default class Wochongxiu extends Component {
-    componentDidMount(){
-        this.render();
-    }
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state={
-            dataImg:[]
+            dengluId:"",
+            dynamicData:[]
         }
     }
+    
     componentDidMount(){
+        fetch("/denglu")
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res[0].userId)
+            this.setState({
+                dengluId:res[0].userId
+            })
+        })
         fetch("/dynamic")
         .then((res)=>res.json())
         .then((res)=>{
             for(var i=0;i<res.length;i++){
-                if(res[i].userid="1"){
+                console.log(res[i].userId);
+                if(res[i].userId==this.state.dengluId){
                     this.setState({
-                        dataImg:[...this.state.dataImg,res[i].dynamicImg]
+                        dynamicData:[...this.state.dynamicData,res[i]]
                     })
                 }
             }
-            console.log(this.state.dataImg);
-            data =this.state.dataImg.map((_val, i) => ({
-                icon: `${_val}`,
-                text: `name${i}`,
-                dataId:`${i}`
-            }));
+            console.log(this.state.dynamicData);
         })
     }
     render() {
@@ -42,24 +45,19 @@ export default class Wochongxiu extends Component {
                     <span style={{marginLeft:140}}>吾宠秀</span>
                 </div>
                 <div>
-                    {/* <div className="sub-title">Custom content</div> */}
-                    <Grid data={data}
-                    hasLine={false}
-                    itemStyle={{border:'1px solid rgb(29,174,169)',width:150,height:200,marginLeft:10,marginRight:10,marginTop:20,borderRadius:10}}
-                    columnNum={2}
-                    renderItem={dataItem => (
-                        <div style={{}}>
-                        <img src={dataItem.icon} style={{ width: '150px', height: '150px' ,backgroundColor:'blue'}} alt="" />
-                        <div style={{ color: '#888', fontSize: '14px' }}>
-                            <span style={{float:'left',marginLeft:10,marginTop:10}}>fasd</span>
-                            <i className="iconfont icon-lajixiang" style={{color:"rgb(29,174,169)",float:'right',marginRight:10,marginTop:10}} onClick={() => operation([
-      { text: '确认删除'},
-      { text: '取消', onPress: () => console.log('置顶聊天被点击了') },{ text: '确认', onPress: () => {data.splice(dataItem.dataId,1);console.log(data)} },
-    ])}></i>
-                        </div>
-                        </div>
-                    )}
-                    />
+                    {
+                        this.state.dynamicData.map((item,idx)=>(
+                            <div key={idx} style={{float:"left",border:'1px solid rgb(29,174,169)',width:150,height:200,marginLeft:10,marginRight:20,marginTop:20,borderRadius:10}}>
+                                <div style={{width:150,overflow:"hidden"}}> 
+                                    <img src={item.dynamicImg} style={{ width: '148px',backgroundColor:'blue',borderTopLeftRadius:10,borderTopRightRadius:10}}/>
+                                </div>
+                                <div>
+                                    <span style={{float:'left',marginLeft:10,marginTop:10,width:100,overflow:"hidden" ,whiteSpace: "nowrap",textOverflow: "ellipsis"}}>{item.dynamicContent}</span>
+                                    <i className="iconfont icon-lajixiang" style={{color:"rgb(29,174,169)",float:'right',marginRight:10,marginTop:10}}></i>
+                                </div>
+                            </div>
+                        ))
+                    }
                 </div>
             </div>
             
