@@ -92,24 +92,24 @@ class AppGuanzhu extends Component {
             .then((res)=>{
                 console.log(res)
                 this.setState({
-                    id:res[0].userId
+                    userId:res[0].userId
                 })
             })
-        fetch('/userinfo')
-            .then((res)=>res.json())
-            .then((res)=>{
-                console.log(res)
-                for(var i =0;i<res.length;i++){
-                    if(res[i].userId == this.state.id){
-                        this.setState({
-                            userName:res[i].userName,
-                            userAvatar:res[i].userAvatar,
-                            userId:res[i].userId
-                        });
-                    }   
-                }
-                console.log("username:",this.state.userName,"userId:",this.state.userId);
-            })
+        // fetch('/userinfo')
+        //     .then((res)=>res.json())
+        //     .then((res)=>{
+        //         console.log(res)
+        //         for(var i =0;i<res.length;i++){
+        //             if(res[i].userId == this.state.id){
+        //                 this.setState({
+                            // userName:res[i].userName,
+                            // userAvatar:res[i].userAvatar,
+                            // userId:res[i].userId
+                //         });
+                //     }   
+                // }
+                // console.log("username:",this.state.userName,"userId:",this.state.userId);
+            // })
             fetch('/guanzhu')
             .then((res)=>res.json())
             .then((res)=>{
