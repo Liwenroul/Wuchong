@@ -58,7 +58,7 @@ export default class App extends Component {
                     <Route path='/all' component={Apptab}/>
                     <Route path='/activity' component={Apptab}/>
                     <Route path='/detail1/:activeId' component={Detail1}/>
-                    <Route path='/signup' component={Signup}/>
+                    <Route path='/signup/:activeId' component={Signup}/>
                     <Route path='/position'  component={Position}/>
 
                     <Route path='/clockin' component={ClockIn}/>

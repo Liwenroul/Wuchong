@@ -10,6 +10,7 @@ export default class Detail1 extends React.Component{
         super();
         this.state={
             data:[],
+            page:''
         }
     }
     componentDidMount(){
@@ -23,9 +24,11 @@ export default class Detail1 extends React.Component{
         .then((res)=>{
             console.log(res);
             this.setState({
-                data:res
+                data:res,
+                page:page
             })
             console.log(this.state.data[0].acContent)
+            console.log(this.state.page)
         })
         
         
@@ -79,7 +82,7 @@ export default class Detail1 extends React.Component{
                         </WingBlank>
                     </div>
                 </div> */}
-                <Link to='/signup' style={{color:'#3fcccb',float:'right'}}>点此报名</Link>
+                <Link to={`/signup/`+this.state.page} style={{color:'#3fcccb',float:'right'}}>点此报名</Link>
             </div>
         )
     }
