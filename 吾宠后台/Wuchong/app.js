@@ -202,7 +202,7 @@ app.get('/signup',function(err,res){
           console.log('[SELECT ERROR] - ', err.message);
           return;
       }
-      res.json(result); 
+      res.json(result);
   }); 
 });
 
@@ -284,8 +284,7 @@ app.post('/denglu',(req,res)=>{
             }else{
               console.log(result);
               res.json(result);
-            }
-               
+            }       
         })
       }
       else{
