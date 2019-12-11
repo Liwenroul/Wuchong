@@ -15,8 +15,23 @@ export default class AppFabu extends Component {
         super(props);
         this.state = {
             files: data,
-            value: '写下此时此刻的想法'
+            value: '写下此时此刻的想法',
+            dengluId:"",
+
         }
+        
+    }
+    componentDidMount(){
+        fetch("/denglu")
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res[0].userId)
+            this.setState({
+                dengluId:res[0].userId
+            }) 
+            console.log(this.state.dengluId)
+        })
+        
     }
     handleChange=(event)=> {
         this.setState({value: event.target.value});
@@ -24,7 +39,7 @@ export default class AppFabu extends Component {
     
     handleSubmit=(event)=> {
         // alert('提交的名字: ' + this.state.value);
-        const registerValue = {"dynamicContent": this.state.value,"dynamicImg":this.state.files[0].url}
+        const registerValue = {"dynamicContent": this.state.value,"dynamicImg":this.state.files[0].url,"userid":this.state.dengluId}
         // const regImg={"dynamicImg":{url:'https://liwenroul.github.io/Wuchong/img/dynamic/d3.jpeg'}}
         if(this.state.value){
             fetch('/dynamic', {
@@ -57,6 +72,7 @@ export default class AppFabu extends Component {
     
     render() {
         const { files } = this.state;
+        
         return (
             <div style={{width:'100%',height:'700px',background:'#fff'}}>
                 <form onSubmit={this.handleSubmit}>
