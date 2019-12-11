@@ -25,7 +25,13 @@ class AppGuanzhu extends Component {
             userAvatar1:[],
             userId1:[],
             guanzhuId:[],
-            num:[]
+            num:[],
+            val:'',
+            dispaly: 'block',
+            display1:'none',
+            userName2:'',
+            userAvatar2:'',
+            userId2:''
         }
     }
     // add=()=>{
@@ -43,22 +49,41 @@ class AppGuanzhu extends Component {
       change2 = () => {
         this.props.history.push('/tab')
       }
-    //   searchClick=()=>{
-    //       if(this.state.condition.searchStr == ''){
-    //           message.warning('请输入查询条件！')
-    //           return;
-    //       }
-    //       else{
-              
-    //       }
-    //   }
-    //   handleKeydown = (e) =>{
-    //     console.log("yes");
-    //     if(e.keyCode === 13){
-    //         this.searchClick()
-    //     }
-    //   }
+      handleChange =(e)=>{
+        this.setState({val:e.target.value});
+      }
+      searchClick=()=>{
+          if(this.state.val == ''){
+            this.setState(prevState => ({
+                display1:'none',
+                display:'block',
+              }));
+          }
+          else{
+              let message = this.state.val;
+              for(var i = 0;i<this.state.num.length;i++){
+                  if(this.state.userName1[i] == message){
+                    this.setState(prevState => ({
+                        display:'none',
+                        display1:'block',
+                        
+                      }));
+                      this.setState({
+                        userName2:this.state.userName1[i],
+                        userAvatar2:this.state.userAvatar1[i],
+                        userId2:this.state.userId1[i]
+                      })
+                  }
+              }
+          }
+      }
+      handleKeydown = (e) =>{
+        if(e.keyCode ===13){
+            this.searchClick()
+        }
+      }
       componentDidMount(){
+        document.addEventListener("keydown", this.onKeyDown);
         // let page = this.props.match.params.id;
         let id = 1;
         fetch('/userinfo')
@@ -114,7 +139,11 @@ class AppGuanzhu extends Component {
                 }
                 console.log("username:",this.state.userName,"userId:",this.state.userId);
             })
+            this.refs.input.focus();
     }
+    componentWillUnmount(){
+        document.removeEventListener("keydown", this.onKeyDown)
+      }
     render() {
         let {url} = this.props.match;
         return (
@@ -130,23 +159,53 @@ class AppGuanzhu extends Component {
                     ]}
                 >关注</NavBar>
             <div style={{ padding: '15px 0' }}>
-                <WingBlank>
+                {/* <WingBlank> */}
                     {/* <PlaceHolder /> */}
-                    <div>
+                    <input
+                    style={{width:'350px',height:'30px',marginLeft:'12px'}}
+                    ref='input' defaultValue={this.state.val}
+                    onKeyDown={this.handleKeydown}
+                    onChange={this.handleChange}
+                    className='form-control'
+                    type='text'
+                    />
+                    {/* <div>
                         <SearchBar placeholder="搜索" maxLength={8}
-                        //  onKeydown={this.handleKeydown}
+                        ref='input' defaultValue={this.state.val}
+                        onKeyPress={this.handleKeydown}
+                        // onChange={this.handleChange}
+                        className='form-control'
+                        type='text'
                           />
-                        <WhiteSpace />
-                    </div>
-                </WingBlank>
+                        <WhiteSpace/>
+                    </div> */}
+                {/* </WingBlank> */}
             </div>
             <div>
                 <div className='Mylist'>
-                    <List renderHeader={() => '我的消息'} className="my-list">
+                    <List renderHeader={() => '我的消息'} className="my-list1"
+                    style={{display: this.state.display1}}
+                    >
+                        <div className='searchVal'>
+                            <Link to={`/chat?userId:`+this.state.userId2}>
+                            <img src={this.state.userAvatar2} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}}/>
+                            </Link>
+                            <div>
+                                <Item extra={'time'}>{this.state.userName2}</Item>
+                                <Item extra={'content'}>wordnum</Item>
+                            </div>
+                            <Route path={url+'?userId:userId'} component={Chat}/>
+                        </div>
+                    </List>
+
+                    <List renderHeader={() => '我的消息'} className="my-list"
+                    style={{display: this.state.display}}
+                    >
                         
                         {/* <Route path='/chat' component={Chat}> */}
                             {/* <img src={this.state.userAvatar} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}} onClick={this.add}/> */}
                         {/* </Route> */}
+                        
                         {
                             this.state.num.map((i)=>{
                                 return(
