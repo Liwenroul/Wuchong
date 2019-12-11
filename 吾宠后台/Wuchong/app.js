@@ -156,7 +156,7 @@ app.get('/clockin',function(err,res){
   }); 
 });
 
-app.get('/dynamic',jsonParser,function(err,res){
+app.get('/dynamic',function(err,res){
   con.query('select * from dynamic',function(err,result){
       if(err){
           console.log('[SELECT ERROR] - ', err.message);
@@ -202,7 +202,7 @@ app.get('/signup',function(err,res){
           console.log('[SELECT ERROR] - ', err.message);
           return;
       }
-      res.json(result);
+      res.json(result); 
   }); 
 });
 
@@ -249,6 +249,28 @@ app.post('/userinfo1',(req,res)=>{
   })
 })
 
+app.post('/clockin',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  let insertData = {
+    clockId:"wuchong"+parseInt(Math.random()*1000000),
+    clockName:data.clockName,
+    clockNum:data.clockNum,
+    clockTime:data.clockTime,
+    userId:data.userId,
+    clockImg:data.clockImg,
+    clockCycle:data.clockCycle,
+    
+  }
+  con.query('insert into clockin(clockId,clockName,clockNum,clockTime,userId,clockImg,clockCycle) values(?,?,?,?,?,?,?)',[insertData.clockId,insertData.clockName,insertData.clockNum,insertData.clockTime,insertData.userId,insertData.clockImg,insertData.clockCycle],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+
 app.post('/petinfo',(req,res)=>{
   let data=req.body;
   console.log(data);
@@ -257,7 +279,7 @@ app.post('/petinfo',(req,res)=>{
     petName:data.petName,
     petSex:data.petSex,
     petAge:data.petAge,
-    userId:data.userId,
+    userId:"1",
     petImg:""
   }
   con.query('insert into petinfo(petId,petName,petSex,petAge,userId,petImg) values(?,?,?,?,?,?)',[insertData.petId,insertData.petName,insertData.petSex,insertData.petAge,insertData.userId,insertData.petImg],function(err,result){
@@ -272,6 +294,9 @@ app.post('/petinfo',(req,res)=>{
 app.post('/denglu',(req,res)=>{
   let data=req.body;
   console.log(data);
+  // let insertData = {
+  //   userId:data.userId,
+  // }
   con.query("select * from denglu",function(err,result){
     if(err){
       console.log(err);
@@ -284,7 +309,8 @@ app.post('/denglu',(req,res)=>{
             }else{
               console.log(result);
               res.json(result);
-            }       
+            }
+               
         })
       }
       else{
@@ -301,70 +327,6 @@ app.post('/denglu',(req,res)=>{
     }
   })
   
-})
-
-app.post('/dynamic',(req,res)=>{
-  let data=req.body;
-  console.log(data);
-  let insertData = {
-    dynamicId:"dynamic"+parseInt(Math.random()*1000000),
-    dynamicImg:data.dynamicImg,
-    dynamicContent:data.dynamicContent,
-    likeNum:1,
-    userId:data.userid
-  }
-  con.query('insert into dynamic(dynamicId,dynamicImg,dynamicContent,likeNum,userid) values(?,?,?,?,?)',[insertData.dynamicId,insertData.dynamicImg,insertData.dynamicContent,insertData.likeNum,insertData.userId],function(err,result){
-    if(err){
-          console.log(err);
-      }
-        console.log(result);
-        res.json(result); 
-  })
-})
-app.post('/signup1',(req,res)=>{
-  let data=req.body;
-  console.log(data);
-  let insertData = {
-    signId:"active"+parseInt(Math.random()*1000000),
-    signName:data.signName,
-    signTel:data.signTel,
-    spetName:data.spetName,
-    spetAge:data.spetAge,
-    spetKind:data.spetKind,
-    activeId:data.activeId,
-    userId:data.userId
-  }
-  con.query('insert into signup(signId,signName,signTel,spetName,spetAge,spetKind,activeId,userId) values(?,?,?,?,?,?,?,?)'
-  ,[insertData.signId,insertData.signName,insertData.signTel,insertData.spetName,insertData.spetAge
-  ,insertData.spetKind,insertData.activeId,insertData.userId],function(err,result){
-    if(err){
-          console.log(err);
-      }
-        console.log(result);
-        res.json(result); 
-  })
-})
-app.post('/userinfo2',(req,res)=>{
-  let data=req.body;
-  console.log(data);
-  con.query('update userinfo set userAvatar=? where userId=?',[data.userAvatar,data.userId],function(err,result){
-    if(err){
-          console.log(err);
-      }
-        console.log(result);
-        res.json(result); 
-  })
-})
-app.post('/userinfo3',(req,res)=>{
-  let data=req.body;
-  console.log(data);
-  con.query('update userinfo set userName=? where userId=?',[data.userName,data.userId],function(err,result){
-    if(err){
-          console.log(err);
-      }
-        console.log(result);
-        res.json(result); 
-  })
 })
 
 var server = app.listen(8081, function () {

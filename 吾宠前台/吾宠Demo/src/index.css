@@ -101,3 +101,9 @@ body{
   border-radius: 20px;
   margin-left: 10px;
 }
+.time{
+  height: 50px;
+  width:200px;
+  border-radius: 10px;
+  border:2px solid rgb(29,174,169);
+}
