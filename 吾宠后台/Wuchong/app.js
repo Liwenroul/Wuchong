@@ -243,7 +243,6 @@ app.post('/userinfo1',(req,res)=>{
   })
 })
 
-<<<<<<< Updated upstream
 app.post('/clockin',(req,res)=>{
   let data=req.body;
   console.log(data);
@@ -266,10 +265,8 @@ app.post('/clockin',(req,res)=>{
   })
 })
 
-app.post('/petinfo',(req,res)=>{
-=======
+
 app.post('/petinfo1',(req,res)=>{
->>>>>>> Stashed changes
   let data=req.body;
   console.log(data);
   let insertData = {
@@ -277,13 +274,10 @@ app.post('/petinfo1',(req,res)=>{
     petName:data.petName,
     petSex:data.petSex,
     petAge:data.petAge,
-<<<<<<< Updated upstream
     userId:"1",
-    petImg:""
-=======
+    petImg:"",
     userId:data.userId,
     petImg:data.petImg
->>>>>>> Stashed changes
   }
   con.query('insert into petinfo(petId,petName,petSex,petAge,userId,petImg) values(?,?,?,?,?,?)',[insertData.petId,insertData.petName,insertData.petSex,insertData.petAge,insertData.userId,insertData.petImg],function(err,result){
     if(err){
@@ -332,8 +326,6 @@ app.post('/denglu',(req,res)=>{
   
 })
 
-<<<<<<< Updated upstream
-=======
 app.post('/dynamic',(req,res)=>{
   let data=req.body;
   console.log(data);
@@ -399,9 +391,6 @@ app.post('/userinfo3',(req,res)=>{
 })
 
 
-
-
-
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -413,7 +402,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
->>>>>>> Stashed changes
 var server = app.listen(8081, function () {
 
   var host = server.address().address;
@@ -421,7 +409,5 @@ var server = app.listen(8081, function () {
 
   console.log("地址为 http://%s:%s", host, port);
 })
-
-
 
 module.exports = app;
