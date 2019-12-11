@@ -156,7 +156,7 @@ app.get('/clockin',function(err,res){
   }); 
 });
 
-app.get('/dynamic',function(err,res){
+app.get('/dynamic',jsonParser,function(err,res){
   con.query('select * from dynamic',function(err,result){
       if(err){
           console.log('[SELECT ERROR] - ', err.message);
@@ -305,6 +305,25 @@ app.post('/denglu',(req,res)=>{
     }
   })
   
+})
+
+app.post('/dynamic',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  let insertData = {
+    dynamicId:"dynamic"+parseInt(Math.random()*1000000),
+    dynamicImg:data.dynamicImg,
+    dynamicContent:data.dynamicContent,
+    likeNum:1,
+    userId:2
+  }
+  con.query('insert into dynamic(dynamicId,dynamicImg,dynamicContent,likeNum,userId) values(?,?,?,?,?)',[insertData.dynamicId,insertData.dynamicImg,insertData.dynamicContent,insertData.likeNum,insertData.userId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
 })
 
 var server = app.listen(8081, function () {

@@ -8,38 +8,55 @@ import AppTab from '../Apptab';
 
 
 
-const data = [{url:require('../../img/images/photo.jpg')}];
+const data = [{url:'https://liwenroul.github.io/Wuchong/img/dynamic/d3.jpeg'}];
   
 export default class AppFabu extends Component {
     constructor(props) {
         super(props);
         this.state = {
             files: data,
-            content:'上传照片',
-            value: ''
+            value: '写下此时此刻的想法'
         }
     }
     handleChange=(event)=> {
         this.setState({value: event.target.value});
       }
     
-      handleSubmit=(event)=> {
-        alert('提交的名字: ' + this.state.value);
+    handleSubmit=(event)=> {
+        // alert('提交的名字: ' + this.state.value);
+        const registerValue = {"dynamicContent": this.state.value,"dynamicImg":this.state.files[0].url}
+        // const regImg={"dynamicImg":{url:'https://liwenroul.github.io/Wuchong/img/dynamic/d3.jpeg'}}
+        if(this.state.value){
+            fetch('/dynamic', {
+                method: "POST",
+                headers: {
+                    "Content-type":"application/json;charset=utf-8",
+                },
+                body:JSON.stringify(registerValue),
+            }).then( res => res.text())
+                .then( data => {
+                    console.log(data);
+                //   if(data.success){
+                //       alert('register OK');
+                //   }
+                });
+       
+        }        
         window.location='/tab';
         event.preventDefault();
-      }
+    }
 
-      onChange = (files,content, type, index) => {
+      
+      onChange = (files, type, index) => {
         console.log(files, type, index);
         this.setState({
           files,
-          content:'上传照片'//未显示
         });
+        
       }
     
     render() {
         const { files } = this.state;
-        const { content } = this.state;
         return (
             <div style={{width:'100%',height:'700px',background:'#fff'}}>
                 <form onSubmit={this.handleSubmit}>
@@ -53,12 +70,12 @@ export default class AppFabu extends Component {
                 
                     <ImagePicker
                                 files={files}
-                                content={content}
                                 onChange={this.onChange}
                                 onImageClick={(index, fs) => console.log(index, fs)}
-                                selectable={files.length < 5,content}
+                                selectable={files.length < 5}
                                 accept="image/gif,image/jpeg,image/jpg,image/png"
                             />
+                    
                     <textarea type="text" style={{width:'100%',height:'180px',margin:'0 auto',lineHeight:3}} placeholder={'写下此时此刻的想法···'} value={this.state.value} onChange={this.handleChange} ></textarea>
                     <div style={{width:'100%',height:50}}>
                             <i style={{lineHeight:'50px',fontSize:20,margin:'10px 20px'}} className='iconfont icon-shouye'>你的位置 </i>
