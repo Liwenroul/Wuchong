@@ -221,7 +221,16 @@ app.get('/denglu',jsonParser,(req,res)=>{
       res.json(result); 
   }); 
 }) 
-
+app.get('/dingwei',jsonParser,(req,res)=>{
+  // console.log(req.body);
+  con.query('select * from dingwei',function(err,result){
+      if(err){
+          console.log('[SELECT ERROR] - ', err.message);
+          return;
+      }
+      res.json(result); 
+  }); 
+})
 
 
 app.post('/userinfo1',(req,res)=>{
@@ -325,6 +334,43 @@ app.post('/denglu',(req,res)=>{
   })
   
 })
+app.post('/dingwei',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  // let insertData = {
+  //   userId:data.userId,
+  // }
+  con.query("select * from dingwei",function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+      if(result==[]){
+        con.query('insert into dingwei(acCity) values(?)',[data.acCity],function(err,result){
+          if(err){
+                console.log(err);
+            }else{
+              console.log(result);
+              res.json(result);
+            }
+               
+        })
+      }
+      else{
+        con.query('update dingwei set acCity=?',[data.acCity],function(err,result){
+          if(err){
+                console.log(err);
+            }else{
+              console.log(result);
+              res.json(result); 
+            }
+              
+        })
+      }
+    }
+  })
+  
+})
 
 app.post('/dynamic',(req,res)=>{
   let data=req.body;
@@ -334,9 +380,10 @@ app.post('/dynamic',(req,res)=>{
     dynamicImg:data.dynamicImg,
     dynamicContent:data.dynamicContent,
     likeNum:1,
-    userId:data.userId
+    userId:data.userId,
+    acCity:data.acCity
   }
-  con.query('insert into dynamic(dynamicId,dynamicImg,dynamicContent,likeNum,userId) values(?,?,?,?,?)',[insertData.dynamicId,insertData.dynamicImg,insertData.dynamicContent,insertData.likeNum,insertData.userId],function(err,result){
+  con.query('insert into dynamic(dynamicId,dynamicImg,dynamicContent,likeNum,userId,acCity) values(?,?,?,?,?,?)',[insertData.dynamicId,insertData.dynamicImg,insertData.dynamicContent,insertData.likeNum,insertData.userId,insertData.acCity],function(err,result){
     if(err){
           console.log(err);
       }

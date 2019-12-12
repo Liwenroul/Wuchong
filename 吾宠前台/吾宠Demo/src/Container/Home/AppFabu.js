@@ -17,7 +17,7 @@ export default class AppFabu extends Component {
             files: data,
             value: '写下此时此刻的想法',
             dengluId:"",
-
+            acCity:''
         }
         
     }
@@ -31,6 +31,14 @@ export default class AppFabu extends Component {
             }) 
             console.log(this.state.dengluId)
         })
+        fetch("/dingwei")
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res[0].acCity)
+            this.setState({
+                acCity:res[0].acCity
+            })
+        })
         
     }
     handleChange=(event)=> {
@@ -39,7 +47,7 @@ export default class AppFabu extends Component {
     
     handleSubmit=(event)=> {
         // alert('提交的名字: ' + this.state.value);
-        const registerValue = {"dynamicContent": this.state.value,"dynamicImg":this.state.files[0].url,"userId":this.state.dengluId}
+        const registerValue = {"dynamicContent": this.state.value,"dynamicImg":this.state.files[0].url,"userId":this.state.dengluId,"acCity":this.state.acCity}
         // const regImg={"dynamicImg":{url:'https://liwenroul.github.io/Wuchong/img/dynamic/d3.jpeg'}}
         if(this.state.value){
             fetch('/dynamic', {
@@ -98,7 +106,7 @@ export default class AppFabu extends Component {
                             <Link  to='/weizhi'><Icon style={{float:'right',margin:'10px 10px'}} type="right"   /></Link>
                             
                             <div style={{width:'100%',height:50,lineHeight:'40px',fontSize:20,padding:'20px 20px',borderTop:'1px solid #eee'}}>
-                                <button style={{float:'left',background:'rgb(29,174,169)',color:'#fff',borderRadius:'10px',lineHeight:'40px'}}>河北师范大学</button>
+                                <button style={{float:'left',background:'rgb(29,174,169)',color:'#fff',borderRadius:'10px',lineHeight:'40px'}}>{this.state.acCity}</button>
                             </div>
                         </div>
                 {/* <input type="submit" value="发布" /> */}
