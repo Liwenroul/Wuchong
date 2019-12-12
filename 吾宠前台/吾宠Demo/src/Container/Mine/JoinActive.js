@@ -10,7 +10,7 @@ export default class JoinActive extends Component {
         this.state={
             activeData:[],
             dengluId:"",
-            activeId:""
+            activeIdList:[]
         }
     }
     componentDidMount(){
@@ -28,20 +28,22 @@ export default class JoinActive extends Component {
             for(var i=0;i<res.length;i++){
                 if(res[i].userId==this.state.dengluId){
                     this.setState({
-                        activeId:res[i].activeId
+                        activeIdList:[...this.state.activeIdList,res[i].activeId]
                     })
                 }
             }
-            console.log(this.state.activeId);
+            console.log(this.state.activeIdList);
         })
         fetch("/active")
         .then((res)=>res.json())
         .then((res)=>{
-            for(var i=0;i<res.length;i++){
-                if(res[i].activeId==this.state.activeId){
-                    this.setState({
-                        activeData:[...this.state.activeData,res[i]]
-                    })
+            for(var i=0;i<this.state.activeIdList.length;i++){
+                for(var j=0;j<res.length;j++){
+                    if(res[j].activeId == this.state.activeIdList[i]){
+                        this.setState({
+                            activeData:[...this.state.activeData,res[j]]
+                        })
+                    }
                 }
             }
             console.log(this.state.activeData);

@@ -40,7 +40,10 @@ export default class UserSelf extends Component {
                     <Link to='/setting'><i className='iconfont icon-back' style={{color:"#fff"}}></i></Link>
                     <span style={{marginLeft:140}}>账户安全</span>
                 </div>
-                <div>
+                <div>    
+                <List className="my-list">
+                    <Item extra={this.state.user.userId}>吾宠号</Item>
+                </List>
                 <List className="my-list">
                     <Item extra={this.state.user.userTel}>手机号</Item>
                 </List>

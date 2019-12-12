@@ -68,7 +68,7 @@ export default class MyAttention extends Component {
                     dengluId:res[0].userId
                 })
             })
-            fetch("/guanzhu")
+        fetch("/guanzhu")
         .then((res)=>res.json())
         .then((res)=>{
             for(var i=0;i<res.length;i++){
@@ -116,41 +116,8 @@ export default class MyAttention extends Component {
                         >{item.userName}</Item>
                         ))
                     }
-                    {/* <Avatar shape="square" size="small" icon="user" /> */}
-                    {/* 
-                    <Item
-                        // style={{borderBottom:'0.5px solid rgb(29,174,169)',height:30,width:355}}
-                        thumb={require("../../img/images/2_05.png")}
-                        onClick={this.enter1}
-                        arrow="horizontal"
-                    >
-                     小李
-                    </Item>
-                    <Item
-                        // style={{borderBottom:'0.5px solid rgb(29,174,169)',height:30}}
-                        thumb="https://zos.alipayobjects.com/rmsportal/UmbJMbWOejVOpxe.png"
-                        onClick={this.enter2}
-                        arrow="horizontal"
-                    >
-                     小黄
-                    </Item>
-                    <Item
-                        // style={{borderBottom:'0.5px solid rgb(29,174,169)',height:30}}
-                        thumb="https://zos.alipayobjects.com/rmsportal/UmbJMbWOejVOpxe.png"
-                        onClick={this.enter3}
-                        arrow="horizontal"
-                    >
-                     小赵
-                    </Item>
-                    <Item
-                        // style={{borderBottom:'0.5px solid rgb(29,174,169)',height:30}}
-                        thumb="https://zos.alipayobjects.com/rmsportal/UmbJMbWOejVOpxe.png"
-                        onClick={this.enter4}
-                        arrow="horizontal"
-                    >
-                     小孙
-                    </Item> */}
-                </List>
+                    
+                 </List>
                 </div>
             </div>
         )
