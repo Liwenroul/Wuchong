@@ -69,7 +69,20 @@ CREATE TABLE `denglu` (
 
 /*Data for the table `denglu` */
 
-insert  into `denglu`(`userId`) values ('0');
+insert  into `denglu`(`userId`) values ('2');
+
+/*Table structure for table `dingwei` */
+
+DROP TABLE IF EXISTS `dingwei`;
+
+CREATE TABLE `dingwei` (
+  `acCity` varchar(64) NOT NULL,
+  PRIMARY KEY (`acCity`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+/*Data for the table `dingwei` */
+
+insert  into `dingwei`(`acCity`) values ('石家庄');
 
 /*Table structure for table `dynamic` */
 
@@ -81,6 +94,7 @@ CREATE TABLE `dynamic` (
   `dynamicContent` text NOT NULL,
   `likeNum` int(10) DEFAULT NULL,
   `userId` varchar(20) NOT NULL,
+  `acCity` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`dynamicId`),
   UNIQUE KEY `PK_Dynamic` (`dynamicId`),
   KEY `FK_Dynamic_UserInfo` (`userId`),
@@ -89,7 +103,7 @@ CREATE TABLE `dynamic` (
 
 /*Data for the table `dynamic` */
 
-insert  into `dynamic`(`dynamicId`,`dynamicImg`,`dynamicContent`,`likeNum`,`userId`) values ('1','https://liwenroul.github.io/Wuchong/img/dynamic/d1.jpeg','带狗狗晒太阳喽！！！',3,'4'),('2','https://liwenroul.github.io/Wuchong/img/dynamic/d2.jpeg','牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。',200,'1'),('3','https://liwenroul.github.io/Wuchong/img/dynamic/d2.jpeg','今天带狗狗美容啦，可爱吗？',1,'4'),('dynamic949622','https://liwenroul.github.io/Wuchong/img/dynamic/d3.jpeg','写下此时此刻的想法',1,'2');
+insert  into `dynamic`(`dynamicId`,`dynamicImg`,`dynamicContent`,`likeNum`,`userId`,`acCity`) values ('1','https://liwenroul.github.io/Wuchong/img/dynamic/d1.jpeg','带狗狗晒太阳喽！！！',3,'4','石家庄'),('2','https://liwenroul.github.io/Wuchong/img/dynamic/d2.jpeg','牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。',200,'1','正定'),('3','https://liwenroul.github.io/Wuchong/img/dynamic/d2.jpeg','今天带狗狗美容啦，可爱吗？',1,'4','河北师范大学'),('dynamic551563','https://liwenroul.github.io/Wuchong/img/dynamic/d3.jpeg','咋的啊',1,'2',NULL);
 
 /*Table structure for table `guanzhu` */
 
