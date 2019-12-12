@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 
 export default class PetInfo extends Component {
     constructor(props){
+        console.log(props);
         super(props);
         this.state={
             petData:[],
@@ -43,13 +44,13 @@ export default class PetInfo extends Component {
                 <ul style={{listStyle:'none'}}>
                     {
                         this.state.petData.map((item,idx)=>(
-                            <li key={idx} style={{float:"left",width:100,height:300,borderRadius:50,backgroundColor:'rgb(29,174,169)',textAlign:'center',marginLeft:20,marginTop:20}}>
+                            <Link to="/editPetInfo"><li key={idx} style={{float:"left",width:100,height:300,borderRadius:50,backgroundColor:'rgb(29,174,169)',textAlign:'center',marginLeft:20,marginTop:20}}>
                                 <img src={item.petImg} style={{width:80,height:80,borderRadius:40,marginTop:20}}/>
                                 <h1 style={{marginTop:20}}>{item.petName}</h1>
                                 {/* <i className='iconfont icon-haibijiahao' style={{fontSize:25}}></i> */}
                                 <h2>{item.petSex}</h2>
                                 <h2>{item.petAge}岁</h2>
-                            </li>
+                            </li></Link>
                         ))
                     }
                     

@@ -438,7 +438,18 @@ app.post('/userinfo3',(req,res)=>{
         res.json(result); 
   })
 })
-
+app.post('/delDynamic',(req,res)=>{
+  let data=req.body;
+  console.log(data.dynamicId);
+  con.query("SET FOREIGN_KEY_CHECKS=0");
+  con.query('delete from dynamic where dynamicId=?',[data.dynamicId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
 
 // error handler
 app.use(function(err, req, res, next) {

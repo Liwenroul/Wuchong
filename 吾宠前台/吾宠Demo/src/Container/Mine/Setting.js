@@ -50,14 +50,14 @@ class Setting extends Component {
                     >
                      帮助和反馈
                     </Item>
-                    <Item
+                   <Link to="/login"><Item
                         // style={{borderBottom:'0.5px solid rgb(29,174,169)',height:30}}
                         // thumb="https://zos.alipayobjects.com/rmsportal/UmbJMbWOejVOpxe.png"
                         // onClick={window.location="/login"}
                         arrow="horizontal"
                     >
                      切换账户
-                    </Item>
+                    </Item></Link>
                 </List>
                 <div style={{width:150,height:40,fontSize:18,borderRadius:20,marginTop:300,marginLeft:117, textAlign:'center',backgroundColor:'rgb(29,174,169)',paddingTop:5}}>
                     <Link to='/login'><span style={{color:'#fff'}}>退出</span></Link>

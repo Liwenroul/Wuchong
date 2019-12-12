@@ -36,6 +36,7 @@ import EditUserInfo from './Container/Mine/EditUserInfo';
 import Mine from './Container/Mine';
 import UserSelf from './Container/Mine/Mchildren/UserSelf';
 import Addpet from './Container/Mine/Mchildren/AddPet';
+import EditPetInfo from './Container/Mine/Mchildren/EditPetInfo';
 
 
 
@@ -84,6 +85,7 @@ export default class App extends Component {
                     <Route path='/EditUserInfo' component={EditUserInfo}/>
                     <Route path='/UserSelf' component={UserSelf}/>
                     <Route path="/addpet" component={Addpet}/>
+                    <Route path="/editPetInfo" component={EditPetInfo}/>
                 </div>
             </Router>
         )

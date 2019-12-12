@@ -10,10 +10,29 @@ export default class Wochongxiu extends Component {
         super();
         this.state={
             dengluId:"",
-            dynamicData:[]
+            dynamicData:[],
         }
     }
-    
+    delDynamic=(dynamicId)=>{
+        const registerValue = {"dynamicId":dynamicId};
+        // confirm("确认删除这条动态吗？")
+        // let r=confirm("确认删除这条动态吗？");
+        // console.log(confirm("确认删除这条动态吗？"));
+        
+        // if(confirm("确认删除这条动态吗？")){
+            fetch('/delDynamic', {
+                method: "POST",
+                headers: {
+                    "Content-type":"application/json;charset=utf-8",
+                },
+                body:JSON.stringify(registerValue) ,
+           }).then( res => res.text())
+             .then( data => {
+                 console.log(data);
+             });
+        // }
+        
+    }
     componentDidMount(){
         fetch("/denglu")
         .then((res)=>res.json())
@@ -53,7 +72,7 @@ export default class Wochongxiu extends Component {
                                 </div>
                                 <div>
                                     <span style={{float:'left',marginLeft:10,marginTop:10,width:100,overflow:"hidden" ,whiteSpace: "nowrap",textOverflow: "ellipsis"}}>{item.dynamicContent}</span>
-                                    <i className="iconfont icon-lajixiang" style={{color:"rgb(29,174,169)",float:'right',marginRight:10,marginTop:10}}></i>
+                                    <i onClick={()=>this.delDynamic(item.dynamicId)} className="iconfont icon-lajixiang" style={{color:"rgb(29,174,169)",float:'right',marginRight:10,marginTop:10}}></i>
                                 </div>
                             </div>
                         ))
