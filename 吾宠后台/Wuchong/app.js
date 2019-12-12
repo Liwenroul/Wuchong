@@ -81,16 +81,7 @@ app.use('/userguanli', userguanRouter);
 // });
 
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
 
 
 
@@ -214,8 +205,11 @@ app.get('/userinfo',jsonParser,(req,res)=>{
       if(err){
           console.log('[SELECT ERROR] - ', err.message);
           return;
+          
       }
+      console.log(typeof(result));
       res.json(result); 
+
   }); 
 }) 
 
@@ -255,7 +249,7 @@ app.post('/clockin',(req,res)=>{
   let data=req.body;
   console.log(data);
   let insertData = {
-    clockId:"clockin"+parseInt(Math.random()*1000000),
+    clockId:"wuchong"+parseInt(Math.random()*1000000),
     clockName:data.clockName,
     clockNum:data.clockNum,
     clockTime:data.clockTime,
@@ -273,7 +267,8 @@ app.post('/clockin',(req,res)=>{
   })
 })
 
-app.post('/petinfo',(req,res)=>{
+
+app.post('/petinfo1',(req,res)=>{
   let data=req.body;
   console.log(data);
   let insertData = {
@@ -282,7 +277,9 @@ app.post('/petinfo',(req,res)=>{
     petSex:data.petSex,
     petAge:data.petAge,
     userId:"1",
-    petImg:""
+    petImg:"",
+    userId:data.userId,
+    petImg:data.petImg
   }
   con.query('insert into petinfo(petId,petName,petSex,petAge,userId,petImg) values(?,?,?,?,?,?)',[insertData.petId,insertData.petName,insertData.petSex,insertData.petAge,insertData.userId,insertData.petImg],function(err,result){
     if(err){
@@ -331,6 +328,82 @@ app.post('/denglu',(req,res)=>{
   
 })
 
+app.post('/dynamic',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  let insertData = {
+    dynamicId:"dynamic"+parseInt(Math.random()*1000000),
+    dynamicImg:data.dynamicImg,
+    dynamicContent:data.dynamicContent,
+    likeNum:1,
+    userId:data.userId
+  }
+  con.query('insert into dynamic(dynamicId,dynamicImg,dynamicContent,likeNum,userId) values(?,?,?,?,?)',[insertData.dynamicId,insertData.dynamicImg,insertData.dynamicContent,insertData.likeNum,insertData.userId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+app.post('/signup1',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  let insertData = {
+    signId:"active"+parseInt(Math.random()*1000000),
+    signName:data.signName,
+    signTel:data.signTel,
+    spetName:data.spetName,
+    spetAge:data.spetAge,
+    spetKind:data.spetKind,
+    activeId:data.activeId,
+    userId:data.userId
+  }
+  con.query('insert into signup(signId,signName,signTel,spetName,spetAge,spetKind,activeId,userId) values(?,?,?,?,?,?,?,?)'
+  ,[insertData.signId,insertData.signName,insertData.signTel,insertData.spetName,insertData.spetAge
+  ,insertData.spetKind,insertData.activeId,insertData.userId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+app.post('/userinfo2',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  con.query('update userinfo set userAvatar=? where userId=?',[data.userAvatar,data.userId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+app.post('/userinfo3',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  con.query('update userinfo set userName=? where userId=?',[data.userName,data.userId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
 var server = app.listen(8081, function () {
 
   var host = server.address().address;
@@ -338,6 +411,5 @@ var server = app.listen(8081, function () {
 
   console.log("地址为 http://%s:%s", host, port);
 })
-
 
 module.exports = app;

@@ -53,7 +53,7 @@ class Setting extends Component {
                     <Item
                         // style={{borderBottom:'0.5px solid rgb(29,174,169)',height:30}}
                         // thumb="https://zos.alipayobjects.com/rmsportal/UmbJMbWOejVOpxe.png"
-                        onClick={this.enter4}
+                        // onClick={window.location="/login"}
                         arrow="horizontal"
                     >
                      切换账户

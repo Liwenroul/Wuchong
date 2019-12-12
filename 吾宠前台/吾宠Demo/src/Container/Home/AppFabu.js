@@ -39,7 +39,7 @@ export default class AppFabu extends Component {
     
     handleSubmit=(event)=> {
         // alert('提交的名字: ' + this.state.value);
-        const registerValue = {"dynamicContent": this.state.value,"dynamicImg":this.state.files[0].url,"userid":this.state.dengluId}
+        const registerValue = {"dynamicContent": this.state.value,"dynamicImg":this.state.files[0].url,"userId":this.state.dengluId}
         // const regImg={"dynamicImg":{url:'https://liwenroul.github.io/Wuchong/img/dynamic/d3.jpeg'}}
         if(this.state.value){
             fetch('/dynamic', {
