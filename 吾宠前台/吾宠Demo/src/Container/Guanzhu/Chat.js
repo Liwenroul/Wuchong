@@ -11,7 +11,38 @@ export default class Chat extends Component {
         this.state={
             userName:'',
             userAvatar:'',
-            userId:''
+            userId:'',
+            value:'',
+            num:[],
+            arr:[]
+        }
+    }
+    handleChange=(e)=>{
+        console.log(this.state.num)
+        this.setState({
+            value:e.target.value,
+        })
+        this.setState({
+            num:[...this.state.num,this.state.value]
+        })
+        console.log(this.state.value);
+    }
+    output=(e)=>{
+        if(e.keyCode ===13){
+            for(var i =0;i<this.state.num.length;i++){
+                this.setState({
+                    arr:[...this.state.arr,i]
+                })
+            }
+        }
+        
+    }
+    postVal=()=>{
+        for(var i =0;i<this.state.num.length;i++){
+            this.setState({
+                arr:[...this.state.arr,i]
+            })
+            
         }
     }
         componentDidMount(){
@@ -57,10 +88,31 @@ export default class Chat extends Component {
                         </div>
                         </Link> 
                         <Route path={url+'/play?userId:userId'} component={Play}/>
+                        <div>
+                        {
+                        this.state.arr.map((i)=>{
+                            return(
+                                <div>
+                                    <Link to={`/play?userId:`+this.state.userId} className='userschat'>
+                                    <img src={this.state.userAvatar} style={{height:'40px',width:'40px',marginTop:"50px",marginLeft:"280px"}}/>
+                                    <div className='novel' style={{marginLeft:"280px"}}>
+                                        {this.state.num[i]}
+                                    </div>
+                                    </Link> 
+                                    <Route path={url+'/play?userId:userId'} component={Play}/>
+                                </div>
+                        )})
+                        }
+                        </div>
+                        
+                    <div style={{position:'relative',top:'420px'}}>
+                    <input type='text' style={{width:300,height:30,float:'left'}}
+                     onChange={this.handleChange} ref='input' defaultValue={this.state.value}
+                     onKeyDown={this.output}/>
+                    <button style={{width:60,height:30}} 
+                    onClick={this.postVal}>发送</button>
+                    </div>
                     
-                    
-                    <input style={{marginTop:430,width:300,height:30,float:'left'}}/>
-                    <button style={{marginTop:430,width:60,height:30}}>发送</button>
             </div>
         )
     }
