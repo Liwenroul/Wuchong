@@ -334,9 +334,9 @@ app.post('/dynamic',(req,res)=>{
     dynamicImg:data.dynamicImg,
     dynamicContent:data.dynamicContent,
     likeNum:1,
-    userId:data.userid
+    userId:data.userId
   }
-  con.query('insert into dynamic(dynamicId,dynamicImg,dynamicContent,likeNum,userid) values(?,?,?,?,?)',[insertData.dynamicId,insertData.dynamicImg,insertData.dynamicContent,insertData.likeNum,insertData.userId],function(err,result){
+  con.query('insert into dynamic(dynamicId,dynamicImg,dynamicContent,likeNum,userId) values(?,?,?,?,?)',[insertData.dynamicId,insertData.dynamicImg,insertData.dynamicContent,insertData.likeNum,insertData.userId],function(err,result){
     if(err){
           console.log(err);
       }
