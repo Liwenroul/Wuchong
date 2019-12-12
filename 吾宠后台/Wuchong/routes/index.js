@@ -58,6 +58,9 @@ console.log(search_result);
 router.get('/zhuce', function(req, res, next) {
   res.render('zhuceM', {List:List});
 });
+router.get('/showPlay',function(req,res,next){
+  res.render('showPlay',{List:List});
+})
 
 //编辑
 router.get('/editM', function(req, res, next) {
@@ -191,6 +194,24 @@ router.post('/add',function(req,res,next){
       else{
         console.log(result);
         res.redirect("/system");
+      }
+    });
+  });
+  router.post('/addPlay',function(req,res,next){
+    var activeId=req.body.activeId;
+    var activeName= req.body.activeName;
+    var acContent=req.body.acContent;
+    var acImg=req.body.acImg;
+    var acAddress=req.body.acAddress;
+    var acCity=req.body.acCity;
+    var acContact = req.body.acContact;
+    con.query("insert into active(activeId,activeName,acContent,acImg,acAddress,acCity,acContact) values(?,?,?,?,?,?,?)",[parseInt((Math.random()*1000)),activeName,acContent,acImg,acAddress,acCity,acContact],function(err,result){
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log(result);
+        res.redirect("/activity");
       }
     });
   });
