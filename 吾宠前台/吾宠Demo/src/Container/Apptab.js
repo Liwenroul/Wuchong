@@ -112,9 +112,10 @@ export default class Apptab extends Component {
             <i className='iconfont icon-chongwu' style={{fontSize:22}}></i>
           }
             title="打卡"
-            key="Friend"
+            key="daka"
             selected={this.state.selectedTab === 'daka'}
             onPress={() => {
+              console.log('打卡')
               this.setState({
                 selectedTab: 'daka',
               });
