@@ -79,16 +79,7 @@ app.use('/userguanli', userguanRouter);
 // });
 
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
 
 
 
@@ -156,7 +147,7 @@ app.get('/clockin',function(err,res){
   }); 
 });
 
-app.get('/dynamic',jsonParser,function(err,res){
+app.get('/dynamic',function(err,res){
   con.query('select * from dynamic',function(err,result){
       if(err){
           console.log('[SELECT ERROR] - ', err.message);
@@ -212,8 +203,11 @@ app.get('/userinfo',jsonParser,(req,res)=>{
       if(err){
           console.log('[SELECT ERROR] - ', err.message);
           return;
+          
       }
+      console.log(typeof(result));
       res.json(result); 
+
   }); 
 }) 
 
@@ -249,7 +243,30 @@ app.post('/userinfo1',(req,res)=>{
   })
 })
 
-app.post('/petinfo',(req,res)=>{
+app.post('/clockin',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  let insertData = {
+    clockId:"wuchong"+parseInt(Math.random()*1000000),
+    clockName:data.clockName,
+    clockNum:data.clockNum,
+    clockTime:data.clockTime,
+    userId:data.userId,
+    clockImg:data.clockImg,
+    clockCycle:data.clockCycle,
+    
+  }
+  con.query('insert into clockin(clockId,clockName,clockNum,clockTime,userId,clockImg,clockCycle) values(?,?,?,?,?,?,?)',[insertData.clockId,insertData.clockName,insertData.clockNum,insertData.clockTime,insertData.userId,insertData.clockImg,insertData.clockCycle],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+
+
+app.post('/petinfo1',(req,res)=>{
   let data=req.body;
   console.log(data);
   let insertData = {
@@ -257,8 +274,10 @@ app.post('/petinfo',(req,res)=>{
     petName:data.petName,
     petSex:data.petSex,
     petAge:data.petAge,
+    userId:"1",
+    petImg:"",
     userId:data.userId,
-    petImg:""
+    petImg:data.petImg
   }
   con.query('insert into petinfo(petId,petName,petSex,petAge,userId,petImg) values(?,?,?,?,?,?)',[insertData.petId,insertData.petName,insertData.petSex,insertData.petAge,insertData.userId,insertData.petImg],function(err,result){
     if(err){
@@ -272,6 +291,9 @@ app.post('/petinfo',(req,res)=>{
 app.post('/denglu',(req,res)=>{
   let data=req.body;
   console.log(data);
+  // let insertData = {
+  //   userId:data.userId,
+  // }
   con.query("select * from denglu",function(err,result){
     if(err){
       console.log(err);
@@ -345,8 +367,40 @@ app.post('/signup1',(req,res)=>{
         res.json(result); 
   })
 })
+app.post('/userinfo2',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  con.query('update userinfo set userAvatar=? where userId=?',[data.userAvatar,data.userId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+app.post('/userinfo3',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  con.query('update userinfo set userName=? where userId=?',[data.userName,data.userId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
 
 
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
 
 var server = app.listen(8081, function () {
 
@@ -355,6 +409,5 @@ var server = app.listen(8081, function () {
 
   console.log("地址为 http://%s:%s", host, port);
 })
-
 
 module.exports = app;

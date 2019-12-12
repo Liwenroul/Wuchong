@@ -25,25 +25,50 @@ function beforeUpload(file) {
 
 
 export default class UploadImg extends Component {
-    
-  state = {
-    loading: false,
-    imageUrl:""
-  };
+  constructor(){
+    super();
+    this.state = {
+      loading: false,
+      imageUrl:"",
+      dengluId:""
+    };
+  }
+  
   handleChange = info => {
     if (info.file.status === 'uploading') {
       this.setState({ loading: true });
       return;
     }
     if (info.file.status === 'done') {
-      // Get this url from response in real world.
+      let userAvatar="https://liwenroul.github.io/Wuchong/img/avatar/"+info.file.name;
+      // console.log(name);
       getBase64(info.file.originFileObj, imageUrl =>
         this.setState({
           imageUrl,
           loading: false,
         }),
       );
-    }
+      fetch("/denglu")
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res[0].userId)
+            this.setState({
+                dengluId:res[0].userId
+            })
+        })
+      const registerValue = {"userAvatar":userAvatar,"userId":this.state.dengluId}
+      console.log(registerValue);
+      fetch('/userinfo2', {
+        method: "POST",
+        headers: {
+            "Content-type":"application/json;charset=utf-8",
+        },
+        body:JSON.stringify(registerValue) ,
+        }).then( res => res.text())
+        .then( data => {
+         console.log(data);
+       });
+     }
   };
   componentDidMount(){
     fetch("/denglu")
@@ -69,19 +94,17 @@ export default class UploadImg extends Component {
       imageUrl:this.state.imageUrl,
       loading: false,
     })
+    // console.log(this.state.imageUrl);
+
   }
   render() {
     const uploadButton = (
       <div>
         <img src={this.state.imageUrl}/>
-        {/* <Icon type={this.state.loading ? 'loading' : 'plus'} />
-        <div className="ant-upload-text">Upload</div> */}
-        {/* <Avatar size={100} icon="user" /> */}
-        
       </div>
     );
     const { imageUrl } = this.state;
-    console.log(this.state.imageUrl);
+    // console.log(imageUrl);
     return (
       // <Provider value={imageUrl}>
         

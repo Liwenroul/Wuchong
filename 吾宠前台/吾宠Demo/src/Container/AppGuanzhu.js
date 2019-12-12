@@ -18,6 +18,7 @@ class AppGuanzhu extends Component {
     constructor(props){
         super(props);
         this.state = {
+            id:'',
             userName:'',
             userAvatar:'',
             userId:'',
@@ -85,22 +86,30 @@ class AppGuanzhu extends Component {
       componentDidMount(){
         document.addEventListener("keydown", this.onKeyDown);
         // let page = this.props.match.params.id;
-        let id = 1;
-        fetch('/userinfo')
+        // let id = 1;
+        fetch('/denglu')
             .then((res)=>res.json())
             .then((res)=>{
                 console.log(res)
-                for(var i =0;i<res.length;i++){
-                    if(res[i].userId == id){
-                        this.setState({
-                            userName:res[i].userName,
-                            userAvatar:res[i].userAvatar,
-                            userId:res[i].userId
-                        });
-                    }   
-                }
-                console.log("username:",this.state.userName,"userId:",this.state.userId);
+                this.setState({
+                    userId:res[0].userId
+                })
             })
+        // fetch('/userinfo')
+        //     .then((res)=>res.json())
+        //     .then((res)=>{
+        //         console.log(res)
+        //         for(var i =0;i<res.length;i++){
+        //             if(res[i].userId == this.state.id){
+        //                 this.setState({
+                            // userName:res[i].userName,
+                            // userAvatar:res[i].userAvatar,
+                            // userId:res[i].userId
+                //         });
+                //     }   
+                // }
+                // console.log("username:",this.state.userName,"userId:",this.state.userId);
+            // })
             fetch('/guanzhu')
             .then((res)=>res.json())
             .then((res)=>{
@@ -169,17 +178,6 @@ class AppGuanzhu extends Component {
                     className='form-control'
                     type='text'
                     />
-                    {/* <div>
-                        <SearchBar placeholder="搜索" maxLength={8}
-                        ref='input' defaultValue={this.state.val}
-                        onKeyPress={this.handleKeydown}
-                        // onChange={this.handleChange}
-                        className='form-control'
-                        type='text'
-                          />
-                        <WhiteSpace/>
-                    </div> */}
-                {/* </WingBlank> */}
             </div>
             <div>
                 <div className='Mylist'>

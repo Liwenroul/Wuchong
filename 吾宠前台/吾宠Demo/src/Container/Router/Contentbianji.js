@@ -137,16 +137,9 @@ export default class Contentda extends React.Component{
                             </div>
                             <span style={{fontSize:15,marginTop:'20px',marginLeft:'5px',float:'left',fontWeight:'bolder'}}>设置提醒时间：{item.clockTime}</span>
                         </div>
-                        <div className="jiahao" onClick={this.add}>+</div>
-                        <div className='shezhi' id='shezhi'>
-                            <DatePickerView
-                                value={this.state.value}
-                                onChange={this.onChange}
-                                onValueChange={this.onValueChange}
-                                mode='time'
-                                itemStyle={{color:'rgb(29,174,169)',fontSize:20}}
-                            />
-                        </div>
+                          <input type='text' id='clockTime' className='time' placeholder='请输入修改时间 例如 08:00'/>
+                       
+                       
                     </div>        
                     ))
                 }

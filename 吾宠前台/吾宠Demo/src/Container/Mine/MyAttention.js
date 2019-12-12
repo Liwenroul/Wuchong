@@ -15,16 +15,60 @@ export default class MyAttention extends Component {
             userNameList:[]
         }
     }
+    // componentDidMount(){
+    //     fetch("/denglu")
+    //     .then((res)=>res.json())
+    //     .then((res)=>{
+    //         console.log(res[0].userId)
+    //         this.setState({
+    //             dengluId:res[0].userId
+    //         })
+    //     })
+    //     fetch("/guanzhu")
+    //     .then((res)=>res.json())
+    //     .then((res)=>{
+    //         for(var i=0;i<res.length;i++){
+    //             if(res[i].userId==this.state.dengluId){
+    //                 this.setState({
+    //                     guanzhuIdList:[...this.state.guanzhuIdList,res[i].guanzhuId]
+    //                 })
+    //             }
+    //         }
+    //         console.log(this.state.guanzhuIdList);
+    //     })
+    //     fetch('/userinfo')
+    //     .then((res)=>res.json())
+    //     .then((res)=>{
+    //         for(var i=0;i<this.state.guanzhuIdList.length;i++){
+                
+    //             // for(var j=0;j<res.length;i++){
+    //                 // console.log(res[j]);
+    //         //         if(res[j].userId==this.state.guanzhuIdList[i]){
+    //         //             this.setState({
+    //         //                 userNameList:[...this.state.userNameList,res[i].userName]
+    //         //             })
+    //         //         }
+    //             // }
+    //         }
+    //         console.log(this.state.userNameList);
+        
+    //     })
+        
+    // }
+
     componentDidMount(){
-        fetch("/denglu")
-        .then((res)=>res.json())
-        .then((res)=>{
-            console.log(res[0].userId)
-            this.setState({
-                dengluId:res[0].userId
+        document.addEventListener("keydown", this.onKeyDown);
+        // let page = this.props.match.params.id;
+        // let id = 1;
+        fetch('/denglu')
+            .then((res)=>res.json())
+            .then((res)=>{
+                console.log(res)
+                this.setState({
+                    dengluId:res[0].userId
+                })
             })
-        })
-        fetch("/guanzhu")
+            fetch("/guanzhu")
         .then((res)=>res.json())
         .then((res)=>{
             for(var i=0;i<res.length;i++){
@@ -36,24 +80,24 @@ export default class MyAttention extends Component {
             }
             console.log(this.state.guanzhuIdList);
         })
-        // fetch('/userinfo')
-        // .then((res)=>res.json())
-        // .then((res)=>{
-        //     console.log(res);
-            // for(var i=0;i<this.state.guanzhuIdList.length;i++){
-            //     for(var j=0;j<res.length;i++){
-            //         if(res[j].userId==this.state.guanzhuIdList[i]){
-            //             this.setState({
-            //                 userNameList:[...this.state.userNameList,res[i].userName]
-            //             })
-            //         }
-            //     }
-            // }
-            // console.log(this.state.userNameList);
-        
-        // })
-        
+            fetch('/userinfo')
+            .then((res)=>res.json())
+            .then((res)=>{
+                console.log(res);
+                for(var i=0;i<this.state.guanzhuIdList.length;i++){
+                    for(var j=0;j<res.length;j++){
+                        if(res[j].userId == this.state.guanzhuIdList[i]){
+                            this.setState({
+                                userNameList:[...this.state.userNameList,res[j]]
+                            })
+                        }
+                    }
+                }
+                console.log(this.state.userNameList);
+            })
+            // this.refs.input.focus();
     }
+
     render() {
         return (
             <div>
@@ -63,12 +107,17 @@ export default class MyAttention extends Component {
                 </div>
                 <div>
                 <List>
+                    {
+                        this.state.userNameList.map((item,idx)=>(
+                            <Item 
+                                thumb={item.userAvatar}//图片
+                                arrow="horizontal"
+                                onClick={this.enter}
+                        >{item.userName}</Item>
+                        ))
+                    }
                     {/* <Avatar shape="square" size="small" icon="user" /> */}
-                    <Item 
-                        thumb={require("../../img/images/2_05.png")}//图片
-                        arrow="horizontal"
-                        onClick={this.enter}
-                    >小郑</Item>
+                    {/* 
                     <Item
                         // style={{borderBottom:'0.5px solid rgb(29,174,169)',height:30,width:355}}
                         thumb={require("../../img/images/2_05.png")}
@@ -100,7 +149,7 @@ export default class MyAttention extends Component {
                         arrow="horizontal"
                     >
                      小孙
-                    </Item>
+                    </Item> */}
                 </List>
                 </div>
             </div>

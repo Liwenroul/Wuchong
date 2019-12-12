@@ -30,7 +30,15 @@
         <div class="main">
             <div class="top">
                 <h1>动态管理</h1>
-                <button>查找和替换</button>
+                <form class="myform" action="/dongtai" method="POST">
+                    <input 
+                    style='margin-left: 100px;margin-top: 30px;width:400px;height:25px' type='text' value='' placeholder="搜索"
+                    class="search_Dongtai" id="search_Dongtai" autocomplete="off" name="search_Dongtai"
+                    >
+                    <button type='submit' class="search_Bt" id="search_Bt" > 查找</button>
+                    <!-- <button>替换</button> -->
+                </form>
+                
             </div>
             <div class="botton">
                 <table>
