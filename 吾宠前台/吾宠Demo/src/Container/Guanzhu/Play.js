@@ -103,7 +103,7 @@ export default class Play extends Component {
                     leftContent={[  
                         <i style={{fontSize:22}} className='iconfont icon-back' onClick={this.change}></i>,
                     ]}
-                >wuchongxiu</NavBar>
+    >{this.state.userName}的吾宠秀</NavBar>
                 <div style={{heigth:'100px',width:'100%'}} className='userPlay'>
                     <img src={this.state.userAvatar} style={{height:'100px',width:'100px',position:'relative',left:'0px'}}/>
                     <div style={{width:'200px',position:'absolute',left:'120px',top:'122px'}}>

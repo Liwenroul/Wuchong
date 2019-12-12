@@ -126,12 +126,12 @@ class AppGuanzhu extends Component {
                             this.setState({
                                 userId1:[...this.state.userId1,res[j].userId],
                                 userAvatar1:[...this.state.userAvatar1,res[j].userAvatar],
-                                userName1:[...this.state.userName1,res[j].userName]
+                                userName1:[...this.state.userName1,res[j].userName],
                             })
                         }
                     }
                 }
-                console.log("username:",this.state.userName,"userId:",this.state.userId);
+                console.log("userId:",this.state.userId);
             })
             this.refs.input.focus();
     }
@@ -174,8 +174,8 @@ class AppGuanzhu extends Component {
                             <img src={this.state.userAvatar2} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}}/>
                             </Link>
                             <div>
-                                <Item extra={'time'}>{this.state.userName2}</Item>
-                                <Item extra={'content'}>wordnum</Item>
+                                <Item extra={''}>{this.state.userName2}</Item>
+                                <Item extra={'2分钟前'}>一条未读消息</Item>
                             </div>
                             <Route path={url+'?userId:userId'} component={Chat}/>
                         </div>
@@ -197,8 +197,8 @@ class AppGuanzhu extends Component {
                                         <img src={this.state.userAvatar1[i]} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}}/>
                                         </Link>
                                         <div>
-                                            <Item extra={'time'}>{this.state.userName1[i]}</Item>
-                                            <Item extra={'content'}>wordnum</Item>
+                                            <Item extra={''}>{this.state.userName1[i]}</Item>
+                                            <Item extra={'2分钟前'}>一条未读消息</Item>
                                         </div>
                                         <Route path={url+'?userId:userId'} component={Chat}/>
                                     </div>

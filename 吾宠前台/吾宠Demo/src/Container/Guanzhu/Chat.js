@@ -79,7 +79,7 @@ export default class Chat extends Component {
                     leftContent={[
                         <i style={{fontSize:22}} className='iconfont icon-back' onClick={this.change}></i>,
                     ]}
-                >username</NavBar>
+    >{this.state.userName}</NavBar>
                     
                         <Link to={`/play?userId:`+this.state.userId} className='userschat'>
                         <img src={this.state.userAvatar} style={{height:'40px',width:'40px',marginTop:"50px"}}/>
