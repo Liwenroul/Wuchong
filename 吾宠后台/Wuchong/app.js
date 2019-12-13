@@ -223,6 +223,16 @@ app.get('/denglu',jsonParser,(req,res)=>{
       res.json(result); 
   }); 
 }) 
+app.get('/editpet',jsonParser,(req,res)=>{
+  // console.log(req.body);
+  con.query('select * from editpet',function(err,result){
+      if(err){
+          console.log('[SELECT ERROR] - ', err.message);
+          return;
+      }
+      res.json(result); 
+  }); 
+})
 app.get('/dingwei',jsonParser,(req,res)=>{
   // console.log(req.body);
   con.query('select * from dingwei',function(err,result){
@@ -333,6 +343,40 @@ app.post('/denglu',(req,res)=>{
       }
       else{
         con.query('update denglu set userId=?',[data.userId],function(err,result){
+          if(err){
+                console.log(err);
+            }else{
+              console.log(result);
+              res.json(result); 
+            }
+              
+        })
+      }
+    }
+  })
+  
+})
+app.post('/editpet',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  con.query("select * from editpet",function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+      if(result==[]){
+        con.query('insert into editpet(petId) values(?)',[data.petId],function(err,result){
+          if(err){
+                console.log(err);
+            }else{
+              console.log(result);
+              res.json(result);
+            }
+               
+        })
+      }
+      else{
+        con.query('update editpet set petId=?',[data.petId],function(err,result){
           if(err){
                 console.log(err);
             }else{

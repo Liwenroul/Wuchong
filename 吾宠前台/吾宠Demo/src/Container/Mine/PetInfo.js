@@ -32,6 +32,22 @@ export default class PetInfo extends Component {
             
         })
     }
+    editPet=(petId)=>{
+        console.log(petId);
+        const registerValue = {"petId":petId};
+        fetch('/editpet', {
+            method: "POST",
+            headers: {
+                "Content-type":"application/json;charset=utf-8",
+            },
+            body:JSON.stringify(registerValue) ,
+       })
+       .then( res => res.text())
+        .then( data => {
+             console.log(data);
+         });
+        window.location="/editPetInfo";
+    }
     render() {
         return (
             <div>
@@ -44,13 +60,15 @@ export default class PetInfo extends Component {
                 <ul style={{listStyle:'none'}}>
                     {
                         this.state.petData.map((item,idx)=>(
-                            <Link to="/editPetInfo"><li key={idx} style={{float:"left",width:100,height:300,borderRadius:50,backgroundColor:'rgb(29,174,169)',textAlign:'center',marginLeft:20,marginTop:20}}>
+                            // <Link to="/editPetInfo">
+                                <li onClick={()=>this.editPet(item.petId)} key={idx} style={{float:"left",width:100,height:300,borderRadius:50,backgroundColor:'rgb(29,174,169)',textAlign:'center',marginLeft:20,marginTop:20}}>
                                 <img src={item.petImg} style={{width:80,height:80,borderRadius:40,marginTop:20}}/>
                                 <h1 style={{marginTop:20}}>{item.petName}</h1>
                                 {/* <i className='iconfont icon-haibijiahao' style={{fontSize:25}}></i> */}
                                 <h2>{item.petSex}</h2>
                                 <h2>{item.petAge}岁</h2>
-                            </li></Link>
+                            </li>
+                            // </Link>
                         ))
                     }
                     
