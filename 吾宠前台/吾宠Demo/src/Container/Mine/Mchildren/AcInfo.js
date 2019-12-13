@@ -1,8 +1,12 @@
 import React from 'react';
 import {Link,Route} from 'react-router-dom';
+// import ayy from '../../img/images/ayy.jpg'
 import {WingBlank} from 'antd-mobile'
+// import children from '..../images/ji.jpg'
+
+
 // 无状态组件
-export default class Detail1 extends React.Component{
+export default class AcInfo extends React.Component{
     constructor(){
         super();
         this.state={
@@ -14,6 +18,8 @@ export default class Detail1 extends React.Component{
         let page = this.props.match.params.activeId;
         console.log(page)
         let url='/active/ac'+page;
+       
+
         fetch(url)
         .then((res)=>res.json())
         .then((res)=>{
@@ -24,7 +30,9 @@ export default class Detail1 extends React.Component{
             })
             console.log(this.state.data[0].acContent)
             console.log(this.state.page)
-        })    
+        })
+        
+        
     }
     // back=()=>{
     //     window.history.back();
@@ -32,7 +40,7 @@ export default class Detail1 extends React.Component{
     render(){
         return (
             <div >
-                <Link to='/activity'>
+                <Link to='/joinActive'>
                     <i style={{float:'right',fontSize:'30px',color:'#1daea9'}} 
                     className='iconfont icon-icon-' key='close'></i>  
                 </Link>

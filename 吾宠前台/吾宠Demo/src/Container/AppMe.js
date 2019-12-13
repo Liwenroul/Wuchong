@@ -8,13 +8,25 @@ import Detail1 from './Active/Detail1'
 // import Detail1 from './container/Detail1'
 
 export default class AppMe extends Component {
-
+    constructor(props){
+        super(props);
+        this.state={
+            city:'石家庄'
+        }
+    }
+    componentDidMount(){
+        fetch('/city').then((res)=>res.json()).then((res)=>{
+            this.setState({
+                city:res[0].cityName
+            })
+        });        
+    }
     render() {
         return (
             <div>
                 <NavBar style={{width:'100%',height:50,backgroundColor:'rgb(29,174,169)',color:'#fff',fontSize:'20px'}}>
                     <Link to='/position' style={{color:'white'}}>
-                        石家庄
+                        {this.state.city}
                         <i style={{fontSize:22,color:'white'}} className='iconfont icon-jiantouxia'></i>
                     </Link>
                 </NavBar>

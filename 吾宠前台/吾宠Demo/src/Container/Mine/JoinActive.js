@@ -59,14 +59,14 @@ export default class JoinActive extends Component {
                 <div>
                     {
                         this.state.activeData.map((item,idx)=>(
-                            <div key={idx} style={{float:"left",width:350,height:100,marginLeft:10,marginTop:20,borderRadius:15,overflow:'hidden',position:'relative'}}>
+                            <Link to='/acinfo'><div key={idx} style={{float:"left",width:350,height:100,marginLeft:10,marginTop:20,borderRadius:15,overflow:'hidden',position:'relative'}}>
                                 <img src={item.acImg} style={{width:350}}/>
                                 <p style={{float:'left',position:'absolute',bottom:-20,left:10,fontSize:25,color:'white'}}>{item.activeName}:
                                 <span style={{fontSize:16,width:100,overflow:"hidden" ,whiteSpace: "nowrap",textOverflow: "ellipsis"}}>{item.acContent}</span>
 
                                 {/* <span style={{width:100,overflow:"hidden" ,whiteSpace: "nowrap",textOverflow: "ellipsis"}}>{item.acContent}</span> */}
                                 </p>
-                            </div>
+                            </div></Link>
                         ))
                     }
                         

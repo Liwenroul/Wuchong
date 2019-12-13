@@ -1,22 +1,6 @@
 import React, { Component } from 'react'
 import {NavBar, WingBlank,WhiteSpace} from 'antd-mobile'
-import {Link} from 'react-router-dom'
-import { Item } from 'rc-menu';
 
-
-//  const handleChange=()=>{
-//     var inputs=document.getElementsByTagName('input');
-//     console.log(inputs[0].value);
-//     inputs[0].value='';
-//     inputs[1].value='';
-//     inputs[2].value='';
-//     inputs[3].value='';
-//     inputs[4].value='';   
-//     // var buttons=document.getElementsByTagName('button');
-//     // buttons[0].innerHTML='已报名';
-//     // buttons[0].disabled='false';
-//     // console.log(buttons[0].innerHTML);
-// }
 export default class Signup extends Component {
     constructor(){
         super();
@@ -26,7 +10,7 @@ export default class Signup extends Component {
             spetName:"",
             spetAge:"",
             spetKind:"",
-            activeId:"",
+            activeId:"1",
             userId:""
         }
     }
@@ -60,27 +44,13 @@ export default class Signup extends Component {
             spetKind:e.target.value
         })
     }
-    // activeIdChange=()=>{
-    //     // var acId=this.props.match.params.activeId;
-    //     console.log(this.props.match.params.activeId);
-    //     this.setState({
-    //         activeId:this.props.match.params.activeId
-    //     })
-    //     console.log(this.state.activeId)
-    // }
-    componentDidMount(){
-        fetch("/denglu")
-        .then((res)=>res.json())
-        .then((res)=>{
-            console.log(res[0].userId)
-            this.setState({
-                userId:res[0].userId
-            }) 
-            console.log(this.state.userId)
-        })
+    activeIdChange=()=>{
+        // var acId=this.props.match.params.activeId;
+        console.log(this.props.match.params.activeId);
         this.setState({
             activeId:this.props.match.params.activeId
         })
+        console.log(this.state.activeId)
     }
     register=()=>{
         var inputs=document.getElementsByTagName('input');
@@ -93,51 +63,47 @@ export default class Signup extends Component {
         
         const registerValue = {"signName":this.state.signName,"signTel": this.state.signTel,
             "spetName": this.state.spetName,"spetAge": this.state.spetAge,"spetKind": this.state.spetKind,
-            "activeId": this.state.activeId,"userId": this.state.userId}
+            "activeId": this.state.activeId,"userId": this.state.userId}        
         if(this.state.signName!="" && this.state.signTel!="" && this.state.spetName!=""
             && this.state.spetAge!="" && this.state.spetKind!=""
             && this.state.activeId!="" && this.state.userId!=""){
             fetch('/signup1', {
-                    method: "POST",
-                    headers: {
-                        "Content-type":"application/json;charset=utf-8",
-                    },
-                    body:JSON.stringify(registerValue) ,
-                }).then( res => res.text())
-                .then( data => {
-                    console.log(data);
-                    //   if(data.success){
-                    //       alert('register OK');
-                    //   }
-                });
-                console.log('success')
-                alert('报名成功')
-                this.setState({
-                    signName:"",
-                    signTel:"",
-                    spetName:"",
-                    spetAge:"",
-                    spetKind:""
-                })  
-            }
-        else{
-            alert("请将报名信息填写完整哦！");
-        }            
-    }
-
-
+                 method: "POST",
+                 headers: {
+                     "Content-type":"application/json;charset=utf-8",
+                 },
+                 body:JSON.stringify(registerValue) ,
+            }).then( res => res.text())
+              .then( data => {
+                  console.log(data);
+                //   if(data.success){
+                //       alert('register OK');
+                //   }
+              });
+            console.log('success')
+        }    
+     }
+     componentDidMount(){
+         fetch('/denglu').then((res)=>res.json()).then((res=>{
+             console.log(res)
+             this.setState({
+                 userId:res[0].userId
+             })
+         }))
+     }
     render() {
         return (
             <div style={{background:'#fff'}}>
                 <NavBar style={{width:'100%',height:50,backgroundColor:'rgb(29,174,169)',color:'#fff',fontSize:'20px'}}
                     rightContent={[
+                    
                         <i style={{color:'white',fontSize:'30px'}} className='iconfont icon-icon-' key='close1'
                             onClick={
                                 ()=>{
                                     window.history.back();
                                 }
                             }
-                        ></i>                       
+                        ></i>                        
                     ]} key='signup'
                 >报名</NavBar>
                 <WhiteSpace size='lg'/>
