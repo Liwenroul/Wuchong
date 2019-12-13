@@ -233,6 +233,16 @@ app.get('/dingwei',jsonParser,(req,res)=>{
       res.json(result); 
   }); 
 })
+app.get('/clockbianji',jsonParser,(req,res)=>{
+  // console.log(req.body);
+  con.query('select * from clockbianji',function(err,result){
+      if(err){
+          console.log('[SELECT ERROR] - ', err.message);
+          return;
+      }
+      res.json(result); 
+  }); 
+}) 
 
 
 app.post('/userinfo1',(req,res)=>{
@@ -449,6 +459,44 @@ app.post('/delDynamic',(req,res)=>{
         console.log(result);
         res.json(result); 
   })
+})
+
+app.post('/clockbianji',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  // let insertData = {
+  //   userId:data.userId,
+  // }
+  con.query("select * from clockbianji",function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+      if(result==[]){
+        con.query('insert into clockbianji(clockId) values(?)',[data.clockId],function(err,result){
+          if(err){
+                console.log(err);
+            }else{
+              console.log(result);
+              res.json(result);
+            }
+               
+        })
+      }
+      else{
+        con.query('update clockbianji set clockId=?',[data.clockId],function(err,result){
+          if(err){
+                console.log(err);
+            }else{
+              console.log(result);
+              res.json(result); 
+            }
+              
+        })
+      }
+    }
+  })
+  
 })
 
 // error handler

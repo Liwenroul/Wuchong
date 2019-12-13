@@ -8,7 +8,12 @@ export default class Contentda extends React.Component{
         super();
         this.state={
             data:[],
-            num:""
+            num:"",
+            clockName:"",
+          clockNum:"",
+          clockTime:"",
+          clockImg:"",
+          clockCycle:"",
         }
     }
     componentDidMount(){
@@ -23,8 +28,21 @@ export default class Contentda extends React.Component{
                 })
             })
     }
-    bianji = (item) => {
-        window.location='/bianji';
+    bianji = (clockId) => {
+        const registerValue = {"clockId":clockId}
+      
+        // if(this.state.clockName!=""&&this.state.clockNum!=""&&this.state.clockTime!=""&&this.state.clockImg!=""&&this.state.clockCycle!=""){
+          fetch('/clockbianji', {
+                method: "POST",
+                headers: {
+                    "Content-type":"application/json;charset=utf-8",
+                },
+                body:JSON.stringify(registerValue) ,
+            }).then( res => res.text())
+              .then( data => {
+                  console.log(data);
+              });
+            // }
 
     }
     daka = () => {
@@ -45,7 +63,7 @@ export default class Contentda extends React.Component{
                                 <div  style={{width:"70px",height:"70px",marginLeft:"28%",marginBottom:"15px",border:"3px dashed gray",borderRadius:"50%"}}>
                                     <img src={item.clockImg} style={{ width: '60px', height: '60px',borderRadius:'50%' }} alt=""/>
                                 </div>
-                                <div style={{textAlign:'center'}}><button className='btn' onClick={this.daka}>{item.clockName}</button><span style={{marginLeft:'10px'}} id='clock'>{item.clockNum}</span><button className='btn' onClick={()=>this.bianji(item)}>编辑</button></div>
+                                <div style={{textAlign:'center'}}><button className='btn' onClick={this.daka}>{item.clockName}</button><span style={{marginLeft:'10px'}} id='clock'>{item.clockNum}</span><button className='btn' onClick={()=>(this.bianji(item.clockId))}><Link to='/bianji' style={{color:'white'}}>编辑</Link></button></div>
                                 
                             </div> 
                             

@@ -26,12 +26,13 @@ function getBase64(img, callback) {
 
 
 export default class Contentda extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             data:[],
             num:""
         }
+        
     }
     componentDidMount(){
         let url = '/clockin'
@@ -43,7 +44,9 @@ export default class Contentda extends React.Component{
                     data:res,
                     
                 })
+                console.log(this.state.data)
             })
+     
     }
     // bianji = () => {
     //     window.location='/bianji';
@@ -112,7 +115,7 @@ export default class Contentda extends React.Component{
             </div>
           );
           const { imageUrl } = this.state;
-          console.log(this.state.data)
+          
         return (
             <div>
                 {
