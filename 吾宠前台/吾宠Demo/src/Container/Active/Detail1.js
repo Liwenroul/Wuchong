@@ -1,10 +1,6 @@
 import React from 'react';
 import {Link,Route} from 'react-router-dom';
-import ayy from '../../img/images/ayy.jpg'
 import {WingBlank} from 'antd-mobile'
-// import children from '..../images/ji.jpg'
-
-
 // 无状态组件
 export default class Detail1 extends React.Component{
     constructor(){
@@ -18,8 +14,6 @@ export default class Detail1 extends React.Component{
         let page = this.props.match.params.activeId;
         console.log(page)
         let url='/active/ac'+page;
-       
-
         fetch(url)
         .then((res)=>res.json())
         .then((res)=>{
@@ -30,9 +24,7 @@ export default class Detail1 extends React.Component{
             })
             console.log(this.state.data[0].acContent)
             console.log(this.state.page)
-        })
-        
-        
+        })    
     }
     // back=()=>{
     //     window.history.back();

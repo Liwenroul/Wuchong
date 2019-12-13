@@ -86,14 +86,14 @@ app.use('/userguanli', userguanRouter);
 
 
 app.get('/active',function(err,res){
-  con.query('select * from active',function(err,result){
+  con.query('select * from active where acCity in (select cityName from city)',function(err,result){
       if(err){
           console.log('[SELECT ERROR] - ', err.message);
           return;
       }
       else{
         res.json(result);
-        console.log(result[0].activeId);
+        // console.log(result[0].activeId);
         // for(var i=0;i<result.length;i++){
         //   app.get(`/active/ac${result[i]}`,function(err,res){
         //     console.log("a");
@@ -107,8 +107,20 @@ app.get('/active',function(err,res){
         //   }) ;
         // }
       }
+      console.log(result)
   }); 
 }) ;
+
+app.get('/city',jsonParser,(req,res)=>{
+  // console.log(req.body);
+  con.query('select * from city',function(err,result){
+      if(err){
+          console.log('[SELECT ERROR] - ', err.message);
+          return;
+      }
+      res.json(result); 
+  }); 
+}) 
 app.get('/active/ac1',function(err,res){
   con.query('select * from active where activeId=?',['1'],function(err,result){
       if(err){
@@ -127,6 +139,7 @@ app.get('/active/ac2',function(err,res){
       res.json(result); 
   }); 
 }) ;
+
 
 // app.get('/active/ac0',function(err,res){
 //   con.query('select * from active where activeId=?',["1"],function(err,result){
@@ -469,6 +482,43 @@ app.post('/signup1',(req,res)=>{
         console.log(result);
         res.json(result); 
   })
+})
+app.post('/city',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  // let insertData = {
+  //   userId:data.userId,
+  // }
+  con.query("select * from city",function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+      if(result==[]){
+        con.query('insert into city(cityName) values(?)',[data.cityName],function(err,result){
+          if(err){
+                console.log(err);
+            }else{
+              console.log(result);
+              res.json(result);
+            }
+               
+        })
+      }
+      else{
+        con.query('update city set cityName=?',[data.cityName],function(err,result){
+          if(err){
+                console.log(err);
+            }else{
+              console.log(result);
+              res.json(result); 
+            }
+              
+        })
+      }
+    }
+  })
+  
 })
 app.post('/userinfo2',(req,res)=>{
   let data=req.body;
