@@ -16,14 +16,6 @@ export default class EditPetInfo extends Component {
         }
     }
     componentWillMount(){
-        // fetch("/denglu")
-        // .then((res)=>res.json())
-        // .then((res)=>{
-        //     console.log(res[0].userId)
-        //     this.setState({
-        //         dengluId:res[0].userId
-        //     })
-        // })
         fetch("/editpet")
         .then((res)=>res.json())
         .then((res)=>{
@@ -36,7 +28,8 @@ export default class EditPetInfo extends Component {
         .then((res)=>res.json())
         .then((res)=>{
             for(var i=0;i<res.length;i++){
-                if(res[i].petId==this.state.editId){
+                if(res[i].petId==this.state.editPetId){
+                    console.log(res[i]);
                     this.setState({
                         petImg:res[i].petImg,
                         petName:res[i].petName,
@@ -72,12 +65,12 @@ export default class EditPetInfo extends Component {
         })
     }
 
-    editInfo=()=>{
+    editPet=()=>{
         console.log(this.state.petName);
-        const registerValue = {"petImg":this.state.petImg,"petName":this.state.petName,"petSex": this.state.petSex,"petAge": this.state.petAge,"userId":this.state.editPetId}
+        const registerValue = {"petImg":this.state.petImg,"petName":this.state.petName,"petSex": this.state.petSex,"petAge": this.state.petAge,"editPetId":this.state.editPetId}
        
         if(this.state.petName!=""&&this.state.petSex!=""&&this.state.petAge!=""){
-           fetch('/editpetinfo', {
+           fetch('/editpet1', {
                  method: "POST",
                  headers: {
                      "Content-type":"application/json;charset=utf-8",
@@ -88,6 +81,19 @@ export default class EditPetInfo extends Component {
                   console.log(data);
               });
             }
+    }
+    delPet=()=>{
+        const registerValue = {"editPetId":this.state.editPetId}
+        fetch('/delPet', {
+            method: "POST",
+            headers: {
+                "Content-type":"application/json;charset=utf-8",
+            },
+            body:JSON.stringify(registerValue) ,
+       }).then( res => res.text())
+         .then( data => {
+             console.log(data);
+         });
     }
     render() {
         return (
@@ -106,7 +112,7 @@ export default class EditPetInfo extends Component {
                     <input onChange={this.sexChange} style={{width:'100%',margin:'0 auto',lineHeight:3,marginTop:20,borderRadius:'20px',textAlign:'center',border:'1px solid #33cccc'}} type='text'  id='sex' name='sex' value={this.state.petSex} />
                     <input onChange={this.ageChange} style={{width:'100%',margin:'0 auto',lineHeight:3,marginTop:20,borderRadius:'20px',textAlign:'center',border:'1px solid #33cccc'}} type='text' id='age' name='age' value={this.state.petAge} />
                     <Link to='/petinfo' style={{width:'100%',height:50,paddingLeft:'105px'}}>
-                    <input onClick={this.editpet} type='submit' style={{width:'45%',height:50,background:'#1daea9',color:'#fff',borderRadius:'40px',fontSize:25,marginTop:20}} value='确定'/>
+                    <input onClick={this.editPet} type='submit' style={{width:'45%',height:50,background:'#1daea9',color:'#fff',borderRadius:'40px',fontSize:25,marginTop:20}} value='确定'/>
                     </Link> 
                     <Link to='/petinfo' style={{width:'100%',height:50,paddingLeft:'105px'}}>
                     <input onClick={this.delPet} type='submit' style={{width:'45%',height:50,background:'#1daea9',color:'#fff',borderRadius:'40px',fontSize:25,marginTop:20}} value='删除'/>

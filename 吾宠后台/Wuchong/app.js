@@ -403,6 +403,28 @@ app.post('/editpet',(req,res)=>{
   })
   
 })
+app.post('/editpet1',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  con.query('update petinfo set petImg=?,petName=?,petSex=?,petAge=? where petId=?',[data.petImg,data.petName,data.petSex,data.petAge,data.editPetId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+app.post('/delPet',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  con.query('delete from petinfo where petId=?',[data.editPetId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
 app.post('/dingwei',(req,res)=>{
   let data=req.body;
   console.log(data);
