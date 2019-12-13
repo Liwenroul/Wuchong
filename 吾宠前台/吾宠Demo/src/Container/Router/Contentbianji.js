@@ -29,25 +29,49 @@ export default class Contentda extends React.Component{
     constructor(props){
         super(props);
         this.state={
+            id:'',
             data:[],
             num:""
         }
         
     }
     componentDidMount(){
-        let url = '/clockin'
-        fetch(url)
-            .then((res)=>res.json())
-            .then((res)=>{
-                console.log(res);
-                this.setState({
-                    data:res,
+      let url = '/clockbianji'
+      fetch(url)
+          .then((res)=>res.json())
+          .then((res)=>{
+              console.log(res);
+              this.setState({
+                  id:res[0].clockId,
+              })
+              console.log(this.state.id)
+          })
+      
+      let url2 = '/clockin'
+      fetch(url2)
+          .then((res)=>res.json())
+          .then((res)=>{
+              console.log(res);
+              this.setState({
+                  data:res,
+              })
+          })
+  }
+
+    // componentDidMount(){
+    //     let url = '/clockin'
+    //     fetch(url)
+    //         .then((res)=>res.json())
+    //         .then((res)=>{
+    //             console.log(res);
+    //             this.setState({
+    //                 data:res,
                     
-                })
-                console.log(this.state.data)
-            })
+    //             })
+    //             console.log(this.state.data)
+    //         })
      
-    }
+    // }
     // bianji = () => {
     //     window.location='/bianji';
     // }
@@ -115,12 +139,13 @@ export default class Contentda extends React.Component{
             </div>
           );
           const { imageUrl } = this.state;
-          
+          console.log(this.state.id)
+          console.log(this.state.data)
         return (
             <div>
                 {
-                    this.state.data.map((item)=>(
-                    <div>
+                  this.state.data.map((item)=>(
+                    item.clockId == this.state.id ? <div>
                         <div className="add">
                             <div className='to'>
                                 <img src={item.clockImg} style={{ width: '105px', height: '105px',borderRadius:'50%' }} alt=""/>
@@ -141,10 +166,14 @@ export default class Contentda extends React.Component{
                             <span style={{fontSize:15,marginTop:'20px',marginLeft:'5px',float:'left',fontWeight:'bolder'}}>设置提醒时间：{item.clockTime}</span>
                         </div>
                           <input type='text' id='clockTime' className='time' placeholder='请输入修改时间 例如 08:00'/>
-                       
-                       
-                    </div>        
-                    ))
+                      
+                    </div> 
+                    : ''
+
+                  ))
+
+
+
                 }
             </div>
         )
