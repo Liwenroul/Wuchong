@@ -31,17 +31,6 @@ export default class AppMe extends Component {
                     </Link>
                 </NavBar>
                 <div className='container'>
-                    {/* <WhiteSpace size="lg" />
-                    <Link to={`/detail1`}>
-                        <Flex>
-                            <Flex.Item><img src={activity1} style={{width:'100%'}}/></Flex.Item>
-                        </Flex>
-                    </Link>
-                    <WhiteSpace size="lg" />
-                    <Flex>
-                        <Flex.Item><img src={activity2} style={{width:'100%'}}/></Flex.Item>
-                    </Flex>
-                    <WhiteSpace size="lg" /> */}
                     <ContentAc/>
                     {/* <Route path='/detail1/:activeId' component={Detail1}/> */}
                 </div>

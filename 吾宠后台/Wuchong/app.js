@@ -86,26 +86,13 @@ app.use('/userguanli', userguanRouter);
 
 
 app.get('/active',function(err,res){
-  con.query('select * from active where acCity in (select cityName from city)',function(err,result){
+  con.query('select * from active',function(err,result){
       if(err){
           console.log('[SELECT ERROR] - ', err.message);
           return;
       }
       else{
         res.json(result);
-        // console.log(result[0].activeId);
-        // for(var i=0;i<result.length;i++){
-        //   app.get(`/active/ac${result[i]}`,function(err,res){
-        //     console.log("a");
-        //     con.query('select * from active where activeId=?',[result[i].activeId],function(err,result){
-        //         if(err){
-        //             console.log('[SELECT ERROR] - ', err.message);
-        //             return;
-        //         }
-        //         res.json(result); 
-        //     }); 
-        //   }) ;
-        // }
       }
       console.log(result)
   }); 
@@ -140,18 +127,16 @@ app.get('/active/ac2',function(err,res){
   }); 
 }) ;
 
-
-// app.get('/active/ac0',function(err,res){
-//   con.query('select * from active where activeId=?',["1"],function(err,result){
-//       if(err){
-//           console.log('[SELECT ERROR] - ', err.message);
-//           return;
-//       }
-//       res.json(result); 
-//   }); 
-// }) ;
-
-
+app.get('/activeinfo',jsonParser,(req,res)=>{
+  // console.log(req.body);
+  con.query('select * from activeinfo',function(err,result){
+      if(err){
+          console.log('[SELECT ERROR] - ', err.message);
+          return;
+      }
+      res.json(result); 
+  }); 
+}) 
 app.get('/clockin',function(err,res){
   con.query('select * from clockin',function(err,result){
       if(err){
@@ -614,6 +599,42 @@ app.post('/clockbianji',(req,res)=>{
   })
   
 })
+app.post('/activeinfo',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  con.query("select * from activeinfo",function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+      if(result==[]){
+        con.query('insert into activeinfo(activeId) values(?)',[data.acInfoId],function(err,result){
+          if(err){
+                console.log(err);
+            }else{
+              console.log(result);
+              res.json(result);
+            }
+               
+        })
+      }
+      else{
+        con.query('update activeinfo set activeId=?',[data.acInfoId],function(err,result){
+          if(err){
+                console.log(err);
+            }else{
+              console.log(result);
+              res.json(result); 
+            }
+              
+        })
+      }
+    }
+  })
+  
+})
+
+
 
 // error handler
 app.use(function(err, req, res, next) {

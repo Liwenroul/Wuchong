@@ -9,6 +9,19 @@ export default class ContentAc extends Component {
             data:[]
         }           
     }
+    acInfo=(activeId)=>{
+        const registerValue = {"acInfoId":activeId}
+        fetch('/activeinfo', {
+            method: "POST",
+            headers: {
+                "Content-type":"application/json;charset=utf-8",
+            },
+            body:JSON.stringify(registerValue) ,
+       }).then( res => res.text())
+         .then( data => {
+             console.log(data);
+         });
+    }
     componentDidMount(){
         let url='/active';
         fetch(url)
@@ -25,9 +38,9 @@ export default class ContentAc extends Component {
             <div>
                 {
                     this.state.data.map((item)=>(
-                        <div key={item.activeId} style={{height:'150px'}}>
+                        <div onClick={()=>this.acInfo(item.activeId)} key={item.activeId} style={{height:'150px'}}>
                             <WhiteSpace size="lg" />
-                                <Link to={`/detail1/`+item.activeId}>
+                                <Link to="/detail1">
                                     <Flex>
                                         <Flex.Item><img src={item.acImg} style={{width:'100%',height:'130px',borderRadius:'10px'}}/>
                                         <h1 style={{color:'white',position:'relative',top:'-80px',left:'20px'}}>{item.activeName}</h1>
