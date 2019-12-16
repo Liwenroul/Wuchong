@@ -646,6 +646,27 @@ app.post('/activeinfo',(req,res)=>{
   })
   
 })
+app.post('/clockinxiugai',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  let insertData = {
+    clockId:data.clockId,
+    clockName:data.clockName,
+    clockNum:data.clockNum,
+    clockTime:data.clockTime,
+    userId:data.userId,
+    clockCycle:data.clockCycle,
+    
+  }
+  con.query('update clockin set clockName=?,clockNum=?,clockTime=?,clockCycle=? where clockId=?',[data.clockName,data.clockNum,data.clockTime,data.clockCycle,data.clockId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+
 
 
 

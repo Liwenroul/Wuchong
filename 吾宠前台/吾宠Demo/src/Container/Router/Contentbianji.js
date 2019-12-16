@@ -31,10 +31,38 @@ export default class Contentda extends React.Component{
         this.state={
             id:'',
             data:[],
-            num:""
+            num:"",
+            clockId:'',
+            clockName:"",
+            clockNum:"",
+            clockTime:"",
+            userId:"2",
+            clockCycle:"",
         }
         
     }
+
+
+  clockNameChange=(e)=>{
+      console.log(e.target.value);
+      this.setState({
+          clockName:e.target.value
+      })
+  }
+  clockNumChange=(e)=>{
+      console.log(e.target.value);
+      this.setState({
+        clockNum:e.target.value
+      })
+  }
+  clockTimeChange=(e)=>{
+      console.log(e.target.value);
+      this.setState({
+        clockTime:e.target.value
+      })
+  }
+
+
     componentDidMount(){
       let url = '/clockbianji'
       fetch(url)
@@ -43,6 +71,7 @@ export default class Contentda extends React.Component{
               console.log(res);
               this.setState({
                   id:res[0].clockId,
+                  clockId:res[0].clockId
               })
               console.log(this.state.id)
           })
@@ -99,6 +128,9 @@ export default class Contentda extends React.Component{
         var every = document.getElementById('every');
         span.innerHTML='设置'+e.target.innerHTML+'打卡次数：';
         every.innerHTML=e.target.innerHTML;
+        this.setState({
+          clockCycle:every.innerHTML
+        })
     }
     
     add = () => {
@@ -106,9 +138,7 @@ export default class Contentda extends React.Component{
         shezhi.style.display='block'
     }
 
-    clockin = () => {
-        this.props.history.push('/clockin');
-    }
+   
 
 
     state = {
@@ -130,6 +160,24 @@ export default class Contentda extends React.Component{
           );
         }
       };
+    
+      register=()=>{
+        console.log(this.state.clockName);
+        const registerValue = {"clockName":this.state.clockName,"clockNum": this.state.clockNum,"clockTime": this.state.clockTime,"userId":this.state.userId,"clockId":this.state.clockId,"clockCycle":this.state.clockCycle}
+      
+        // if(this.state.clockName!=""&&this.state.clockNum!=""&&this.state.clockTime!=""&&this.state.clockImg!=""&&this.state.clockCycle!=""){
+          fetch('/clockinxiugai', {
+                method: "POST",
+                headers: {
+                    "Content-type":"application/json;charset=utf-8",
+                },
+                body:JSON.stringify(registerValue) ,
+            }).then( res => res.text())
+              .then( data => {
+                  console.log(data);
+              });
+            // }
+    }
 
     render(){
         const uploadButton = (
@@ -143,6 +191,11 @@ export default class Contentda extends React.Component{
           console.log(this.state.data)
         return (
             <div>
+                <NavBar
+                            style={{backgroundColor:'rgb(29,174,169)',color:'#000'}}
+                            leftContent={<Link to='/clockin' style={{color:'white'}}><i style={{fontSize:22,color:'white'}} className='iconfont icon-back' ></i></Link>}
+                            rightContent={<Link to='/clockin' style={{color:'white'}}><i style={{fontSize:22,color:'white'}} className='iconfont icon-duihao' onClick={this.register}></i></Link> }
+                        >编辑</NavBar>
                 {
                   this.state.data.map((item)=>(
                     item.clockId == this.state.id ? <div>
@@ -151,7 +204,7 @@ export default class Contentda extends React.Component{
                                 <img src={item.clockImg} style={{ width: '105px', height: '105px',borderRadius:'50%' }} alt=""/>
                                 
                             </div>
-                            <input type="text" placeholder={item.clockName} style={{textAlign:'center',marginLeft:'110px',marginTop:'20px',borderRadius:'5px',background:'#eee'}}/>
+                            <input type="text" id='clockName' onChange={this.clockNameChange} placeholder={item.clockName} style={{textAlign:'center',marginLeft:'110px',marginTop:'20px',borderRadius:'5px',background:'#eee'}}/>
                         </div>
                         <div className="add2">
                             <span style={{fontSize:15,marginTop:'30px',marginLeft:'5px',float:'left',fontWeight:'bolder'}} id='span'>设置每日打卡次数：</span>
@@ -160,12 +213,12 @@ export default class Contentda extends React.Component{
                             <div className="daka2" id='daka3' onClick={this.daka}>每月</div>
                             <div className="add3">
                                 <span style={{fontWeight:'bolder',marginLeft:'5px'}} id='every'>每日</span>
-                                <input type='text' placeholder={item.clockNum} style={{height:'30px',width:'40px',marginLeft:'5px',borderRadius:'10px',textAlign:'center',fontWeight:'bolder',lineHeight:'40px'}}/>
+                                <input type='text' onChange={this.clockNumChange} id='clockNum' placeholder={item.clockNum} style={{height:'30px',width:'40px',marginLeft:'5px',borderRadius:'10px',textAlign:'center',fontWeight:'bolder',lineHeight:'40px'}}/>
                                 <span style={{fontWeight:'bolder',marginLeft:'5px'}}>次</span>
                             </div>
                             <span style={{fontSize:15,marginTop:'20px',marginLeft:'5px',float:'left',fontWeight:'bolder'}}>设置提醒时间：{item.clockTime}</span>
                         </div>
-                          <input type='text' id='clockTime' className='time' placeholder='请输入修改时间 例如 08:00'/>
+                          <input type='text'  onChange={this.clockTimeChange} id='clockTime' className='time' placeholder='请输入修改时间 例如 08:00'/>
                       
                     </div> 
                     : ''
