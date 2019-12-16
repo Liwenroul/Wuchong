@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import { Grid ,Modal, Button, WhiteSpace, WingBlank} from 'antd-mobile';
+import { Modal } from 'antd';
+import { Grid , Button, WhiteSpace, WingBlank} from 'antd-mobile';
 const operation = Modal.operation;
 
 let data =[];
+const { confirm } = Modal;
 
 export default class Wochongxiu extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+        console.log(props);
         this.state={
             dengluId:"",
             dynamicData:[],
@@ -15,23 +18,24 @@ export default class Wochongxiu extends Component {
     }
     delDynamic=(dynamicId)=>{
         const registerValue = {"dynamicId":dynamicId};
-        // confirm("确认删除这条动态吗？")
-        // let r=confirm("确认删除这条动态吗？");
-        // console.log(confirm("确认删除这条动态吗？"));
-        
-        // if(confirm("确认删除这条动态吗？")){
-            fetch('/delDynamic', {
-                method: "POST",
-                headers: {
-                    "Content-type":"application/json;charset=utf-8",
-                },
-                body:JSON.stringify(registerValue) ,
-           }).then( res => res.text())
-             .then( data => {
-                 console.log(data);
-             });
-        // }
-        
+        confirm({
+            title: '确定删除这条动态吗?',
+            onOk() {
+                fetch('/delDynamic', {
+                    method: "POST",
+                    headers: {
+                        "Content-type":"application/json;charset=utf-8",
+                    },
+                    body:JSON.stringify(registerValue) ,
+               }).then( res => res.text())
+                 .then( data => {
+                     console.log(data);
+                 });
+            },
+            onCancel() {
+              console.log('Cancel');
+            },
+          });
     }
     componentDidMount(){
         fetch("/denglu")
@@ -56,6 +60,31 @@ export default class Wochongxiu extends Component {
             console.log(this.state.dynamicData);
         })
     }
+    // componentDidUpdate(){
+    //     if(this.state.dynamicData)
+    //     fetch("/denglu")
+    //     .then((res)=>res.json())
+    //     .then((res)=>{
+    //         console.log(res[0].userId)
+    //         this.setState({
+    //             dengluId:res[0].userId
+    //         })
+    //     })
+    //     fetch("/dynamic")
+    //     .then((res)=>res.json())
+    //     .then((res)=>{
+    //         for(var i=0;i<res.length;i++){
+    //             console.log(res[i].userId);
+    //             if(res[i].userId==this.state.dengluId){
+    //                 this.setState({
+    //                     dynamicData:[...this.state.dynamicData,res[i]]
+    //                 })
+    //             }
+    //         }
+    //         console.log(this.state.dynamicData);
+    //          }
+    //     })
+    // }
     render() {
         return (
             <div>

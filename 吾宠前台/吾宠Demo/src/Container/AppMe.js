@@ -24,24 +24,18 @@ export default class AppMe extends Component {
     render() {
         return (
             <div>
-                <NavBar style={{width:'100%',height:50,backgroundColor:'rgb(29,174,169)',color:'#fff',fontSize:'20px'}}>
+                <NavBar style={{width:'100%',height:50,backgroundColor:'rgb(29,174,169)',color:'#fff',fontSize:'20px'}}
+                    leftContent={[<Link to='/all' key='position'>
+                    <i style={{color:'white',fontSize:'30px'}} className='iconfont icon-back' key='close1'></i>
+                  </Link>]}
+                    >
+                    
                     <Link to='/position' style={{color:'white'}}>
                         {this.state.city}
                         <i style={{fontSize:22,color:'white'}} className='iconfont icon-jiantouxia'></i>
                     </Link>
                 </NavBar>
                 <div className='container'>
-                    {/* <WhiteSpace size="lg" />
-                    <Link to={`/detail1`}>
-                        <Flex>
-                            <Flex.Item><img src={activity1} style={{width:'100%'}}/></Flex.Item>
-                        </Flex>
-                    </Link>
-                    <WhiteSpace size="lg" />
-                    <Flex>
-                        <Flex.Item><img src={activity2} style={{width:'100%'}}/></Flex.Item>
-                    </Flex>
-                    <WhiteSpace size="lg" /> */}
                     <ContentAc/>
                     {/* <Route path='/detail1/:activeId' component={Detail1}/> */}
                 </div>

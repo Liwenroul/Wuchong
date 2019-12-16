@@ -140,18 +140,16 @@ app.get('/active/ac2',function(err,res){
   }); 
 }) ;
 
-
-// app.get('/active/ac0',function(err,res){
-//   con.query('select * from active where activeId=?',["1"],function(err,result){
-//       if(err){
-//           console.log('[SELECT ERROR] - ', err.message);
-//           return;
-//       }
-//       res.json(result); 
-//   }); 
-// }) ;
-
-
+app.get('/activeinfo',jsonParser,(req,res)=>{
+  // console.log(req.body);
+  con.query('select * from activeinfo',function(err,result){
+      if(err){
+          console.log('[SELECT ERROR] - ', err.message);
+          return;
+      }
+      res.json(result); 
+  }); 
+}) 
 app.get('/clockin',function(err,res){
   con.query('select * from clockin',function(err,result){
       if(err){
@@ -614,6 +612,42 @@ app.post('/clockbianji',(req,res)=>{
   })
   
 })
+app.post('/activeinfo',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  con.query("select * from activeinfo",function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+      if(result==[]){
+        con.query('insert into activeinfo(activeId) values(?)',[data.acInfoId],function(err,result){
+          if(err){
+                console.log(err);
+            }else{
+              console.log(result);
+              res.json(result);
+            }
+               
+        })
+      }
+      else{
+        con.query('update activeinfo set activeId=?',[data.acInfoId],function(err,result){
+          if(err){
+                console.log(err);
+            }else{
+              console.log(result);
+              res.json(result); 
+            }
+              
+        })
+      }
+    }
+  })
+  
+})
+
+
 
 
 app.post('/guanzhu',(req,res)=>{

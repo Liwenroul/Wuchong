@@ -39,7 +39,7 @@ export default class EditUserInfo extends Component {
         })
     }
     register=()=>{
-        // console.log(this.state.userName);
+        
         const registerValue = {"userName":this.state.userName,"userId":this.state.dengluId}
         if(this.state.userName!=""){
            fetch('/userinfo3', {
