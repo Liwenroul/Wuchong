@@ -615,6 +615,49 @@ app.post('/clockbianji',(req,res)=>{
   
 })
 
+
+app.post('/guanzhu',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  let insertData = {
+    clockId:"WuChong"+parseInt(Math.random()*1000),
+    Id:data.Id,
+    guanzhuId:data.guanzhuId,
+    userId:data.userId,
+    
+  }
+  con.query('insert into guanzhu(Id,guanzhuId,userId) values(?,?,?)',[insertData.Id,insertData.guanzhuId,insertData.userId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+
+
+app.post('/delguanzhu',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  let insertData = {
+    Id:data.Id,
+    guanzhuId:data.guanzhuId,
+    userId:data.userId,
+    
+  }
+  con.query('delete from guanzhu where Id=?',[insertData.Id],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+
+
+
+
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

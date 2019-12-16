@@ -27,27 +27,91 @@ export default class Play extends Component {
             dynamicImg:[],
             dynamicContent:[],
             dynamicId:[],
-            num:[]
+            num:[],
+            ID:'',
+            id:'56'
         }
     }
+    
     change = () =>{
         this.props.history.push('./chat');
     }
     changeValue=()=>{
         parseInt(this.state.value++);
+        
         console.log(parseInt(this.state.value));
         this.setState(()=>{
             if(this.state.value % 2==0){
                 this.setState({
                     points:'已关注'
                 })
+
+                fetch('/denglu')
+                .then((res)=>res.json())
+                .then((res)=>{
+                    // console.log(res)
+                    this.setState({
+                        ID:res[0].userId
+                    })
+                    const registerValue = {"Id":this.state.id,
+                    "guanzhuId": this.state.userId,
+                    "userId": this.state.ID}
+                    console.log(registerValue);
+                    fetch('/guanzhu', {
+                            method: "POST",
+                            headers: {
+                                "Content-type":"application/json;charset=utf-8",
+                            },
+                            body:JSON.stringify(registerValue) ,
+                        }).then( res => res.text())
+                        .then( data => {
+                            console.log(data);
+                        });
+                        // }
+                    // this.props.history.push('/guanzhu');
+                    })
                 
             }
             else{
                 this.setState({
                     points:'关注'
                 })
-                
+                fetch('/denglu')
+                .then((res)=>res.json())
+                .then((res)=>{
+                    // console.log(res)
+                    this.setState({
+                        ID:res[0].userId
+                    })
+                    fetch('guanzhu')
+                    .then((res)=>res.json())
+                    .then((res)=>{
+                        for(var i =0;i<res.length;i++){
+                            if(res.guanzhuId == this.state.userId){
+                                this.setState({
+                                    id:res.Id
+                                })
+                            }
+                        }
+                        const registerValue = {"Id":this.state.id,
+                        "guanzhuId": this.state.userId,
+                        "userId": this.state.ID}
+                        console.log(registerValue);
+                        fetch('/delguanzhu', {
+                                method: "POST",
+                                headers: {
+                                    "Content-type":"application/json;charset=utf-8",
+                                },
+                                body:JSON.stringify(registerValue) ,
+                            }).then( res => res.text())
+                            .then( data => {
+                                console.log(data);
+                            });
+                            // }
+                        // this.props.history.push('/guanzhu');
+                    })
+                    
+                })
             }
         })
     }
@@ -125,28 +189,6 @@ export default class Play extends Component {
                             )
                         })
                     }
-                        {/* <Grid data={data1}
-                        columnNum={2}
-                        renderItem={dataItem => (
-
-                            <div style={{height:175}}>
-                                <img src={this.state.dynamicImg} style={{ width: '135px', height: '100px' ,marginTop:0}} alt="" className='space'/>
-                                <div style={{ color: '#888', fontSize: '14px', marginTop: '12px' }}>
-                                    {this.state.dynamicContent}
-                                </div>
-                            </div>
-                        )}
-                        /> */}
-                        
-                        {/* {this.state.num.map(()=>{
-                            <div style={{height:175}}>
-                            <img src={this.state.dynamicImg} style={{ width: '135px', height: '100px' ,marginTop:0}} alt="" className='space'/>
-                            <div style={{ color: '#888', fontSize: '14px', marginTop: '12px' }}>
-                                {this.state.dynamicContent}
-                            </div>
-                            </div>
-
-                        })}  */}
                 </div>
             </div>
         )
