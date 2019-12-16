@@ -58,13 +58,13 @@ export default class Detail1 extends React.Component{
                     className='iconfont icon-icon-' key='close'></i>  
                 </Link>
                 <div style={{marginTop:'20px'}} >
-                        <div key={this.state.activeId} style={{width:'100%'}}>
-                            <h2 style={{paddingLeft:'10px'}}>{this.state.activeName}</h2>
-                            <p style={{paddingLeft:'10px'}}>地址:{this.state.acAddress}</p>
-                            <img src={this.state.acImg} style={{width:'100%',height:'350px'}}/>
+                        <div key={this.state.data.activeId} style={{width:'100%'}}>
+                            <h2 style={{paddingLeft:'10px'}}>{this.state.data.activeName}</h2>
+                            <p style={{paddingLeft:'10px'}}>地址:{this.state.data.acAddress}</p>
+                            <img src={this.state.data.acImg} style={{width:'100%',height:'350px'}}/>
                             <WingBlank>
                                 <div style={{fontSize:'20px'}}>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;{this.state.acContent}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;{this.state.data.acContent}
                                 </div>
                             </WingBlank>
                         </div>
