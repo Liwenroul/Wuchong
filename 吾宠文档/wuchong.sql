@@ -34,7 +34,7 @@ CREATE TABLE `active` (
 
 /*Data for the table `active` */
 
-insert  into `active`(`activeId`,`activeName`,`acContent`,`acImg`,`acAddress`,`acCity`,`acContact`) values ('1','爱牙牙','      牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。让宠物主人都行动起 来——健康养宠生活，从爱护它们的 牙齿开始！ ','https://liwenroul.github.io/Wuchong/img/active/d5.jpeg','石家庄市裕华区','石家庄','756273648'),('2','狗狗运动会','      牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。让宠物主人都行动起 来——健康养宠生活，从爱护它们的 牙齿开始！ ','https://liwenroul.github.io/Wuchong/img/active/d4.jpeg','石家庄市建设路','石家庄','324537887');
+insert  into `active`(`activeId`,`activeName`,`acContent`,`acImg`,`acAddress`,`acCity`,`acContact`) values ('1','爱牙牙','      牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。让宠物主人都行动起 来——健康养宠生活，从爱护它们的 牙齿开始！ ','https://liwenroul.github.io/Wuchong/img/active/d5.jpeg','石家庄市裕华区','石家庄','756273648'),('2','狗狗运动会','      牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。让宠物主人都行动起 来——健康养宠生活，从爱护它们的 牙齿开始！ ','https://liwenroul.github.io/Wuchong/img/active/d4.jpeg','石家庄市建设路','石家庄','324537887'),('3','宠物选美大赛','作为一名优秀的“铲屎官”，不能只满足于朋友圈晒猫猫狗狗！简直浪费了你家爱宠超高的颜值！除了铲屎，你还要为你家宝贝赢得荣誉。投稿宠物的美照，不管是丑萌的，可爱的，搞笑的，只要够特色，你就有机会被选中。','https://liwenroul.github.io/Wuchong/img/dynamic/d2.jpeg','安阳市建设路','安阳','123452066');
 
 /*Table structure for table `activeinfo` */
 
@@ -46,7 +46,7 @@ CREATE TABLE `activeinfo` (
 
 /*Data for the table `activeinfo` */
 
-insert  into `activeinfo`(`activeId`) values ('2');
+insert  into `activeinfo`(`activeId`) values ('3');
 
 /*Table structure for table `city` */
 
@@ -58,7 +58,7 @@ CREATE TABLE `city` (
 
 /*Data for the table `city` */
 
-insert  into `city`(`cityName`) values ('北京');
+insert  into `city`(`cityName`) values ('安阳');
 
 /*Table structure for table `clockbianji` */
 

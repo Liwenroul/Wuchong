@@ -86,13 +86,26 @@ app.use('/userguanli', userguanRouter);
 
 
 app.get('/active',function(err,res){
-  con.query('select * from active',function(err,result){
+  con.query('select * from active where acCity in (select cityName from city)',function(err,result){
       if(err){
           console.log('[SELECT ERROR] - ', err.message);
           return;
       }
       else{
         res.json(result);
+        // console.log(result[0].activeId);
+        // for(var i=0;i<result.length;i++){
+        //   app.get(`/active/ac${result[i]}`,function(err,res){
+        //     console.log("a");
+        //     con.query('select * from active where activeId=?',[result[i].activeId],function(err,result){
+        //         if(err){
+        //             console.log('[SELECT ERROR] - ', err.message);
+        //             return;
+        //         }
+        //         res.json(result); 
+        //     }); 
+        //   }) ;
+        // }
       }
       console.log(result)
   }); 
