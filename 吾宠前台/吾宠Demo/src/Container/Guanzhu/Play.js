@@ -28,8 +28,8 @@ export default class Play extends Component {
             dynamicContent:[],
             dynamicId:[],
             num:[],
-            ID:'',
-            id:'56'
+            ID:'',//登录用户的userID
+            id:''//关注页面的ID
         }
     }
     
@@ -51,8 +51,10 @@ export default class Play extends Component {
                 .then((res)=>{
                     // console.log(res)
                     this.setState({
-                        ID:res[0].userId
+                        ID:res[0].userId,
+                        id:parseInt(Math.random()*1000)
                     })
+                    console.log("this.id:",this.state.id,"this.ID:",this.state.ID)
                     const registerValue = {"Id":this.state.id,
                     "guanzhuId": this.state.userId,
                     "userId": this.state.ID}
@@ -76,20 +78,24 @@ export default class Play extends Component {
                 this.setState({
                     points:'关注'
                 })
+                // 获取登录的userID
                 fetch('/denglu')
                 .then((res)=>res.json())
                 .then((res)=>{
                     // console.log(res)
                     this.setState({
-                        ID:res[0].userId
+                        ID:res[0].userId,
                     })
+                    let ip0 =this.props.location.search;
+                    let ip = ip0.slice(8);//截取当前页面的userID
+                    //通过登录用户的userId获取关注的人的关注ID
                     fetch('guanzhu')
                     .then((res)=>res.json())
                     .then((res)=>{
                         for(var i =0;i<res.length;i++){
-                            if(res.guanzhuId == this.state.userId){
+                            if(res[i].guanzhuId == ip && res[i].userId==this.state.ID){
                                 this.setState({
-                                    id:res.Id
+                                    id:res[i].Id
                                 })
                             }
                         }
