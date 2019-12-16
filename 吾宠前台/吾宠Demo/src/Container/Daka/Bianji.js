@@ -93,11 +93,11 @@ export default class Add extends Component {
         return (
             <div>
                 <div>
-                    <NavBar
+                    {/* <NavBar
                             style={{backgroundColor:'rgb(29,174,169)',color:'#000'}}
                             leftContent={<i style={{fontSize:22,color:'white'}} className='iconfont icon-back' onClick={this.clockin}></i>}
                             rightContent={<i style={{fontSize:22,color:'white'}} className='iconfont icon-duihao' onClick={this.clockin}></i> }
-                        >编辑</NavBar>
+                        >编辑</NavBar> */}
                     <Contentbianji/>
                     {/* <div className="add">
                         <div className='to'>
