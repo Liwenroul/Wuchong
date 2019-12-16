@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { List } from 'antd-mobile';
-import {Link} from 'react-router-dom';
+import {Link,Route} from 'react-router-dom';
 import { Avatar,Upload, Icon, message } from 'antd';
-
+import AtInfo from "./Mchildren/AtInfo";
 
 const Item = List.Item;
 
@@ -55,7 +55,9 @@ export default class MyAttention extends Component {
     //     })
         
     // }
-
+    // enter=(userId)=>{
+    //     window.location="/atInfo?userId:"+userId;
+    // }
     componentDidMount(){
         document.addEventListener("keydown", this.onKeyDown);
         // let page = this.props.match.params.id;
@@ -109,11 +111,14 @@ export default class MyAttention extends Component {
                 <List>
                     {
                         this.state.userNameList.map((item,idx)=>(
-                            <Item 
+                            <div>
+                            <Link to={`/atInfo?userId:${item.userId}`}><Item key={idx} onClick={()=>this.enter(item.userId)}
                                 thumb={item.userAvatar}//图片
                                 arrow="horizontal"
                                 onClick={this.enter}
-                        >{item.userName}</Item>
+                        >{item.userName}</Item></Link>
+                        <Route path={"/atInfo?userId:userId"} component={AtInfo}/>
+                        </div>
                         ))
                     }
                     

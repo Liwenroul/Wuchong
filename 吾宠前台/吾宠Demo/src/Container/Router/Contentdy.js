@@ -34,8 +34,9 @@ export default class Contentdy extends React.Component{
                 
             })
     }
-    dianZan =()=> {    
-            var zan = document.getElementById('zan');
+    dianZan =(id)=> {    
+            console.log(id)
+            var zan = document.getElementById(id);
             var zanStr = JSON.parse(zan.innerHTML)
             if(this.state.likeNumState==0){
                 zan.innerHTML = zanStr+1;
@@ -74,7 +75,7 @@ export default class Contentdy extends React.Component{
                                 }}
                             />
                             <div style={{float:'right',margin:'10px'}} >
-                                <i style={{fontSize:30,lineHeight:'30px',margin:'0 10px',color:"red"}} id="zan" className='iconfont icon-dianzan' onClick={this.dianZan}>{item.likeNum}</i>
+                                <i style={{fontSize:30,lineHeight:'30px',margin:'0 10px',color:"red"}} id={item.dynamicId} className='iconfont icon-dianzan' onClick={()=>this.dianZan(item.dynamicId)}>{item.likeNum}</i>
                                 <i style={{fontSize:30,lineHeight:'30px',margin:'0 10px'}} id="zhu" className='iconfont icon-haibijiahao' onClick={this.guanZhu}></i>
                             </div> 
                             <div style={{width:'100%',margin:'auto',float:'left'}}><p>{item.dynamicContent}</p></div> 
