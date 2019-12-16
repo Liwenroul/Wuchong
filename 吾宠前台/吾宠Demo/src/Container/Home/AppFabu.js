@@ -1,26 +1,41 @@
 import React, { Component } from 'react'
 
-import { Icon,ImagePicker} from 'antd-mobile';
+import { Icon} from 'antd-mobile';
 import {Link,Route} from 'react-router-dom'
 import AppWeizhi from './AppWeizhi';
 import AppTab from '../Apptab';
+import { Upload, message } from 'antd';
 
-
-
-
-const data = [{url:'https://liwenroul.github.io/Wuchong/img/dynamic/d3.jpeg'}];
+function getBase64(img, callback) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
+  }
   
+  function beforeUpload(file) {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+      message.error('You can only upload JPG/PNG file!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error('Image must smaller than 2MB!');
+    }
+    return isJpgOrPng && isLt2M;
+  }
+
 export default class AppFabu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            files: data,
+            dynamicImg:"",
             value: '写下此时此刻的想法',
             dengluId:"",
-            acCity:''
+            acCity:'',
         }
         
     }
+
     componentDidMount(){
         fetch("/denglu")
         .then((res)=>res.json())
@@ -44,10 +59,14 @@ export default class AppFabu extends Component {
     handleChange=(event)=> {
         this.setState({value: event.target.value});
       }
-    
+    //   data[parseInt(Math.random()*3)]
     handleSubmit=(event)=> {
         // alert('提交的名字: ' + this.state.value);
-        const registerValue = {"dynamicContent": this.state.value,"dynamicImg":this.state.files[0].url,"userId":this.state.dengluId,"acCity":this.state.acCity}
+        // for(var  i=0;i<this.state.files.length;i++){
+        //     var urlArr=[];
+        //     urlArr.push(this.state.files[i].url)
+        // }
+        const registerValue = {"dynamicContent": this.state.value,"dynamicImg":this.state.dynamicImg,"userId":this.state.dengluId,"acCity":this.state.acCity}
         // const regImg={"dynamicImg":{url:'https://liwenroul.github.io/Wuchong/img/dynamic/d3.jpeg'}}
         if(this.state.value){
             fetch('/dynamic', {
@@ -70,17 +89,44 @@ export default class AppFabu extends Component {
     }
 
       
-      onChange = (files, type, index) => {
-        console.log(files, type, index);
-        this.setState({
-          files,
-        });
+    //   onChange = (files, type, index) => {
+    //     console.log(files, type, index);
+    //     this.setState({
+    //       files,
+    //     });
         
-      }
+    //   }
+    state = {
+        loading: false,
+      };
     
+      handleChange = info => {
+        console.log(info.file.name)
+        if (info.file.status === 'uploading') {
+          this.setState({ loading: true });
+          return;
+        }
+        if (info.file.status === 'done') {
+          let dynamicImg="https://liwenroul.github.io/Wuchong/img/"+info.file.name;
+          // Get this url from response in real world.
+          getBase64(info.file.originFileObj, imageUrl =>
+            this.setState({
+              imageUrl,
+              loading: false,
+              dynamicImg:dynamicImg
+            }),
+          );
+        }
+      };
     render() {
-        const { files } = this.state;
-        
+        // const { files } = this.state;
+        const uploadButton = (
+            <div>
+              <Icon type={this.state.loading ? 'loading' : 'plus'} />
+              <div className="ant-upload-text">Upload</div>
+            </div>
+          );
+          const { imageUrl } = this.state;
         return (
             <div style={{width:'100%',height:'700px',background:'#fff'}}>
                 <form onSubmit={this.handleSubmit}>
@@ -92,14 +138,25 @@ export default class AppFabu extends Component {
                         {/* </Link> */}
                     </div>
                 
-                    <ImagePicker
+                    {/* <ImagePicker
                                 files={files}
                                 onChange={this.onChange}
                                 onImageClick={(index, fs) => console.log(index, fs)}
                                 selectable={files.length < 5}
                                 accept="image/gif,image/jpeg,image/jpg,image/png"
-                            />
-                    
+                            /> */}
+                    <Upload
+                                name="img"
+                                listType="picture-card"
+                                className="img-uploader"
+                                showUploadList={false}
+                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                beforeUpload={beforeUpload}
+                                onChange={this.handleChange}
+                                // beforeUpload={this.handleBeforeUpload}
+                            >
+                                {imageUrl ? <img src={imageUrl} onChange={this.dynamicImgChange} id='dynamicImg' alt="img" style={{ width: '90px',height:'90px',borderRadius:'50%',marginLeft:'-8px',marginTop:'-8px'}} /> : uploadButton}
+                            </Upload>
                     <textarea type="text" style={{width:'100%',height:'180px',margin:'0 auto',lineHeight:3}} placeholder={'写下此时此刻的想法···'} value={this.state.value} onChange={this.handleChange} ></textarea>
                     <div style={{width:'100%',height:50}}>
                             <i style={{lineHeight:'50px',fontSize:20,margin:'10px 20px'}} className='iconfont icon-shouye'>你的位置 </i>

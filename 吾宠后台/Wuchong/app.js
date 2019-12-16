@@ -423,6 +423,18 @@ app.post('/delPet',(req,res)=>{
         res.json(result); 
   })
 })
+app.post('/delDynamic',(req,res)=>{
+  let data=req.body;
+  console.log(data.dynamicId);
+  // con.query("SET FOREIGN_KEY_CHECKS=0");
+  con.query('delete from dynamic where dynamicId=?',[data.dynamicId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
 app.post('/dingwei',(req,res)=>{
   let data=req.body;
   console.log(data);
@@ -562,18 +574,7 @@ app.post('/userinfo3',(req,res)=>{
         res.json(result); 
   })
 })
-app.post('/delDynamic',(req,res)=>{
-  let data=req.body;
-  console.log(data.dynamicId);
-  con.query("SET FOREIGN_KEY_CHECKS=0");
-  con.query('delete from dynamic where dynamicId=?',[data.dynamicId],function(err,result){
-    if(err){
-          console.log(err);
-      }
-        console.log(result);
-        res.json(result); 
-  })
-})
+
 
 app.post('/clockbianji',(req,res)=>{
   let data=req.body;
@@ -666,6 +667,49 @@ app.post('/clockinxiugai',(req,res)=>{
         res.json(result); 
   })
 })
+
+
+
+
+
+app.post('/guanzhu',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  let insertData = {
+    clockId:"WuChong"+parseInt(Math.random()*1000),
+    Id:data.Id,
+    guanzhuId:data.guanzhuId,
+    userId:data.userId,
+    
+  }
+  con.query('insert into guanzhu(Id,guanzhuId,userId) values(?,?,?)',[insertData.Id,insertData.guanzhuId,insertData.userId],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+
+
+app.post('/delguanzhu',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  let insertData = {
+    Id:data.Id,
+    guanzhuId:data.guanzhuId,
+    userId:data.userId,
+    
+  }
+  con.query('delete from guanzhu where Id=?',[insertData.Id],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+
 
 
 

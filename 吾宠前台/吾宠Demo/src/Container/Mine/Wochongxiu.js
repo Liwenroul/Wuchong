@@ -31,6 +31,7 @@ export default class Wochongxiu extends Component {
                  .then( data => {
                      console.log(data);
                  });
+                 window.location="/wochongxiu";
             },
             onCancel() {
               console.log('Cancel');
@@ -42,6 +43,7 @@ export default class Wochongxiu extends Component {
         .then((res)=>res.json())
         .then((res)=>{
             console.log(res[0].userId)
+            console.log(data);
             this.setState({
                 dengluId:res[0].userId
             })
@@ -60,31 +62,32 @@ export default class Wochongxiu extends Component {
             console.log(this.state.dynamicData);
         })
     }
-    // componentDidUpdate(){
-    //     if(this.state.dynamicData)
-    //     fetch("/denglu")
-    //     .then((res)=>res.json())
-    //     .then((res)=>{
-    //         console.log(res[0].userId)
-    //         this.setState({
-    //             dengluId:res[0].userId
-    //         })
-    //     })
-    //     fetch("/dynamic")
-    //     .then((res)=>res.json())
-    //     .then((res)=>{
-    //         for(var i=0;i<res.length;i++){
-    //             console.log(res[i].userId);
-    //             if(res[i].userId==this.state.dengluId){
-    //                 this.setState({
-    //                     dynamicData:[...this.state.dynamicData,res[i]]
-    //                 })
-    //             }
-    //         }
-    //         console.log(this.state.dynamicData);
-    //          }
-    //     })
-    // }
+//     componentDidUpdate(){
+//         console.log(this.state.dynamicData.length);
+//         if(this.state.dynamicData.length){
+//             fetch("/denglu")
+//             .then((res)=>res.json())
+//             .then((res)=>{
+//             console.log(res[0].userId)
+//             this.setState({
+//                 dengluId:res[0].userId
+//             })
+//         })
+//         fetch("/dynamic")
+//         .then((res)=>res.json())
+//         .then((res)=>{
+//             for(var i=0;i<res.length;i++){
+//                 console.log(res[i].userId);
+//                 if(res[i].userId==this.state.dengluId){
+//                     this.setState({
+//                         dynamicData:[...this.state.dynamicData,res[i]]
+//                     })
+//                 }
+//             }
+//             console.log(this.state.dynamicData);
+//         })
+//     }
+// }
     render() {
         return (
             <div>
