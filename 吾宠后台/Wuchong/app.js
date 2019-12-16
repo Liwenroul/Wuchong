@@ -264,6 +264,16 @@ app.get('/clockbianji',jsonParser,(req,res)=>{
       res.json(result); 
   }); 
 }) 
+app.get('/chat',jsonParser,(req,res)=>{
+  // console.log(req.body);
+  con.query('select * from chat',function(err,result){
+      if(err){
+          console.log('[SELECT ERROR] - ', err.message);
+          return;
+      }
+      res.json(result); 
+  }); 
+})
 
 
 app.post('/userinfo1',(req,res)=>{
@@ -613,6 +623,7 @@ app.post('/clockbianji',(req,res)=>{
   })
   
 })
+
 app.post('/activeinfo',(req,res)=>{
   let data=req.body;
   console.log(data);
@@ -709,8 +720,18 @@ app.post('/delguanzhu',(req,res)=>{
         res.json(result); 
   })
 })
-
-
+app.post('/chat',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  let time=new Date().toLocaleString();
+  con.query('insert into chat(chatId,sendId,acceptId,content) values(?,?,?,?)',[time,data.sendId,data.acceptId,data.content],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
 
 
 
