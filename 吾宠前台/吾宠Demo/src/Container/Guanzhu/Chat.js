@@ -14,7 +14,9 @@ export default class Chat extends Component {
             userId:'',
             value:'',
             num:[],
-            arr:[]
+            arr:[],
+            sendId:"",
+            acceptId:""
         }
     }
     handleChange=(e)=>{
@@ -44,6 +46,8 @@ export default class Chat extends Component {
             })
             
         }
+        
+
     }
         componentDidMount(){
             // let page = this.props.match.params.id;

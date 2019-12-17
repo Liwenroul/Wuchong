@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import { NavBar, Icon, Tabs,Carousel } from 'antd-mobile';
 // import img from '../../img/images/tou.png'
 // import { Grid } from 'antd-mobile';
@@ -162,12 +163,10 @@ export default class AtInfo extends Component {
     render() {
         return (
             <div>
-                <NavBar
-                    style={{backgroundColor:'#3fcccb',color:'#000',height:'88px'}}
-                    leftContent={[  
-                        <i style={{fontSize:22}} className='iconfont icon-back' onClick={this.change}></i>,
-                    ]}
-    >{this.state.userName}的吾宠秀</NavBar>
+                <div style={{width:'100%',height:50,backgroundColor:'rgb(29,174,169)',paddingTop:10,color:'#fff',fontSize:'20px'}}>
+                    <Link to='/myAttention'><i className='iconfont icon-back' style={{color:"#fff"}}></i></Link>
+                    <span style={{marginLeft:140}}>我的关注</span>
+                </div>
                 <div style={{heigth:'100px',width:'100%'}} className='userPlay'>
                     <img src={this.state.userAvatar} style={{height:'100px',width:'100px',position:'relative',left:'0px'}}/>
                     <div style={{width:'200px',position:'absolute',left:'120px',top:'122px'}}>
