@@ -10,66 +10,16 @@ export default class MyAttention extends Component {
     constructor(props){
         super(props);
         this.state={
-            dengluId:"",
+            dengluId:this.props.match.params.dengluId,
             guanzhuIdList:[],
             userNameList:[]
         }
     }
-    // componentDidMount(){
-    //     fetch("/denglu")
-    //     .then((res)=>res.json())
-    //     .then((res)=>{
-    //         console.log(res[0].userId)
-    //         this.setState({
-    //             dengluId:res[0].userId
-    //         })
-    //     })
-    //     fetch("/guanzhu")
-    //     .then((res)=>res.json())
-    //     .then((res)=>{
-    //         for(var i=0;i<res.length;i++){
-    //             if(res[i].userId==this.state.dengluId){
-    //                 this.setState({
-    //                     guanzhuIdList:[...this.state.guanzhuIdList,res[i].guanzhuId]
-    //                 })
-    //             }
-    //         }
-    //         console.log(this.state.guanzhuIdList);
-    //     })
-    //     fetch('/userinfo')
-    //     .then((res)=>res.json())
-    //     .then((res)=>{
-    //         for(var i=0;i<this.state.guanzhuIdList.length;i++){
-                
-    //             // for(var j=0;j<res.length;i++){
-    //                 // console.log(res[j]);
-    //         //         if(res[j].userId==this.state.guanzhuIdList[i]){
-    //         //             this.setState({
-    //         //                 userNameList:[...this.state.userNameList,res[i].userName]
-    //         //             })
-    //         //         }
-    //             // }
-    //         }
-    //         console.log(this.state.userNameList);
-        
-    //     })
-        
-    // }
-    // enter=(userId)=>{
-    //     window.location="/atInfo?userId:"+userId;
-    // }
+
     componentDidMount(){
         document.addEventListener("keydown", this.onKeyDown);
         // let page = this.props.match.params.id;
         // let id = 1;
-        fetch('/denglu')
-            .then((res)=>res.json())
-            .then((res)=>{
-                console.log(res)
-                this.setState({
-                    dengluId:res[0].userId
-                })
-            })
         fetch("/guanzhu")
         .then((res)=>res.json())
         .then((res)=>{
@@ -112,12 +62,12 @@ export default class MyAttention extends Component {
                     {
                         this.state.userNameList.map((item,idx)=>(
                             <div key={idx}>
-                            <Link to={`/atInfo?userId:${item.userId}`}><Item key={idx} onClick={()=>this.enter(item.userId)}
+                            <Link to={`/atInfo?userId:${item.userId}&&dengluId:${this.state.dengluId}`}><Item key={idx} onClick={()=>this.enter(item.userId)}
                                 thumb={item.userAvatar}//图片
                                 arrow="horizontal"
                                 onClick={this.enter}
                         >{item.userName}</Item></Link>
-                        <Route path={"/atInfo?userId:userId"} component={AtInfo}/>
+                        <Route path={"/atInfo?userId:userId&&dengluId:dengluId"} component={AtInfo}/>
                         </div>
                         ))
                     }

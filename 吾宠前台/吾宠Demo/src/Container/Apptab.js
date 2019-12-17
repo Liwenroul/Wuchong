@@ -17,6 +17,7 @@ export default class Apptab extends Component {
       selectedTab: 'home',
       hidden: false,
       fullScreen: false,
+      dengluId:this.props.match.params.userId
     };
   }
   componentDidMount(){
@@ -155,7 +156,7 @@ export default class Apptab extends Component {
               });
             }}
           >
-            <Mine/>
+            <Mine dengluId={this.state.dengluId}/>
           </TabBar.Item>
         </TabBar>
       </div>

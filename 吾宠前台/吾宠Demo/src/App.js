@@ -51,7 +51,6 @@ export default class App extends Component {
                     <Route path='/' component={AppStart} exact/>
                     <Route path='/home' component={Apptab}/>
                     <Route path='/login' component={AppLogin}/>
-                    {/* <Route  path='/tabb' component={Apptab}/>  */}
                     <Route  path='/tab:userId' component={Apptab}/>
                     <Route  path='/zhuce' component={AppZhuce} />
                     <Route path='/wangji' component={AppForget} />
@@ -79,18 +78,18 @@ export default class App extends Component {
 
                     {/* <Route path='/' component={Apptab} exact/> */}
                     <Route path="/wode" component={Apptab}/>
-                    <Route path='/mine' component={Mine}/>
-                    <Route path='/personalInfo' component={PersonalInfo}/>
-                    <Route path='/petInfo' component={PetInfo}/>
-                    <Route path='/wochongxiu' component={Wochongxiu}/>
-                    <Route path='/joinActive' component={JoinActive}/>
-                    <Route path='/myAttention' component={MyAttention}/>
-                    <Route path='/setting' component={Setting}/>
-                    <Route path='/EditUserInfo' component={EditUserInfo}/>
-                    <Route path='/UserSelf' component={UserSelf}/>
-                    <Route path="/addpet" component={Addpet}/>
-                    <Route path="/editPetInfo" component={EditPetInfo}/>
-                    <Route path="/acinfo" component={AcInfo}/>
+                    <Route path='/mine/:dengluId' component={Mine}/>
+                    <Route path='/personalInfo/:dengluId' component={PersonalInfo}/>
+                    <Route path='/petInfo/:dengluId' component={PetInfo}/>
+                    <Route path='/wochongxiu/:dengluId' component={Wochongxiu}/>
+                    <Route path='/joinActive/:dengluId' component={JoinActive}/>
+                    <Route path='/myAttention/:dengluId' component={MyAttention}/>
+                    <Route path='/setting/:dengluId' component={Setting}/>
+                    <Route path='/EditUserInfo/:dengluId' component={EditUserInfo}/>
+                    <Route path='/UserSelf/:dengluId' component={UserSelf}/>
+                    <Route path="/addpet/:dengluId" component={Addpet}/>
+                    <Route path="/editPetInfo/:dengluId" component={EditPetInfo}/>
+                    <Route path="/acinfo/:dengluId" component={AcInfo}/>
                     <Route path ='/atInfo' component={AtInfo}/>
 
                 </div>

@@ -9,7 +9,7 @@ export default class JoinActive extends Component {
         super(props);
         this.state={
             activeData:[],
-            dengluId:"",
+            dengluId:this.props.match.params.dengluId,
             activeIdList:[],
         }
     }
@@ -27,14 +27,6 @@ export default class JoinActive extends Component {
          });
     }
     componentDidMount(){
-        fetch("/denglu")
-        .then((res)=>res.json())
-        .then((res)=>{
-            console.log(res[0].userId)
-            this.setState({
-                dengluId:res[0].userId
-            })
-        })
         fetch("/signup")
         .then((res)=>res.json())
         .then((res)=>{
@@ -47,9 +39,10 @@ export default class JoinActive extends Component {
             }
             console.log(this.state.activeIdList);
         })
-        fetch("/active")
+        fetch("/signActive")
         .then((res)=>res.json())
         .then((res)=>{
+            console.log(res);
             for(var i=0;i<this.state.activeIdList.length;i++){
                 for(var j=0;j<res.length;j++){
                     if(res[j].activeId == this.state.activeIdList[i]){
@@ -72,7 +65,7 @@ export default class JoinActive extends Component {
                 <div>
                     {
                         this.state.activeData.map((item,idx)=>(
-                            <Link to='/acinfo'><div onClick={()=>this.acInfo(item.activeId)} key={idx} style={{float:"left",width:350,height:100,marginLeft:10,marginTop:20,borderRadius:15,overflow:'hidden',position:'relative'}}>
+                            <Link to={'/acinfo/'+this.state.dengluId}><div onClick={()=>this.acInfo(item.activeId)} key={idx} style={{float:"left",width:350,height:100,marginLeft:10,marginTop:20,borderRadius:15,overflow:'hidden',position:'relative'}}>
                                 <img src={item.acImg} style={{width:350}}/>
                                 <p style={{float:'left',position:'absolute',bottom:-20,left:10,fontSize:25,color:'white'}}>{item.activeName}:
                                 <span style={{fontSize:16,width:100,overflow:"hidden" ,whiteSpace: "nowrap",textOverflow: "ellipsis"}}>{item.acContent}</span>

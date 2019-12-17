@@ -14,20 +14,12 @@ class Mine extends Component {
     constructor(props){
         super(props);
         this.state={
-            dengluId:"",
+            dengluId:this.props.dengluId,
             imageUrl:"",
             data:[]
         }
     }
     componentDidMount(){
-        fetch("/denglu")
-        .then((res)=>res.json())
-        .then((res)=>{
-            console.log(res[0].userId)
-            this.setState({
-                dengluId:res[0].userId
-            })
-        })
         fetch("/userinfo")
         .then((res)=>res.json())
         .then((res)=>{  
@@ -44,27 +36,27 @@ class Mine extends Component {
         })
     }
     enter=()=>{
-        this.props.history.push("/personalInfo");
+        this.props.history.push("/personalInfo/"+this.state.dengluId);
 
     }
     enter1=()=>{
-        this.props.history.push("/petInfo");
+        this.props.history.push("/petInfo/"+this.state.dengluId);
 
     }
     enter2=()=>{
-        this.props.history.push("/wochongxiu");
+        this.props.history.push("/wochongxiu/"+this.state.dengluId);
     }
     enter3=()=>{
-        this.props.history.push("/joinActive");
+        this.props.history.push("/joinActive/"+this.state.dengluId);
     }
     enter4=()=>{
-        this.props.history.push("/myAttention");
+        this.props.history.push("/myAttention/"+this.state.dengluId);
     }
     enter5=()=>{
-        this.props.history.push("/setting");
+        this.props.history.push("/setting/"+this.state.dengluId);
     }
     change2 = () => {
-        this.props.history.push('/tab')
+        this.props.history.push('/tab'+this.state.dengluId);
       }
     render() {
         return (

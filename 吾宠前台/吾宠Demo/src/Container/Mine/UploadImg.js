@@ -25,12 +25,13 @@ function beforeUpload(file) {
 
 
 export default class UploadImg extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
+    console.log(this.props.dengluId);
     this.state = {
       loading: false,
       imageUrl:"",
-      dengluId:""
+      dengluId:this.props.dengluId
     };
   }
   
@@ -48,14 +49,6 @@ export default class UploadImg extends Component {
           loading: false,
         }),
       );
-      fetch("/denglu")
-        .then((res)=>res.json())
-        .then((res)=>{
-            console.log(res[0].userId)
-            this.setState({
-                dengluId:res[0].userId
-            })
-        })
       const registerValue = {"userAvatar":userAvatar,"userId":this.state.dengluId}
       console.log(registerValue);
       fetch('/userinfo2', {
@@ -71,14 +64,6 @@ export default class UploadImg extends Component {
      }
   };
   componentDidMount(){
-    fetch("/denglu")
-        .then((res)=>res.json())
-        .then((res)=>{
-            console.log(res[0].dengluId)
-            this.setState({
-                dengluId:res[0].userId
-            })
-    })
     fetch("/userinfo")
     .then((res)=>res.json())
     .then((res)=>{

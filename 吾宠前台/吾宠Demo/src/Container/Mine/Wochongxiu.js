@@ -12,7 +12,7 @@ export default class Wochongxiu extends Component {
         super(props);
         console.log(props);
         this.state={
-            dengluId:"",
+            dengluId:this.props.match.params.dengluId,
             dynamicData:[],
         }
     }
@@ -31,7 +31,7 @@ export default class Wochongxiu extends Component {
                  .then( data => {
                      console.log(data);
                  });
-                 window.location="/wochongxiu";
+                 window.location="/wochongxiu"+this.state.dengluId;
             },
             onCancel() {
               console.log('Cancel');
@@ -39,15 +39,6 @@ export default class Wochongxiu extends Component {
           });
     }
     componentDidMount(){
-        fetch("/denglu")
-        .then((res)=>res.json())
-        .then((res)=>{
-            console.log(res[0].userId)
-            console.log(data);
-            this.setState({
-                dengluId:res[0].userId
-            })
-        })
         fetch("/dynamic")
         .then((res)=>res.json())
         .then((res)=>{
@@ -62,32 +53,7 @@ export default class Wochongxiu extends Component {
             console.log(this.state.dynamicData);
         })
     }
-//     componentDidUpdate(){
-//         console.log(this.state.dynamicData.length);
-//         if(this.state.dynamicData.length){
-//             fetch("/denglu")
-//             .then((res)=>res.json())
-//             .then((res)=>{
-//             console.log(res[0].userId)
-//             this.setState({
-//                 dengluId:res[0].userId
-//             })
-//         })
-//         fetch("/dynamic")
-//         .then((res)=>res.json())
-//         .then((res)=>{
-//             for(var i=0;i<res.length;i++){
-//                 console.log(res[i].userId);
-//                 if(res[i].userId==this.state.dengluId){
-//                     this.setState({
-//                         dynamicData:[...this.state.dynamicData,res[i]]
-//                     })
-//                 }
-//             }
-//             console.log(this.state.dynamicData);
-//         })
-//     }
-// }
+
     render() {
         return (
             <div>

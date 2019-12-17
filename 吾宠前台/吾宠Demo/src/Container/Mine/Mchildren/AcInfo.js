@@ -7,12 +7,13 @@ import {WingBlank} from 'antd-mobile'
 
 // 无状态组件
 export default class AcInfo extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             data:[],
             page:'',
-            acInfoId:''
+            acInfoId:'',
+            dengluId:this.props.match.params.dengluId
         }
     }
     
@@ -25,7 +26,7 @@ export default class AcInfo extends React.Component{
                 acInfoId:res[0].activeId
             })
         })
-        fetch("/active")
+        fetch("/signActive")
         .then((res)=>res.json())
         .then((res)=>{
             for(var i=0;i<res.length;i++){
@@ -44,7 +45,7 @@ export default class AcInfo extends React.Component{
     render(){
         return (
             <div >
-                <Link to='/joinActive'>
+                <Link to={'/joinActive/'+this.state.dengluId}>
                     <i style={{float:'right',fontSize:'30px',color:'#1daea9'}} 
                     className='iconfont icon-icon-' key='close'></i>  
                 </Link>

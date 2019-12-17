@@ -18,6 +18,8 @@ const data1 = Array.from(new Array(2)).map(() => ({
 export default class AtInfo extends Component {
     constructor(props){
         super(props);
+        let start = this.props.location.search.indexOf("&&")
+        console.log(this.props.location.search.slice(parseInt(start)+11));
         this.state={
             value:0,
             points:'已关注',
@@ -29,8 +31,8 @@ export default class AtInfo extends Component {
             dynamicContent:[],
             dynamicId:[],
             num:[],
-            ID:'',
-            id:'56'
+            ID:this.props.location.search.slice(parseInt(start)+11),
+            id:'56',
         }
     }
     
@@ -47,13 +49,13 @@ export default class AtInfo extends Component {
                     points:'已关注'
                 })
 
-                fetch('/denglu')
-                .then((res)=>res.json())
-                .then((res)=>{
-                    // console.log(res)
-                    this.setState({
-                        ID:res[0].userId
-                    })
+                // fetch('/denglu')
+                // .then((res)=>res.json())
+                // .then((res)=>{
+                //     // console.log(res)
+                //     this.setState({
+                //         ID:res[0].userId
+                //     })
                     const registerValue = {"Id":this.state.id,
                     "guanzhuId": this.state.userId,
                     "userId": this.state.ID}
@@ -70,7 +72,7 @@ export default class AtInfo extends Component {
                         });
                         // }
                     // this.props.history.push('/guanzhu');
-                    })
+                    // })
                 
             }
             else{
@@ -164,7 +166,7 @@ export default class AtInfo extends Component {
         return (
             <div>
                 <div style={{width:'100%',height:50,backgroundColor:'rgb(29,174,169)',paddingTop:10,color:'#fff',fontSize:'20px'}}>
-                    <Link to='/myAttention'><i className='iconfont icon-back' style={{color:"#fff"}}></i></Link>
+                    <Link to={'/myAttention/'+this.state.ID}><i className='iconfont icon-back' style={{color:"#fff"}}></i></Link>
                     <span style={{marginLeft:140}}>我的关注</span>
                 </div>
                 <div style={{heigth:'100px',width:'100%'}} className='userPlay'>

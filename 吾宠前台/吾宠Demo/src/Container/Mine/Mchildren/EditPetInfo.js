@@ -6,13 +6,14 @@ import UploadImgEditPet from "../UploadImgEditPet";
 export default class EditPetInfo extends Component {
     constructor(props){
         super(props);
-        console.log(this.props.location.key);
+        console.log(this.props);
         this.state={
             petImg:"",
             petName:"",
             petSex:"",
             petAge:"",
-            editPetId:""
+            editPetId:"",
+            dengluId:this.props.match.params.dengluId
         }
     }
     componentWillMount(){
@@ -99,7 +100,7 @@ export default class EditPetInfo extends Component {
         return (
             <div style={{background:'#fff'}}>
                 <div style={{width:'100%',height:50,backgroundColor:'rgb(29,174,169)',paddingTop:10,color:'#fff',fontSize:'20px'}}>
-                    <Link to='/petinfo'><i className='iconfont icon-back' style={{color:"#fff"}}></i></Link>
+                    <Link to={'/petinfo/'+this.state.dengluId}><i className='iconfont icon-back' style={{color:"#fff"}}></i></Link>
                     <span style={{marginLeft:120}}>编辑宠物信息</span>
                     {/* <Link to='/petinfo'><i className='iconfont icon-haibijiahao' style={{color:"#fff",float:'right',marginRight:15}}></i></Link> */}
                 </div>
@@ -111,10 +112,10 @@ export default class EditPetInfo extends Component {
                     <input onChange={this.nameChange} style={{width:'100%',margin:'0 auto',lineHeight:3,marginTop:20,borderRadius:'20px',textAlign:'center',border:'1px solid #33cccc'}} type='text' id='petname' name='petname' value={this.state.petName} />
                     <input onChange={this.sexChange} style={{width:'100%',margin:'0 auto',lineHeight:3,marginTop:20,borderRadius:'20px',textAlign:'center',border:'1px solid #33cccc'}} type='text'  id='sex' name='sex' value={this.state.petSex} />
                     <input onChange={this.ageChange} style={{width:'100%',margin:'0 auto',lineHeight:3,marginTop:20,borderRadius:'20px',textAlign:'center',border:'1px solid #33cccc'}} type='text' id='age' name='age' value={this.state.petAge} />
-                    <Link to='/petinfo' style={{width:'100%',height:50,paddingLeft:'105px'}}>
+                    <Link to={'/petinfo/'+this.dengluId} style={{width:'100%',height:50,paddingLeft:'105px'}}>
                     <input onClick={this.editPet} type='submit' style={{width:'45%',height:50,background:'#1daea9',color:'#fff',borderRadius:'40px',fontSize:25,marginTop:20}} value='确定'/>
                     </Link> 
-                    <Link to='/petinfo' style={{width:'100%',height:50,paddingLeft:'105px'}}>
+                    <Link to={'/petinfo/'+this.state.dengluId} style={{width:'100%',height:50,paddingLeft:'105px'}}>
                     <input onClick={this.delPet} type='submit' style={{width:'45%',height:50,background:'#1daea9',color:'#fff',borderRadius:'40px',fontSize:25,marginTop:20}} value='删除'/>
                     </Link> 
                 </div>

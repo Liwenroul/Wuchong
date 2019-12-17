@@ -7,10 +7,12 @@ const Brief = Item.Brief;
 class Setting extends Component {
     constructor(props){
         super(props);
-        
+        this.state={
+            dengluId:this.props.match.params.dengluId
+        }
     }
     enter=()=>{
-        this.props.history.push("/UserSelf")
+        this.props.history.push("/UserSelf/"+this.state.dengluId)
     }
     render() {
         return (
