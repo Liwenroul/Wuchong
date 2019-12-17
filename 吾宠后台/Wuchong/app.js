@@ -352,15 +352,6 @@ app.post('/petinfo1',(req,res)=>{
 app.post('/denglu',(req,res)=>{
   let data=req.body;
   console.log(data);
-  // let insertData = {
-  //   userId:data.userId,
-  // }
-  con.query("select * from denglu",function(err,result){
-    if(err){
-      console.log(err);
-    }else{
-      console.log(result);
-      if(result==[]){
         con.query('insert into denglu(userId) values(?)',[data.userId],function(err,result){
           if(err){
                 console.log(err);
@@ -370,20 +361,7 @@ app.post('/denglu',(req,res)=>{
             }
                
         })
-      }
-      else{
-        con.query('update denglu set userId=?',[data.userId],function(err,result){
-          if(err){
-                console.log(err);
-            }else{
-              console.log(result);
-              res.json(result); 
-            }
-              
-        })
-      }
-    }
-  })
+      
   
 })
 app.post('/editpet',(req,res)=>{
