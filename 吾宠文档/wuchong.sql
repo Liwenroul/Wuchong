@@ -34,7 +34,7 @@ CREATE TABLE `active` (
 
 /*Data for the table `active` */
 
-insert  into `active`(`activeId`,`activeName`,`acContent`,`acImg`,`acAddress`,`acCity`,`acContact`) values ('1','爱牙牙','      牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。让宠物主人都行动起 来——健康养宠生活，从爱护它们的 牙齿开始！ ','https://liwenroul.github.io/Wuchong/img/active/d5.jpeg','石家庄市裕华区','石家庄','756273648'),('2','狗狗运动会','      牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。让宠物主人都行动起 来——健康养宠生活，从爱护它们的 牙齿开始！ ','https://liwenroul.github.io/Wuchong/img/active/d4.jpeg','石家庄市建设路','石家庄','324537887'),('3','宠物选美大赛','作为一名优秀的“铲屎官”，不能只满足于朋友圈晒猫猫狗狗！简直浪费了你家爱宠超高的颜值！除了铲屎，你还要为你家宝贝赢得荣誉。投稿宠物的美照，不管是丑萌的，可爱的，搞笑的，只要够特色，你就有机会被选中。','https://liwenroul.github.io/Wuchong/img/dynamic/d2.jpeg','安阳市建设路','安阳','123452066');
+insert  into `active`(`activeId`,`activeName`,`acContent`,`acImg`,`acAddress`,`acCity`,`acContact`) values ('1','爱牙牙','      牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。让宠物主人都行动起 来——健康养宠生活，从爱护它们的 牙齿开始！ ','https://liwenroul.github.io/Wuchong/img/active/d5.jpeg','石家庄市裕华区','石家庄','756273648'),('2','狗狗运动会','      牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。让宠物主人都行动起 来——健康养宠生活，从爱护它们的 牙齿开始！ ','https://liwenroul.github.io/Wuchong/img/active/d4.jpeg','石家庄市建设路','石家庄','324537887');
 
 /*Table structure for table `activeinfo` */
 
@@ -46,7 +46,21 @@ CREATE TABLE `activeinfo` (
 
 /*Data for the table `activeinfo` */
 
-insert  into `activeinfo`(`activeId`) values ('3');
+insert  into `activeinfo`(`activeId`) values ('2');
+
+/*Table structure for table `chat` */
+
+DROP TABLE IF EXISTS `chat`;
+
+CREATE TABLE `chat` (
+  `chatId` varchar(20) NOT NULL,
+  `sendId` varchar(20) DEFAULT NULL,
+  `acceptId` varchar(20) DEFAULT NULL,
+  `content` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`chatId`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+/*Data for the table `chat` */
 
 /*Table structure for table `city` */
 
@@ -71,7 +85,11 @@ CREATE TABLE `clockbianji` (
 
 /*Data for the table `clockbianji` */
 
+<<<<<<< HEAD
 insert  into `clockbianji`(`clockId`) values ('wuchong294212');
+=======
+insert  into `clockbianji`(`clockId`) values ('2');
+>>>>>>> 5af25f06606bd580000e7b1f667e29b9b1d26973
 
 /*Table structure for table `clockin` */
 
@@ -209,7 +227,7 @@ CREATE TABLE `petinfo` (
 
 /*Data for the table `petinfo` */
 
-insert  into `petinfo`(`petId`,`petName`,`petSex`,`petAge`,`userId`,`petImg`) values ('1','小小','女',2,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar1.jpeg'),('2','爱爱','男',4,'1','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('3','团子','女',2,'2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('4','可可','男',3,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('5','笑笑','女',4,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar2.jpeg'),('pet323755','黑子','男',5,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar1.jpeg');
+insert  into `petinfo`(`petId`,`petName`,`petSex`,`petAge`,`userId`,`petImg`) values ('2','爱爱','男',4,'1','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('3','团子','女',2,'2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('4','可可','男',3,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('5','笑笑','女',4,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar2.jpeg'),('pet323755','黑子','男',5,'4','https://liwenroul.github.io/Wuchong/img/avatar/avatar1.jpeg');
 
 /*Table structure for table `signup` */
 

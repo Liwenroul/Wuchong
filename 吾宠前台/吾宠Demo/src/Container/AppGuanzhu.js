@@ -26,6 +26,7 @@ class AppGuanzhu extends Component {
             userAvatar1:[],
             userId1:[],
             guanzhuId:[],
+            concern:[],
             num:[],
             val:'',
             dispaly: 'block',
@@ -87,6 +88,7 @@ class AppGuanzhu extends Component {
         document.addEventListener("keydown", this.onKeyDown);
         // let page = this.props.match.params.id;
         // let id = 1;
+        //获取登录的ID
         fetch('/denglu')
             .then((res)=>res.json())
             .then((res)=>{
@@ -95,6 +97,7 @@ class AppGuanzhu extends Component {
                     userId:res[0].userId
                 })
             })
+            //获取关注的人的guanzhuID
             fetch('/guanzhu')
             .then((res)=>res.json())
             .then((res)=>{
@@ -105,10 +108,21 @@ class AppGuanzhu extends Component {
                             guanzhuId:[...this.state.guanzhuId,res[i].guanzhuId]
                         })
                     }
-                    
                 }
-                console.log("关注ID:",this.state.guanzhuId);
-                for(var i =0;i<this.state.guanzhuId.length;i++){
+                console.log(this.state.guanzhuId)
+                for(var i = 0 ; i <this.state.guanzhuId.length;i++){
+                    for(var j =0;j<res.length;j++){
+                        if(res[j].guanzhuId == this.state.userId && res[j].userId == this.state.guanzhuId[i]){
+                            this.setState({
+                                concern:[...this.state.concern,res[j].userId]
+                            })
+                            
+                        }
+                    }
+                }
+                console.log("concern:",this.state.concern)
+                console.log("关注ID:",this.state.concern);
+                for(var i =0;i<this.state.concern.length;i++){
                     this.setState({
                         num:[...this.state.num,i]
                     })
@@ -120,9 +134,9 @@ class AppGuanzhu extends Component {
             .then((res)=>res.json())
             .then((res)=>{
                 console.log(res);
-                for(var i=0;i<this.state.guanzhuId.length;i++){
+                for(var i=0;i<this.state.concern.length;i++){
                     for(var j=0;j<res.length;j++){
-                        if(res[j].userId == this.state.guanzhuId[i]){
+                        if(res[j].userId == this.state.concern[i]){
                             this.setState({
                                 userId1:[...this.state.userId1,res[j].userId],
                                 userAvatar1:[...this.state.userAvatar1,res[j].userAvatar],
@@ -151,7 +165,8 @@ class AppGuanzhu extends Component {
                     leftContent={[
                         <i style={{fontSize:22}} className='iconfont icon-back' onClick={this.change2}></i>,
                     ]}
-                >关注</NavBar>
+                >关注
+                </NavBar>
             <div style={{ padding: '15px 0' }}>
                 {/* <WingBlank> */}
                     {/* <PlaceHolder /> */}
