@@ -6,11 +6,13 @@ import AppTab from './Apptab'
 import  AppZhuce from './Login/AppZhuce'
 import AppForget from './Login/AppForget';
 // import Data from '../data.json'
+let registerValue="";
 export default class AppLogin extends Component {
     constructor(){
         super();
         this.state={
             data:[],
+            userId:''
         }
     }
     componentDidMount(){
@@ -32,7 +34,8 @@ export default class AppLogin extends Component {
         if(loginname.value!==null){
             for(var i=1;i<this.state.data.length;i++){
                 if(loginname.value===this.state.data[i].userName && password.value===this.state.data[i].userPassword){
-                    const registerValue = {"userId":this.state.data[i].userId}
+                    registerValue = {"userId":this.state.data[i].userId}
+                    this.setState({userId:this.state.data[i].userId})
                     fetch('/denglu', {
                         method: "POST",
                         headers: {
@@ -45,29 +48,21 @@ export default class AppLogin extends Component {
                      });
                    
                     alert("success!");
-                    window.location = 'tab';
+                    window.location = '/tab:'+this.state.data[i].userId;
+                    // window.location = '/tabb'
                 }
                 if(loginname.value===this.state.data[i].userName && password.value!==this.state.data[i].userPassword){
                     alert("error!");
                 }
-                // else if(loginname.value===this.state.data[1].userName && password.value===this.state.data[1].userPassword){
-                //     alert("success!");
-                //     window.location = 'tab';
-                // }
-                // else if(loginname.value===this.state.data[2].userName && password.value===this.state.data[2].userPassword){
-                //     alert("success!");
-                //     window.location = 'tab';
-                // }
-                // else if(loginname.value===this.state.data[3].userName && password.value===this.state.data[3].userPassword){
-                //     alert("success!");
-                //     window.location = 'tab';
-                // }
+                
                 
             }
         }
         else{
             alert("未完成验证");
         }
+        
+        console.log(registerValue.userId)
     }
     render() {
         return (
@@ -92,8 +87,9 @@ export default class AppLogin extends Component {
                     {/* <Link to='/tab'>
                     <input type='submit' style={{width:'100%',height:50,margin:'0 auto',background:'rgb(29,174,169)',color:'#fff',borderRadius:'40px',fontSize:25,marginTop:20}} value='登录'/>
                     </Link> */}
+                    {/* <Link to={`/tab?userId:${this.state.userId}`}> */}
                     <input type='submit' onClick={this.check} style={{width:'100%',height:50,margin:'0 auto',background:'#1daea9',color:'#fff',borderRadius:'40px',fontSize:30,marginTop:20}} value='登录'/>
-                    
+                    {/* </Link> */}
                     <p style={{width:'100%',margin:'0 auto',lineHeight:2,marginTop:10}}><Link to='/zhuce' style={{color:'rgb(29,174,169)'}}>手机快速注册</Link><span style={{float:'right'}}><Link to='/wangji' style={{color:'rgb(29,174,169)'}}>忘记密码</Link></span></p>
                 </div>
                 </WingBlank>
@@ -124,6 +120,7 @@ export default class AppLogin extends Component {
                 <Route path='/login/zhuce' component={AppZhuce} />
                 <Route path='/login/wangji' component={AppForget} />
                 
+                {/* <Route  path='/tab?userId/:userId' component={AppTab}/> */}
             </div>
         )
     }
