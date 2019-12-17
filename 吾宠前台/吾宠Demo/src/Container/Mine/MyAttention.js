@@ -111,7 +111,7 @@ export default class MyAttention extends Component {
                 <List>
                     {
                         this.state.userNameList.map((item,idx)=>(
-                            <div>
+                            <div key={idx}>
                             <Link to={`/atInfo?userId:${item.userId}`}><Item key={idx} onClick={()=>this.enter(item.userId)}
                                 thumb={item.userAvatar}//图片
                                 arrow="horizontal"

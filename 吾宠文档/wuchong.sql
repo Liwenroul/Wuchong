@@ -62,6 +62,8 @@ CREATE TABLE `chat` (
 
 /*Data for the table `chat` */
 
+insert  into `chat`(`chatId`,`sendId`,`acceptId`,`content`) values ('2019-12-16 4:55:08 P','','','123'),('2019-12-16 4:57:05 P','','','123'),('2019-12-16 4:58:28 P','','1','123');
+
 /*Table structure for table `city` */
 
 DROP TABLE IF EXISTS `city`;
@@ -85,7 +87,7 @@ CREATE TABLE `clockbianji` (
 
 /*Data for the table `clockbianji` */
 
-insert  into `clockbianji`(`clockId`) values ('2');
+insert  into `clockbianji`(`clockId`) values ('0');
 
 /*Table structure for table `clockin` */
 
@@ -107,7 +109,7 @@ CREATE TABLE `clockin` (
 
 /*Data for the table `clockin` */
 
-insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`) values ('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日');
+insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`) values ('1','美容',3,'9：00','1','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('3','美容',3,'14:00','3','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('4','美容',2,'15:00','4','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日');
 
 /*Table structure for table `denglu` */
 

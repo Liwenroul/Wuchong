@@ -169,6 +169,15 @@ app.get('/dynamic',function(err,res){
       res.json(result); 
   }); 
 });
+app.get('/dynamic1',function(err,res){
+  con.query('select * from dynamic',function(err,result){
+      if(err){
+          console.log('[SELECT ERROR] - ', err.message);
+          return;
+      }
+      res.json(result); 
+  }); 
+});
 
 app.get('/manager',function(err,res){
   con.query('select * from manager',function(err,result){
@@ -344,15 +353,6 @@ app.post('/petinfo1',(req,res)=>{
 app.post('/denglu',(req,res)=>{
   let data=req.body;
   console.log(data);
-  // let insertData = {
-  //   userId:data.userId,
-  // }
-  con.query("select * from denglu",function(err,result){
-    if(err){
-      console.log(err);
-    }else{
-      console.log(result);
-      if(result==[]){
         con.query('insert into denglu(userId) values(?)',[data.userId],function(err,result){
           if(err){
                 console.log(err);
@@ -362,20 +362,7 @@ app.post('/denglu',(req,res)=>{
             }
                
         })
-      }
-      else{
-        con.query('update denglu set userId=?',[data.userId],function(err,result){
-          if(err){
-                console.log(err);
-            }else{
-              console.log(result);
-              res.json(result); 
-            }
-              
-        })
-      }
-    }
-  })
+      
   
 })
 app.post('/editpet',(req,res)=>{
@@ -496,6 +483,21 @@ app.post('/dynamic',(req,res)=>{
     acCity:data.acCity
   }
   con.query('insert into dynamic(dynamicId,dynamicImg,dynamicContent,likeNum,userId,acCity) values(?,?,?,?,?,?)',[insertData.dynamicId,insertData.dynamicImg,insertData.dynamicContent,insertData.likeNum,insertData.userId,insertData.acCity],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+app.post('/dynamic1',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  let insertData = {
+    likeNum:data.likeNum,
+    dynamicId:data.dynamicId
+  }
+  con.query('update dynamic set likeNum=? where dynamicId=?',[insertData.likeNum,insertData.dynamicId],function(err,result){
     if(err){
           console.log(err);
       }

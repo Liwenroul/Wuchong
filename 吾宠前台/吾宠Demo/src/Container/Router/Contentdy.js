@@ -9,7 +9,11 @@ export default class Contentdy extends React.Component{
         this.state={
             data:[],
             num:"",
-            likeNumState:0
+            likeNumState:0,
+            guanzhuId:'',
+            userId:'',
+            Id:'',
+            dynamicId:''
         }
     }
     componentDidMount(){
@@ -18,7 +22,7 @@ export default class Contentdy extends React.Component{
         .then((res)=>{
             console.log(res[0].userId)
             this.setState({
-                dengluId:res[0].userId
+                userId:res[0].userId
             })
         })
         
@@ -40,22 +44,94 @@ export default class Contentdy extends React.Component{
             var zanStr = JSON.parse(zan.innerHTML)
             if(this.state.likeNumState==0){
                 zan.innerHTML = zanStr+1;
-                this.state.likeNumState=1;
+                this.setState({
+                    likeNumState:1
+                })
+                const registerValue = {"likeNum":zan.innerHTML,"dynamicId":id}
+                fetch('/dynamic1', {
+                    method: "POST",
+                    headers: {
+                        "Content-type":"application/json;charset=utf-8",
+                    },
+                    body:JSON.stringify(registerValue),
+                })
+                .then( res => res.text())
+                    .then( data => {
+                        console.log(data);
+                    });
             }
             else if(this.state.likeNumState==1){
                 zan.innerHTML = zanStr-1;
-                this.state.likeNumState=0;
+                this.setState({
+                    likeNumState:0
+                })
+                const registerValue = {"likeNum":zan.innerHTML,"dynamicId":id}
+                fetch('/dynamic1', {
+                    method: "POST",
+                    headers: {
+                        "Content-type":"application/json;charset=utf-8",
+                    },
+                    body:JSON.stringify(registerValue),
+                })
+                .then( res => res.text())
+                    .then( data => {
+                        console.log(data);
+                    });
             }
            
     };
-    guanZhu =()=> {            
-        var btn = document.getElementById("zhu");
+    guanZhu =(id)=> {           
+        var btn = document.getElementById(id);
             num++;
             if (num % 2 === 1) {
                     btn.style.color = "red";
+                    
+        const registerValue = {"Id":"guanzhu"+parseInt(Math.random()*1000),"guanzhuId" : id,"userId":this.state.userId}
+                    fetch('/guanzhu', {
+                        method: "POST",
+                        headers: {
+                            "Content-type":"application/json;charset=utf-8",
+                        },
+                        body:JSON.stringify(registerValue),
+                    }).then( res => res.text())
+                        .then( data => {
+                            console.log(data);
+                        });
             }
             if (num % 2 === 0) {
                     btn.style.color = "gray";
+                    fetch("/denglu")
+                    .then((res)=>res.json())
+                    .then((res)=>{
+                        console.log(res[0].userId)
+                        this.setState({
+                            userId:res[0].userId
+                        })
+                    })
+                    fetch('/guanzhu')
+                    .then((res)=>res.json())
+                    .then((res)=>{
+                        for(var i =0;i<res.length;i++){
+                            if(res[i].guanzhuId == id && res[i].userId==this.state.userId){
+                                this.setState({
+                                    Id:res[i].Id
+                                })
+                            }
+                        }
+                    })
+                        const registerValue = {"Id":this.state.Id,"guanzhuId": id,"userId": this.state.userId}
+                        console.log(registerValue);
+                        fetch('/delguanzhu', {
+                                method: "POST",
+                                headers: {
+                                    "Content-type":"application/json;charset=utf-8",
+                                },
+                                body:JSON.stringify(registerValue) ,
+                            }).then( res => res.text())
+                            .then( data => {
+                                console.log(data);
+                            });
+                   
             }           
     };
     render(){
@@ -76,7 +152,7 @@ export default class Contentdy extends React.Component{
                             />
                             <div style={{float:'right',margin:'10px'}} >
                                 <i style={{fontSize:30,lineHeight:'30px',margin:'0 10px',color:"red"}} id={item.dynamicId} className='iconfont icon-dianzan' onClick={()=>this.dianZan(item.dynamicId)}>{item.likeNum}</i>
-                                <i style={{fontSize:30,lineHeight:'30px',margin:'0 10px'}} id="zhu" className='iconfont icon-haibijiahao' onClick={this.guanZhu}></i>
+                                <i style={{fontSize:30,lineHeight:'30px',margin:'0 10px'}} id={item.userId} className='iconfont icon-haibijiahao' onClick={()=>this.guanZhu(item.userId)}></i>
                             </div> 
                             <div style={{width:'100%',margin:'auto',float:'left'}}><p>{item.dynamicContent}</p></div> 
                             {/* <div>{item.dynamicImg}</div> */}
