@@ -13,7 +13,6 @@ const data = Array.from(new Array(9)).map((_val, i) => ({
 class ClockIn extends Component {
     constructor(props){
         super(props);
-        console.log(this.props)
     }
     add = () => {
         this.props.history.push('/add');
@@ -40,7 +39,7 @@ class ClockIn extends Component {
                         
                     }
                     >今日</NavBar>
-                    <Contentda userId={this.props.dengluId}/>
+                    <Contentda/>
                     {/* <Grid data={data} columnNum={3} hasLine={false}
                         renderItem={dataItem => (
                             <div>

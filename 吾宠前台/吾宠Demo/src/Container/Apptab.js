@@ -13,14 +13,11 @@ export default class Apptab extends Component {
   constructor(props) {
     super(props);
     console.log(props);
-    console.log(this.props)
     this.state = {
       selectedTab: 'home',
       hidden: false,
       fullScreen: false,
-      dengluId:this.props.match.params.userId
     };
-    console.log(this.state.dengluId)
   }
   componentDidMount(){
     this.setState({
@@ -124,7 +121,7 @@ export default class Apptab extends Component {
               });
             }}
           >
-            <ClockIn dengluId={this.state.dengluId}/>
+            <ClockIn/>
           </TabBar.Item>
           <TabBar.Item
             icon={<i className='iconfont icon-guanzhu'></i>

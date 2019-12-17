@@ -4,8 +4,8 @@ import {Link,Route} from 'react-router-dom'
 var times = 0;
 var num =0;
 export default class Contentda extends React.Component{
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state={
             data:[],
             num:"",
@@ -15,7 +15,7 @@ export default class Contentda extends React.Component{
           clockTime:"",
           clockImg:"",
           clockCycle:"",
-          userId:this.props.userId
+          userId:''
         }
     }
     componentDidMount(){
@@ -29,15 +29,15 @@ export default class Contentda extends React.Component{
                     
                 })
             })
-        // let url2 = '/denglu'
-        // fetch(url2)
-        //     .then((res)=>res.json())
-        //     .then((res)=>{
-        //         console.log(res[0].userId);
-        //         this.setState({
-        //             userId:res[0].userId
-        //         })
-        //     })
+        let url2 = '/denglu'
+        fetch(url2)
+            .then((res)=>res.json())
+            .then((res)=>{
+                console.log(res[0].userId);
+                this.setState({
+                    userId:res[0].userId
+                })
+            })
     }
     bianji = (clockId) => {
         const registerValue = {"clockId":clockId}
