@@ -87,11 +87,7 @@ CREATE TABLE `clockbianji` (
 
 /*Data for the table `clockbianji` */
 
-<<<<<<< HEAD
-insert  into `clockbianji`(`clockId`) values ('wuchong294212');
-=======
-insert  into `clockbianji`(`clockId`) values ('2');
->>>>>>> 5af25f06606bd580000e7b1f667e29b9b1d26973
+insert  into `clockbianji`(`clockId`) values ('0');
 
 /*Table structure for table `clockin` */
 
@@ -113,11 +109,7 @@ CREATE TABLE `clockin` (
 
 /*Data for the table `clockin` */
 
-<<<<<<< Updated upstream
-insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`) values ('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('3','玩耍',3,'09:00','1','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('4','美容',2,'10:00','3','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('5','遛一遛',3,'09:00','4','https://liwenroul.github.io/Wuchong/img/avatar/avatar2.jpeg','每周'),('wuchong294212','遛弯',3,'09:00','4','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每周');
-=======
 insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`) values ('1','美容',3,'9：00','1','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('3','美容',3,'14:00','3','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('4','美容',2,'15:00','4','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日');
->>>>>>> Stashed changes
 
 /*Table structure for table `denglu` */
 
