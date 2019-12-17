@@ -48,7 +48,7 @@ export default class AppLogin extends Component {
                      });
                    
                     alert("success!");
-                    window.location = '/tab:'+this.state.data[i].userId;
+                    window.location = '/tab'+this.state.data[i].userId;
                     // window.location = '/tabb'
                 }
                 if(loginname.value===this.state.data[i].userName && password.value!==this.state.data[i].userPassword){
