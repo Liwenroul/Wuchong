@@ -111,6 +111,17 @@ app.get('/active',function(err,res){
   }); 
 }) ;
 
+app.get('/signActive',jsonParser,(req,res)=>{
+  // console.log(req.body);
+  con.query('select * from active',function(err,result){
+      if(err){
+          console.log('[SELECT ERROR] - ', err.message);
+          return;
+      }
+      res.json(result); 
+  }); 
+}) 
+
 app.get('/city',jsonParser,(req,res)=>{
   // console.log(req.body);
   con.query('select * from city',function(err,result){
@@ -121,24 +132,7 @@ app.get('/city',jsonParser,(req,res)=>{
       res.json(result); 
   }); 
 }) 
-app.get('/active/ac1',function(err,res){
-  con.query('select * from active where activeId=?',['1'],function(err,result){
-      if(err){
-          console.log('[SELECT ERROR] - ', err.message);
-          return;
-      }
-      res.json(result); 
-  }); 
-}) ;
-app.get('/active/ac2',function(err,res){
-  con.query('select * from active where activeId=?',['2'],function(err,result){
-      if(err){
-          console.log('[SELECT ERROR] - ', err.message);
-          return;
-      }
-      res.json(result); 
-  }); 
-}) ;
+
 
 app.get('/activeinfo',jsonParser,(req,res)=>{
   // console.log(req.body);
