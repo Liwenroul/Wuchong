@@ -737,6 +737,27 @@ app.post('/chatVal',(req,res)=>{
 })
 
 
+app.post('/clockdaka',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  con.query('select clockNum from clockin where clockId=?',[data.clockId],function(err,result){
+    if(err){
+      console.log(err)
+    }
+    else{
+      con.query('update clockin set clockNum=? where clockId=?',[result[0].clockNum+1,data.clockId],function(err,result){
+        if(err){
+              console.log(err);
+          }
+            console.log(result);
+            res.json(result); 
+      })
+    }
+    console.log(result)
+  })
+})
+
+
 
 // error handler
 app.use(function(err, req, res, next) {

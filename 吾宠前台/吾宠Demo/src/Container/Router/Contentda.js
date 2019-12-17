@@ -56,11 +56,34 @@ export default class Contentda extends React.Component{
             // }
             console.log(clockId);
     }
-    daka = () => {
+    daka = (clockId) => {
         alert('打卡成功');
-        var clock = document.getElementById('clock');
-        var clockStr = JSON.parse(clock.innerHTML)
-        clock.innerHTML = clockStr+1;
+        // var clock = document.getElementById('clock');
+        // var clockStr = JSON.parse(clock.innerHTML)
+        // clock.innerHTML = clockStr+1;
+        console.log(clockId)
+        const registerValue = {"clockId":clockId};
+        fetch('/clockdaka', {
+            method: "POST",
+            headers: {
+                "Content-type":"application/json;charset=utf-8",
+            },
+            body:JSON.stringify(registerValue) ,
+        }).then( res => res.text())
+          .then( data => {
+              console.log(data);
+          });
+
+          let url4 = '/clockin'
+          fetch(url4)
+              .then((res)=>res.json())
+              .then((res)=>{
+                  console.log(res);
+                  this.setState({
+                      data:res,
+                      
+                  })
+              })
     }
     render(){
         return (
@@ -75,7 +98,7 @@ export default class Contentda extends React.Component{
                                 <div  style={{width:"70px",height:"70px",marginLeft:"28%",marginBottom:"15px",border:"3px dashed gray",borderRadius:"50%"}}>
                                     <img src={item.clockImg} style={{ width: '60px', height: '60px',borderRadius:'50%' }} alt=""/>
                                 </div>
-                                <div style={{textAlign:'center'}}><button className='btn' onClick={this.daka}>{item.clockName}</button><span style={{marginLeft:'10px'}} id='clock'>{item.clockNum}</span><button className='btn' onClick={()=>(this.bianji(item.clockId))}><Link to='/bianji' style={{color:'white'}}>编辑</Link></button></div>
+                                <div style={{textAlign:'center'}}><button className='btn' onClick={()=>(this.daka(item.clockId))}>{item.clockName}</button><span style={{marginLeft:'10px'}} id='clock'>{item.clockNum}</span><button className='btn' onClick={()=>(this.bianji(item.clockId))}><Link to='/bianji' style={{color:'white'}}>编辑</Link></button></div>
                                 
                             </div> 
                             
