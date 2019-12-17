@@ -272,6 +272,7 @@ app.get('/chat',jsonParser,(req,res)=>{
           return;
       }
       res.json(result); 
+      console.log(result);
   }); 
 })
 
@@ -720,7 +721,7 @@ app.post('/delguanzhu',(req,res)=>{
         res.json(result); 
   })
 })
-app.post('/chat',(req,res)=>{
+app.post('/chatVal',(req,res)=>{
   let data=req.body;
   console.log(data);
   let time=new Date().toLocaleString();
