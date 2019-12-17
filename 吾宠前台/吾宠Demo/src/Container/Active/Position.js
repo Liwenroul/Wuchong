@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { SearchBar,NavBar,WhiteSpace} from 'antd-mobile'
 import {Link} from 'react-router-dom'
 import AppMe from '../AppMe'
+import axios from 'axios';
 var Arr=['石家庄','鞍山','安阳','安庆','安顺'];
 var Brr=['北京','蚌埠','包头','保定','宝鸡','白银','白云鄂博','巴彦淖尔','北戴河','博鳌','承德','本溪','阜新','白山','白城','亳州','滨州','北海','百色','巴中','宝山'];
 var Crr=['重庆','成都','长沙','长春','承德', '常州','池州','沧州','赤峰','滁州','巢湖','常德','郴州','潮州','崇左','德阳'];
@@ -35,44 +36,26 @@ export default class call extends Component {
     constructor(props){
         super(props);
         this.state={
-            city:'石家庄'
+            city:''
         }
     }
     Choose =(i)=>{
         this.setState({
             city:i
         },()=>{
-          console.log(this.state.city);
-        const registerValue={"cityName":this.state.city}
-        fetch('/city', {
-          method: "POST",
-          headers: {
-              "Content-type":"application/json;charset=utf-8",
-          },
-          body:JSON.stringify(registerValue) ,
-     }).then( res => res.text())
-       .then( data => {
-           console.log(data);
-         //   if(data.success){
-         //       alert('register OK');
-         //   }
-       });
+            console.log(this.state.city);
+            const registerValue={"cityName":this.state.city}
+            fetch('/city', {
+            method: "POST",
+            headers: {
+                "Content-type":"application/json;charset=utf-8",
+            },
+            body:JSON.stringify(registerValue) ,
+            }).then( res => res.text())
+            .then( data => {
+            console.log(data);
+            });
         })
-    //     console.log(this.state.city);
-    //     const registerValue={"cityName":this.state.city}
-    //     fetch('/city', {
-    //       method: "POST",
-    //       headers: {
-    //           "Content-type":"application/json;charset=utf-8",
-    //       },
-    //       body:JSON.stringify(registerValue) ,
-    //  }).then( res => res.text())
-    //    .then( data => {
-    //        console.log(data);
-    //      //   if(data.success){
-    //      //       alert('register OK');
-    //      //   }
-    //    });
      console.log('success')
      window.scrollTo({
       left: 0,
@@ -80,40 +63,65 @@ export default class call extends Component {
       behavior: 'smooth',
     });
  }    
-    
-    // componentDidMount(){
-    //     fetch("http://restapi.amap.com/v3/ip?key=高德地图key").then((res)=>{
-    //         if(res.ok){
-    //           res.text().then((data)=>{
-    //             const detail=JSON.parse(data)
-    //             this.setState({
-    //               city:detail.city,
-    //               adcode:detail.adcode
-    //             })
-    //             console.log(this.state.adcode)
-    //           })
-    //         }
-    //       }).catch((res)=>{
-    //         console.log(res.status);
-    //       });
-      
-    // }
+ Pposition=()=>{
+    var BMap = window.BMap;//取出window中的BMap对象
+    var geolocation=new BMap.Geolocation();
+    geolocation.getCurrentPosition(        
+        (r)=>{
+            if(true){
+                // let lat=r.address.lat//当前经度
+                // let lng=r.address.lng//当前纬度
+                // let province=r.address.province //返回当前省份
+                var city=r.address.city//返回当前城市
+                console.log(r)
+                console.log(city);
+                var ccity=city.slice(-4,-1)
+                console.log(ccity)
+                this.setState({
+                    city:ccity
+                },()=>{
+                    console.log(this.state.city);
+                    const registerValue={"cityName":this.state.city}
+                    fetch('/city', {
+                    method: "POST",
+                    headers: {
+                        "Content-type":"application/json;charset=utf-8",
+                    },
+                    body:JSON.stringify(registerValue) ,
+                    }).then( res => res.text())
+                    .then( data => {
+                    console.log(data);
+                    });
+                })
+            }
+            return city;            
+        }  
+    )    
+}
+backTop=()=>{
+    window.scrollTo({
+        left: 0,
+        top: 0,
+        behavior: 'smooth',
+      });
+}
     render() {
         return (
             <div className='position'>
-              
+            {/* <i onClick={this.backTop} style={{color:'black',position:"absolute",fontSize:'100px'}} className='iconfont icon-fanhuidingbu4' key='backtop'></i> */}
+
             <NavBar style={{backgroundColor:'#1daea9',color:'white',height:'80px'}}
               leftContent={[
                 <Link to='/activity' key='position'>
                   <i style={{color:'white',fontSize:'30px'}} className='iconfont icon-back' key='close1'></i>
                 </Link>
-              ]}>{this.state.city}
+              ]} id='ccity'>{this.state.city}
             </NavBar>
             <SearchBar placeholder="城市" maxLength={8}/>
             <WhiteSpace size='md'/>
             <button style={{backgroundColor:'#1daea9',border:0,
                     borderRadius:'20px',width:'200px',height:'45px',
-                    color:'white',fontSize:'20px'}}>自动获取定位
+                    color:'white',fontSize:'20px'}} onClick={this.Pposition}>自动获取定位
             </button>
             <WhiteSpace size='md'/>
             <div>
