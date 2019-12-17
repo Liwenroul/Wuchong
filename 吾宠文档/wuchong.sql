@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.08 (64 bit)
-MySQL - 5.7.1-m11 : Database - wuchong
+MySQL - 5.7.14 : Database - wuchong
 *********************************************************************
 */
 
@@ -62,7 +62,7 @@ CREATE TABLE `chat` (
 
 /*Data for the table `chat` */
 
-insert  into `chat`(`chatId`,`sendId`,`acceptId`,`content`) values ('2019-12-16 4:55:08 P','','','123'),('2019-12-16 4:57:05 P','','','123'),('2019-12-16 4:58:28 P','','1','123');
+insert  into `chat`(`chatId`,`sendId`,`acceptId`,`content`) values ('2019-12-16 4:55:08 P','4','2','123'),('2019-12-16 4:57:05 P','2','4','123'),('2019-12-16 4:58:28 P','3','1','123');
 
 /*Table structure for table `city` */
 
@@ -184,7 +184,7 @@ CREATE TABLE `guanzhu` (
 
 /*Data for the table `guanzhu` */
 
-insert  into `guanzhu`(`Id`,`guanzhuId`,`userId`) values ('1','1','2'),('2','1','4'),('3','2','4'),('4','3','4');
+insert  into `guanzhu`(`Id`,`guanzhuId`,`userId`) values ('1','1','2'),('2','1','4'),('3','2','4'),('4','3','4'),('5','4','2'),('6','4','1');
 
 /*Table structure for table `manager` */
 
@@ -268,7 +268,7 @@ CREATE TABLE `userinfo` (
 
 /*Data for the table `userinfo` */
 
-insert  into `userinfo`(`userId`,`userName`,`userTel`,`userPassword`,`userAvatar`) values ('1','小李','27498749','123456','https://liwenroul.github.io/Wuchong/img/avatar/avatar1.jpeg'),('2','小赵','767569238','76476587','https://liwenroul.github.io/Wuchong/img/avatar/avatar2.jpeg'),('3','小郑','645788456','65656237','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('4','小黄','123456','123456','https://liwenroul.github.io/Wuchong/img/avatar/avatar2.jpeg');
+insert  into `userinfo`(`userId`,`userName`,`userTel`,`userPassword`,`userAvatar`) values ('1','小李','27498749','123456','https://liwenroul.github.io/Wuchong/img/avatar/avatar1.jpeg'),('2','小赵','767569238','76476587','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('3','小郑','645788456','65656237','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg'),('4','小黄','123456','123456','https://liwenroul.github.io/Wuchong/img/avatar/avatar2.jpeg');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
