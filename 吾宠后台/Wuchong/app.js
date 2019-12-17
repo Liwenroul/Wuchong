@@ -269,7 +269,7 @@ app.get('/clockbianji',jsonParser,(req,res)=>{
 }) 
 app.get('/chat',jsonParser,(req,res)=>{
   // console.log(req.body);
-  con.query('select * from chat',function(err,result){
+  con.query('select * from chat group by chatId desc',function(err,result){
       if(err){
           console.log('[SELECT ERROR] - ', err.message);
           return;

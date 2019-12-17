@@ -44,9 +44,9 @@ export default class Chat extends Component {
         fetch('/denglu')
         .then((res)=>res.json())
         .then((res)=>{
-            console.log(res[0].userId);
+            console.log(this.props.location.search.slice(8,9));
             this.setState({
-                sendId:res[0].userId
+                sendId:this.props.location.search.slice(8,9)
             })
         })
     }
@@ -58,7 +58,11 @@ export default class Chat extends Component {
             allId:[],
             allAvatar:[]
         })
-        const registerValue = {"sendId":this.state.userID,"acceptId": this.state.userId,"content": this.state.value}
+        let dengluId = this.props.location.search.slice(20);
+        let lll=this.props.match.params.userId;
+        console.log("网址解决",lll)
+        console.log("dengluId:",dengluId);
+        const registerValue = {"sendId":this.state.userID,"acceptId": dengluId,"content": this.state.value}
         if(this.state.value!=""){
            fetch('/chatVal', {
                  method: "POST",
@@ -74,101 +78,66 @@ export default class Chat extends Component {
             }
             let ip0 =this.props.location.search;
             let id = ip0.slice(8);
-            // fetch('/chat')
-            //     .then((res)=>res.json())
-            //     .then((res)=>{
-            //         let ip0 =this.props.location.search;
-            //         let id = ip0.slice(8);
-            //         for(var i =res.length-1;i>=0;i--){
-            //             // console.log("userID:",this.state.userID,"sendId:",res[i].sendId,"accept:",id
-            //             // ,"acceptid:",res[i].acceptId)
-            //             if(this.state.userID == res[i].sendId && id == res[i].acceptId){
-            //                 this.setState({
-            //                     //将发送的消息加入到crr数组中
-            //                     //crr数组中只包含发送的内容，
-            //                     crr:[...this.state.crr,res[i].content],
-            //                     allId:[...this.state.allId,res[i].sendId],
-            //                 })
-            //                 // break;
-            //             }
-            //         }
-                 
-            //         for(var i =0;i<this.state.crr.length;i++){
-            //             this.setState({
-            //                 allnum:[...this.state.allnum,i]
-            //             })
-            //         }
-            //     })
-               
-            //     // console.log("Ayy:",this.state.Ayy);
-            //     fetch('/userinfo')
-            //     .then((res)=>res.json())
-            //     .then((res)=>{
-            //         for(var i = 0;i<res.length;i++){
-            //             for(var j = 0;j<this.state.allId.length;j++){
-            //                 if(res[i].userId == this.state.allId[j]){
-            //                     this.setState({
-            //                         allAvatar:[...this.state.allAvatar,res[i].userAvatar]
-            //                     })
-            //                 }
-            //             }
-            //         }
-            //     })
-            //     console.log("allAvatar:",this.state.allAvatar)
-            //     console.log("crr:",this.state.crr)
 
             fetch('/chat')
-            .then((res)=>res.json())
-            .then((res)=>{
-                for(var i =res.length-1;i>=0;i--){
-                    if((this.state.userID == res[i].sendId && id == res[i].acceptId)||
-                    (this.state.userID == res[i].acceptId && id == res[i].sendId))
-                    {
-                        this.setState({
-                            crr:[...this.state.crr,res[i].content],
-                            allId:[...this.state.allId,res[i].sendId],
-                        })
-                    }
-                }
-                for(var i =0;i<this.state.crr.length;i++){
-                    this.setState({
-                        allnum:[...this.state.allnum,i]
-                    })
-                }
-                fetch('/userinfo')
                 .then((res)=>res.json())
                 .then((res)=>{
-                    for(var i = 0;i<res.length;i++){
-                        for(var j = 0;j<this.state.allId.length;j++){
-                            if(res[i].userId == this.state.allId[j]){
-                                this.setState({
-                                    allAvatar:[...this.state.allAvatar,res[i].userAvatar]
-                                })
-                            }
+                    console.log(res)
+                    for(var i =res.length-1;i>=0;i--){
+                        // console.log(res[i])
+                        if((this.state.userID == res[i].sendId && this.props.location.search.slice(20) == res[i].acceptId)||
+                        (this.state.userID == res[i].acceptId && this.props.location.search.slice(20) == res[i].sendId))
+                        {
+                            // console.log(i)
+                            this.setState({
+                                crr:[...this.state.crr,res[i].content],
+                                allId:[...this.state.allId,res[i].acceptId],
+                            })
                         }
                     }
-                })
-                })
-
+                    console.log(this.state.crr)
+                    console.log(this.state.allId)
+                    for(var i =0;i<this.state.crr.length;i++){
+                        this.setState({
+                            allnum:[...this.state.allnum,i]
+                        })
+                    }
+                    fetch('/userinfo')
+                    .then((res)=>res.json())
+                    .then((res)=>{
+                        for(var i = 0;i<res.length;i++){
+                            for(var j = 0;j<this.state.allId.length;j++){
+                                if(res[i].userId == this.state.allId[j]){
+                                    this.setState({
+                                        allAvatar:[...this.state.allAvatar,res[i].userAvatar]
+                                    })
+                                }
+                            }
+                        }
+                        console.log(this.state.allAvatar)
+                    })
+                    })
+                    // console.log(this.state.allAvatar)
 
     }
 
         componentDidMount(){
+            console.log("网址2：",this.props.match)
             let ip0 =this.props.location.search;
-            let id = ip0.slice(8);
+            let id = this.props.location.search.slice(8,9);
             fetch('/denglu')
             .then((res)=>res.json())
             .then((res)=>{
-                console.log(res)
+                // console.log(res)
                 this.setState({
-                    userID:res[0].userId
+                    userID:this.props.location.search.slice(8,9)
                 })
             })
             console.log("userID",this.state.userID)
             fetch('/userinfo')
                 .then((res)=>res.json())
                 .then((res)=>{
-                    console.log(res)
+                    // console.log(res)
                     for(var i=0;i<res.length;i++){
                         if(res[i].userId == id){
                             this.setState({
@@ -188,16 +157,21 @@ export default class Chat extends Component {
                 fetch('/chat')
                 .then((res)=>res.json())
                 .then((res)=>{
+                    console.log(res)
                     for(var i =res.length-1;i>=0;i--){
-                        if((this.state.userID == res[i].sendId && id == res[i].acceptId)||
-                        (this.state.userID == res[i].acceptId && id == res[i].sendId))
+                        // console.log(res[i])
+                        if((this.state.userID == res[i].sendId && this.props.location.search.slice(20) == res[i].acceptId)||
+                        (this.state.userID == res[i].acceptId && this.props.location.search.slice(20) == res[i].sendId))
                         {
+                            // console.log(i)
                             this.setState({
                                 crr:[...this.state.crr,res[i].content],
-                                allId:[...this.state.allId,res[i].sendId],
+                                allId:[...this.state.allId,res[i].acceptId],
                             })
                         }
                     }
+                    console.log(this.state.crr)
+                    console.log(this.state.allId)
                     for(var i =0;i<this.state.crr.length;i++){
                         this.setState({
                             allnum:[...this.state.allnum,i]
@@ -215,12 +189,14 @@ export default class Chat extends Component {
                                 }
                             }
                         }
+                        console.log(this.state.allAvatar)
                     })
                     })
+                    console.log(this.state.allAvatar)
         }
         //跳转页面
     change=()=>{
-        this.props.history.push('/follow')
+        this.props.history.push('/tab'+this.props.location.search.slice(20))
     }
     render() {
         let {url} = this.props.match;
@@ -238,13 +214,13 @@ export default class Chat extends Component {
                             this.state.allnum.map((i)=>{
                                 return(
                                     <div>
-                                        <Link to={`/play?userId:`+this.state.userID} className='userschat'>
+                                        <Link to={`/play?userId:`+this.state.allId[i]+`&&dengluId:`+this.props.location.search.slice(20)} className='userschat'>
                                         <div className='novel'>
                                         <img src={this.state.allAvatar[i]} style={{height:'40px',width:'40px'}}/>
                                             {this.state.crr[i]}
                                         </div>
                                         </Link> 
-                                        <Route path={url+'/play?userId:userId'} component={Play}/>
+                                        <Route path={'/play?userId:userId&&dengluId:dengluId'} component={Play}/>
                                     </div>
                             )
                         })

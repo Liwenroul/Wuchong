@@ -48,13 +48,16 @@ export default class Play extends Component {
                 this.setState({
                     points:'已关注'
                 })
-
+                let dengluId = this.props.match.params.userId
+                // this.setState({
+                //     userId:dengluId
+                // })
                 fetch('/denglu')
                 .then((res)=>res.json())
                 .then((res)=>{
                     // console.log(res)
                     this.setState({
-                        ID:res[0].userId,
+                        ID:this.props.match.params.userId,
                         id:parseInt(Math.random()*1000)
                     })
                     console.log("this.id:",this.state.id,"this.ID:",this.state.ID)
@@ -87,10 +90,10 @@ export default class Play extends Component {
                 .then((res)=>{
                     // console.log(res)
                     this.setState({
-                        ID:res[0].userId,
+                        ID:this.props.match.params.userId,
                     })
                     let ip0 =this.props.location.search;
-                    let ip = ip0.slice(8);//截取当前页面的userID
+                    let ip = ip0.slice(8,9);//截取当前页面的userID
                     //通过登录用户的userId获取关注的人的关注ID
                     fetch('guanzhu')
                     .then((res)=>res.json())
@@ -129,7 +132,7 @@ export default class Play extends Component {
         // let id = this.props.match.params.userId;
         // let id=1;
         let ip0 =this.props.location.search;
-        let id = ip0.slice(8);
+        let id = ip0.slice(8,9);
         this.setState({
             guanzhuid:id
         })
@@ -177,7 +180,7 @@ export default class Play extends Component {
                 <NavBar
                     style={{backgroundColor:'#3fcccb',color:'#000',height:'88px'}}
                     leftContent={[  
-                        <Link to={`/chat?userId:`+this.state.guanzhuid}>
+                        <Link to={`/tab`+this.props.location.search.slice(20)}>
                             <i style={{fontSize:22}} className='iconfont icon-back' onClick={this.change}>
                                 </i>
                                 </Link>
