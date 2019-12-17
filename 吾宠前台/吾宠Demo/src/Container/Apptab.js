@@ -87,7 +87,7 @@ export default class Apptab extends Component {
               });
             }}
           >
-          <AppHome/>
+          <AppHome dengluId={this.state.dengluId}/>
           </TabBar.Item>
           <TabBar.Item
              icon={<i className='iconfont icon-chongwuwanju'></i>

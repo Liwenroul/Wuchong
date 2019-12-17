@@ -4,19 +4,21 @@ import {Link,Route} from 'react-router-dom'
 var times = 0;
 var num =0;
 export default class Contentdy extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             data:[],
             num:"",
             likeNumState:0,
             guanzhuId:'',
-            userId:'',
+            userId:this.props.match.params.userId,
             Id:'',
             dynamicId:''
         }
+        
     }
     componentDidMount(){
+        console.log(this.props.match.params.userId)
         fetch("/denglu")
         .then((res)=>res.json())
         .then((res)=>{

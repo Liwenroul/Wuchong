@@ -29,23 +29,16 @@ export default class AppFabu extends Component {
         super(props);
         this.state = {
             dynamicImg:"",
-            value: '写下此时此刻的想法',
-            dengluId:"",
+            value: '',
+            dengluId:this.props.match.params.userId,
             acCity:'',
         }
         
     }
 
-    componentDidMount(){
-        fetch("/denglu")
-        .then((res)=>res.json())
-        .then((res)=>{
-            console.log(res[0].userId)
-            this.setState({
-                dengluId:res[0].userId
-            }) 
+    componentDidMount(){ 
             console.log(this.state.dengluId)
-        })
+        
         fetch("/dingwei")
         .then((res)=>res.json())
         .then((res)=>{
@@ -56,18 +49,15 @@ export default class AppFabu extends Component {
         })
         
     }
-    handleChange=(event)=> {
-        this.setState({value: event.target.value});
-      }
-    //   data[parseInt(Math.random()*3)]
+    
+      dynamicContentChange=(e)=>{
+        console.log(e.target.value);
+        this.setState({
+          value:e.target.value
+        })
+    }
     handleSubmit=(event)=> {
-        // alert('提交的名字: ' + this.state.value);
-        // for(var  i=0;i<this.state.files.length;i++){
-        //     var urlArr=[];
-        //     urlArr.push(this.state.files[i].url)
-        // }
         const registerValue = {"dynamicContent": this.state.value,"dynamicImg":this.state.dynamicImg,"userId":this.state.dengluId,"acCity":this.state.acCity}
-        // const regImg={"dynamicImg":{url:'https://liwenroul.github.io/Wuchong/img/dynamic/d3.jpeg'}}
         if(this.state.value){
             fetch('/dynamic', {
                 method: "POST",
@@ -84,7 +74,7 @@ export default class AppFabu extends Component {
                 });
        
         }        
-        window.location='/tab';
+        window.location='/tab'+this.state.dengluId;
         event.preventDefault();
     }
 
@@ -130,14 +120,23 @@ export default class AppFabu extends Component {
         return (
             <div style={{width:'100%',height:'700px',background:'#fff'}}>
                 <form onSubmit={this.handleSubmit}>
+                  
                     <div  style={{border:'1px solid rgb(29,174,169)',color:'#33cccc',height:48,fontSize:20,textAlign:'center'}}>
-                        <Link to='/tab'><i style={{float:'left',lineHeight:'40px',fontSize:30,color:'rgb(29,174,169)'}} className='iconfont icon-icon-' /></Link>
+                        <Link to={'/tab'+this.state.dengluId}><i style={{float:'left',lineHeight:'40px',fontSize:30,color:'rgb(29,174,169)'}} className='iconfont icon-icon-' /></Link>
                         {/* <Link><button style={{width:'100px',height:45,border:'1px solid #33cccc',borderRadius:'25px'}}>存草稿</button></Link> */}
                         {/* <Link> */}
                         <input type="submit" value="发布" style={{float:'right',width:'100px',height:40,marginRight:'10px',marginTop:2,background:'rgb(29,174,169)',color:'#fff',borderRadius:'20px'}}/>
                         {/* </Link> */}
                     </div>
-                
+                    <div style={{width:'100%',height:50,marginBottom:'20px',marginTop:'20px'}}>
+                      <span style={{float:'left',background:'rgb(29,174,169)',width:'60px',textAlign:'center',color:'#fff',borderRadius:'10px',lineHeight:'40px'}}>{this.state.acCity}</span>
+                      <i style={{lineHeight:'50px',fontSize:20,margin:'10px 20px'}} className='iconfont icon-shouye'>我的位置 </i>
+                      <Link  to={'/weizhi'+this.state.dengluId}><Icon style={{float:'right',margin:'10px 10px'}} type="right"   /></Link>
+                              
+                      {/* <div style={{width:'100%',height:50,lineHeight:'40px',fontSize:20,padding:'20px 20px',borderTop:'1px solid #eee'}}>
+                          <button style={{float:'left',background:'rgb(29,174,169)',color:'#fff',borderRadius:'10px',lineHeight:'40px'}}>{this.state.acCity}</button>
+                      </div> */}
+                    </div>
                     {/* <ImagePicker
                                 files={files}
                                 onChange={this.onChange}
@@ -157,20 +156,14 @@ export default class AppFabu extends Component {
                             >
                                 {imageUrl ? <img src={imageUrl} onChange={this.dynamicImgChange} id='dynamicImg' alt="img" style={{ width: '90px',height:'90px',borderRadius:'50%',marginLeft:'-8px',marginTop:'-8px'}} /> : uploadButton}
                             </Upload>
-                    <textarea type="text" style={{width:'100%',height:'180px',margin:'0 auto',lineHeight:3}} placeholder={'写下此时此刻的想法···'} value={this.state.value} onChange={this.handleChange} ></textarea>
-                    <div style={{width:'100%',height:50}}>
-                            <i style={{lineHeight:'50px',fontSize:20,margin:'10px 20px'}} className='iconfont icon-shouye'>你的位置 </i>
-                            <Link  to='/weizhi'><Icon style={{float:'right',margin:'10px 10px'}} type="right"   /></Link>
-                            
-                            <div style={{width:'100%',height:50,lineHeight:'40px',fontSize:20,padding:'20px 20px',borderTop:'1px solid #eee'}}>
-                                <button style={{float:'left',background:'rgb(29,174,169)',color:'#fff',borderRadius:'10px',lineHeight:'40px'}}>{this.state.acCity}</button>
-                            </div>
-                        </div>
+                            {/* <input type="text" id='dynamicContent' onChange={this.dynamicContentChange}  style={{width:'100%',height:'180px',margin:'0 auto',lineHeight:3}} placeholder={'写下此时此刻的想法···'}/> */}
+                    <textarea type="text" style={{width:'100%',height:'180px',margin:'0 auto',lineHeight:3}} placeholder={'写下此时此刻的想法···'}  onChange={this.dynamicContentChange} ></textarea>
+                    
                 {/* <input type="submit" value="发布" /> */}
                 </form>
                 
-                <Route path='/weizhi' component={AppWeizhi} />
-                <Route  path='/tab' component={AppTab}/>
+                {/* <Route path='/weizhi' component={AppWeizhi} /> */}
+                {/* <Route  path='/tab' component={AppTab}/> */}
             </div>
         )
     }

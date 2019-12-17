@@ -13,6 +13,7 @@ const Brief = Item.Brief;
 class Mine extends Component {
     constructor(props){
         super(props);
+        console.log(this.props);
         this.state={
             dengluId:this.props.dengluId,
             imageUrl:"",

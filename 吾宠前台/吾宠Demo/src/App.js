@@ -55,8 +55,8 @@ export default class App extends Component {
                     <Route  path='/zhuce' component={AppZhuce} />
                     <Route path='/wangji' component={AppForget} />
                     <Route  path='/petxinxi' component={AppPetXinxi} />
-                    <Route path='/fabu' component={AppFabu}/>
-                    <Route path={'/weizhi'} component={AppWeizhi} />
+                    <Route path='/fabu:userId' component={AppFabu}/>
+                    <Route path='/weizhi:userId' component={AppWeizhi} />
 
                     <Route path='/all' component={Apptab}/>
                     <Route path='/activity' component={AppMe}/>
