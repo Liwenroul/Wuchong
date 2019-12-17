@@ -12,7 +12,8 @@ export default class Contentdy extends React.Component{
             likeNumState:0,
             guanzhuId:'',
             userId:'',
-            Id:''
+            Id:'',
+            dynamicId:''
         }
     }
     componentDidMount(){
@@ -43,11 +44,39 @@ export default class Contentdy extends React.Component{
             var zanStr = JSON.parse(zan.innerHTML)
             if(this.state.likeNumState==0){
                 zan.innerHTML = zanStr+1;
-                this.state.likeNumState=1;
+                this.setState({
+                    likeNumState:1
+                })
+                const registerValue = {"likeNum":zan.innerHTML,"dynamicId":id}
+                fetch('/dynamic1', {
+                    method: "POST",
+                    headers: {
+                        "Content-type":"application/json;charset=utf-8",
+                    },
+                    body:JSON.stringify(registerValue),
+                })
+                .then( res => res.text())
+                    .then( data => {
+                        console.log(data);
+                    });
             }
             else if(this.state.likeNumState==1){
                 zan.innerHTML = zanStr-1;
-                this.state.likeNumState=0;
+                this.setState({
+                    likeNumState:0
+                })
+                const registerValue = {"likeNum":zan.innerHTML,"dynamicId":id}
+                fetch('/dynamic1', {
+                    method: "POST",
+                    headers: {
+                        "Content-type":"application/json;charset=utf-8",
+                    },
+                    body:JSON.stringify(registerValue),
+                })
+                .then( res => res.text())
+                    .then( data => {
+                        console.log(data);
+                    });
             }
            
     };

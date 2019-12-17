@@ -169,6 +169,15 @@ app.get('/dynamic',function(err,res){
       res.json(result); 
   }); 
 });
+app.get('/dynamic1',function(err,res){
+  con.query('select * from dynamic',function(err,result){
+      if(err){
+          console.log('[SELECT ERROR] - ', err.message);
+          return;
+      }
+      res.json(result); 
+  }); 
+});
 
 app.get('/manager',function(err,res){
   con.query('select * from manager',function(err,result){
@@ -495,6 +504,21 @@ app.post('/dynamic',(req,res)=>{
     acCity:data.acCity
   }
   con.query('insert into dynamic(dynamicId,dynamicImg,dynamicContent,likeNum,userId,acCity) values(?,?,?,?,?,?)',[insertData.dynamicId,insertData.dynamicImg,insertData.dynamicContent,insertData.likeNum,insertData.userId,insertData.acCity],function(err,result){
+    if(err){
+          console.log(err);
+      }
+        console.log(result);
+        res.json(result); 
+  })
+})
+app.post('/dynamic1',(req,res)=>{
+  let data=req.body;
+  console.log(data);
+  let insertData = {
+    likeNum:data.likeNum,
+    dynamicId:data.dynamicId
+  }
+  con.query('update dynamic set likeNum=? where dynamicId=?',[insertData.likeNum,insertData.dynamicId],function(err,result){
     if(err){
           console.log(err);
       }

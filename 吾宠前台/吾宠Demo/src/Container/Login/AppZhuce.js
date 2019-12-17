@@ -89,7 +89,7 @@ export default class AppZhuce extends Component {
          {
              //验证码正确(表单提交)
              this.register();
-             window.location='/petxinxi';
+             window.location='/login';
              return true;
          }
          alert("请输入正确的验证码!");
@@ -106,7 +106,7 @@ export default class AppZhuce extends Component {
                     style={{width:'100%',height:50,backgroundColor:'rgb(29,174,169)',color:'#fff',fontSize:'20px'}}
                     icon={<Icon type="left" />}
                     
-                    onLeftClick={() => {window.history.back()}}
+                    onLeftClick={() => {window.location='/login'}}
                     >注册
                 </NavBar>
                 <WingBlank>
