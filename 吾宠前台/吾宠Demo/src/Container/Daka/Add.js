@@ -27,7 +27,7 @@ export default class Add extends Component {
           clockName:"",
           clockNum:"",
           clockTime:"",
-          userId:"2",
+          userId:"",
           clockImg:"",
           clockCycle:"",
           
@@ -65,10 +65,23 @@ export default class Add extends Component {
     //       clockCycle:e.target.value
     //     })
     // }
+    componentWillMount(){
+      let url2 = '/denglu'
+        fetch(url2)
+            .then((res)=>res.json())
+            .then((res)=>{
+                console.log(res);
+                this.setState({
+                    userId:res[0].userId
+                })
+            })
+    }
+
     register=()=>{
         console.log(this.state.clockName);
         const registerValue = {"clockName":this.state.clockName,"clockNum": this.state.clockNum,"clockTime": this.state.clockTime,"userId":this.state.userId,"clockImg":this.state.clockImg,"clockCycle":this.state.clockCycle}
       
+
         // if(this.state.clockName!=""&&this.state.clockNum!=""&&this.state.clockTime!=""&&this.state.clockImg!=""&&this.state.clockCycle!=""){
           fetch('/clockin', {
                 method: "POST",
@@ -82,6 +95,8 @@ export default class Add extends Component {
               });
             // }
         this.props.history.push('/clockin');
+
+       
     }
 
       

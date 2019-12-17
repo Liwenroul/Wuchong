@@ -9,11 +9,13 @@ export default class Contentda extends React.Component{
         this.state={
             data:[],
             num:"",
+            clockId:'',
             clockName:"",
           clockNum:"",
           clockTime:"",
           clockImg:"",
           clockCycle:"",
+          userId:''
         }
     }
     componentDidMount(){
@@ -25,6 +27,15 @@ export default class Contentda extends React.Component{
                 this.setState({
                     data:res,
                     
+                })
+            })
+        let url2 = '/denglu'
+        fetch(url2)
+            .then((res)=>res.json())
+            .then((res)=>{
+                console.log(res[0].userId);
+                this.setState({
+                    userId:res[0].userId
                 })
             })
     }
@@ -43,7 +54,7 @@ export default class Contentda extends React.Component{
                   console.log(data);
               });
             // }
-
+            console.log(clockId);
     }
     daka = () => {
         alert('打卡成功');
@@ -56,6 +67,7 @@ export default class Contentda extends React.Component{
             <div>
                 {
                     this.state.data.map((item)=>(
+                        item.userId == this.state.userId ? 
                         <div key={item.id} style={{height: '100px',float:"left",marginLeft:"10%",marginTop:"5%"}}>
                             {/* <img  src={require('../../img/images/img0.png')} style={{ width: '60px', height: '60px' }} alt="" /> */}
                             <div style={{ color: '#888', fontSize: '14px'}}>
@@ -68,6 +80,7 @@ export default class Contentda extends React.Component{
                             </div> 
                             
                         </div>
+                        : ''
                             
                     ))
                 }

@@ -71,7 +71,7 @@ CREATE TABLE `clockbianji` (
 
 /*Data for the table `clockbianji` */
 
-insert  into `clockbianji`(`clockId`) values ('0');
+insert  into `clockbianji`(`clockId`) values ('wuchong294212');
 
 /*Table structure for table `clockin` */
 
@@ -93,7 +93,7 @@ CREATE TABLE `clockin` (
 
 /*Data for the table `clockin` */
 
-insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`) values ('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日');
+insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`) values ('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('3','玩耍',3,'09:00','1','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('4','美容',2,'10:00','3','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('5','遛一遛',3,'09:00','4','https://liwenroul.github.io/Wuchong/img/avatar/avatar2.jpeg','每周'),('wuchong294212','遛弯',3,'09:00','4','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每周');
 
 /*Table structure for table `denglu` */
 

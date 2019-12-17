@@ -36,7 +36,7 @@ export default class Contentda extends React.Component{
             clockName:"",
             clockNum:"",
             clockTime:"",
-            userId:"2",
+            userId:"",
             clockCycle:"",
         }
         
@@ -85,7 +85,18 @@ export default class Contentda extends React.Component{
                   data:res,
               })
           })
+
+      let url3 = '/denglu'
+      fetch(url3)
+          .then((res)=>res.json())
+          .then((res)=>{
+              console.log(res);
+              this.setState({
+                  userId:res[0].userId
+              })
+          })
   }
+
 
     // componentDidMount(){
     //     let url = '/clockin'
@@ -177,6 +188,16 @@ export default class Contentda extends React.Component{
                   console.log(data);
               });
             // }
+
+            let url4 = '/denglu'
+            fetch(url4)
+                .then((res)=>res.json())
+                .then((res)=>{
+                    console.log(res);
+                    this.setState({
+                        userId:res[0].userId
+                    })
+                })
     }
 
     render(){
@@ -187,8 +208,10 @@ export default class Contentda extends React.Component{
             </div>
           );
           const { imageUrl } = this.state;
+          // console.log(data)
           console.log(this.state.id)
           console.log(this.state.data)
+          console.log(this.state.userId)
         return (
             <div>
                 <NavBar
@@ -198,7 +221,8 @@ export default class Contentda extends React.Component{
                         >编辑</NavBar>
                 {
                   this.state.data.map((item)=>(
-                    item.clockId == this.state.id ? <div>
+                    item.clockId == this.state.id && item.userId == this.state.userId ? 
+                    <div>
                         <div className="add">
                             <div className='to'>
                                 <img src={item.clockImg} style={{ width: '105px', height: '105px',borderRadius:'50%' }} alt=""/>
