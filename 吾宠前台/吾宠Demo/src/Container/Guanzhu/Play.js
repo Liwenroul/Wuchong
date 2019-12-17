@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NavBar, Icon, Tabs,Carousel } from 'antd-mobile';
+import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 import img from '../../img/images/tou.png'
 import { Grid } from 'antd-mobile';
 // import Chat from './chat'
@@ -29,12 +30,14 @@ export default class Play extends Component {
             dynamicId:[],
             num:[],
             ID:'',//登录用户的userID
-            id:''//关注页面的ID
+            id:'',//关注页面的ID
+            guanzhuid:'',
         }
     }
     
     change = () =>{
-        this.props.history.push('./chat');
+        this.props.history.push('./chat?userId:'+this.state.guanzhuid);
+        console.log('./chat?userId:'+this.state.guanzhuid)
     }
     changeValue=()=>{
         parseInt(this.state.value++);
@@ -127,6 +130,9 @@ export default class Play extends Component {
         // let id=1;
         let ip0 =this.props.location.search;
         let id = ip0.slice(8);
+        this.setState({
+            guanzhuid:id
+        })
         // console.log("ip:",ip);
         fetch('/userinfo')
             .then((res)=>res.json())
@@ -171,7 +177,11 @@ export default class Play extends Component {
                 <NavBar
                     style={{backgroundColor:'#3fcccb',color:'#000',height:'88px'}}
                     leftContent={[  
-                        <i style={{fontSize:22}} className='iconfont icon-back' onClick={this.change}></i>,
+                        <Link to={`/chat?userId:`+this.state.guanzhuid}>
+                            <i style={{fontSize:22}} className='iconfont icon-back' onClick={this.change}>
+                                </i>
+                                </Link>
+                                ,
                     ]}
     >{this.state.userName}的吾宠秀</NavBar>
                 <div style={{heigth:'100px',width:'100%'}} className='userPlay'>
