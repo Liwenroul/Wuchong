@@ -67,8 +67,11 @@ export default class App extends Component {
 
                     <Route path='/clockin/:userId' component={ClockIn}/>
                     <Route path='/daka/:userId' component={ClockIn}/>
-                    <Route path='/add/:userId' component={Add}/>
-                    <Route path='/bianji' component={Bianji}/>
+                    {/* <Route path='/add/:userId' component={Add}/> */}
+                    {/* <Route path='/bianji' component={Bianji}/> */}
+                    {/* <Route path='/daka' component={ClockIn}/> */}
+                    <Route path='/add' component={Add}/>
+                    <Route path={'/bianji/:clockId'+"&&"+":dengluId"} component={Bianji}/>
 
                     {/* <Route  path='/' component={AppTab} exact/> */}
                     <Route path='/follow/:userId' component={AppGZ}/>

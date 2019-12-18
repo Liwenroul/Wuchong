@@ -130,7 +130,7 @@ class ClockIn extends Component {
                                 <div  style={{width:"70px",height:"70px",marginLeft:"28%",marginBottom:"15px",border:"3px dashed gray",borderRadius:"50%"}}>
                                     <img src={item.clockImg} style={{ width: '60px', height: '60px',borderRadius:'50%' }} alt=""/>
                                 </div>
-                                <div style={{textAlign:'center'}}><button className='btn' onClick={()=>(this.daka(item.clockId))}>{item.clockName}</button><span style={{marginLeft:'10px'}} id='clock'>{item.clockNum}</span><button className='btn' onClick={()=>(this.bianji(item.clockId))}><Link to='/bianji' style={{color:'white'}}>编辑</Link></button></div>
+                                <div style={{textAlign:'center'}}><button className='btn' onClick={()=>(this.daka(item.clockId))}>{item.clockName}</button><span style={{marginLeft:'10px'}} id='clock'>{item.clockNum}</span><button className='btn' onClick={()=>(this.bianji(item.clockId))}><Link to={'/bianji/'+item.clockId+"&&"+this.state.dengluId} style={{color:'white'}}>编辑</Link></button></div>
                                 
                             </div> 
                             

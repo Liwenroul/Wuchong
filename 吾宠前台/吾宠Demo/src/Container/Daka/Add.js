@@ -23,11 +23,13 @@ function getBase64(img, callback) {
 export default class Add extends Component {
     constructor(props){
         super(props);
+        console.log(this.props.location.pathname.split("/"));
+        let arr=this.props.location.pathname.split("/");
         this.state={
           clockName:"",
           clockNum:"",
           clockTime:"",
-          userId:this.props.match.params.userId,
+          userId:arr[2],
           clockImg:"",
           clockCycle:"",
           
