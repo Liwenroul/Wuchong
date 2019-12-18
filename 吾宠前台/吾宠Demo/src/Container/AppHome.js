@@ -144,7 +144,7 @@
                             <div>
                                 {
                                     this.state.data.map((item)=>(
-                                        <div key={item.id} style={{height: '400px',background:'#eee'}}>
+                                        <div key={item.id} style={{height: '520px',background:'#eee',borderTop:'1px dashed rgb(29,174,169)'}}>
                                             <img
                                                 src={item.dynamicImg}
                                                 alt=""
