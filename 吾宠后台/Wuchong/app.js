@@ -720,7 +720,7 @@ app.post('/delguanzhu',(req,res)=>{
 app.post('/chatVal',(req,res)=>{
   let data=req.body;
   console.log(data);
-  let time=new Date().toLocaleString();
+  let time=new Date().getTime();
   con.query('insert into chat(chatId,sendId,acceptId,content) values(?,?,?,?)',[time,data.sendId,data.acceptId,data.content],function(err,result){
     if(err){
           console.log(err);
@@ -750,7 +750,17 @@ app.post('/clockdaka',(req,res)=>{
     console.log(result)
   })
 })
-
+// app.post('/time',(req,res)=>{
+//   let data=req.body;
+//   console.log(data);
+//   con.query('insert into chat(nowTime) values(?)',[data.nowTime],function(err,result){
+//     if(err){
+//           console.log(err);
+//       }
+//         console.log(result);
+//         res.json(result); 
+//   })
+// })
 
 
 // error handler

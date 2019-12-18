@@ -33,7 +33,9 @@ class AppGuanzhu extends Component {
             display1:'none',
             userName2:'',
             userAvatar2:'',
-            userId2:''
+            userId2:'',
+            time:"",
+            arr:[]
         }
     }
     // add=()=>{
@@ -157,7 +159,46 @@ class AppGuanzhu extends Component {
     }
     componentWillUnmount(){
         document.removeEventListener("keydown", this.onKeyDown)
-      }
+        // fetch('/guanzhu')
+        //     .then((res)=>res.json())
+        //     .then((res)=>{
+        //         console.log(res);
+        //         for(var i = 0;i<res.length;i++){
+        //             if(res[i].userId == this.state.userId){
+        //                 this.setState({
+        //                     guanzhuId:[...this.state.guanzhuId,res[i].guanzhuId]
+        //                 })
+        //             }
+        //         }
+        // })
+        // fetch('/userinfo')
+        //     .then((res)=>res.json())
+        //     .then((res)=>{
+        //         // console.log(res);
+        //         for(var i=0;i<this.state.concern.length;i++){
+        //             for(var j=0;j<res.length;j++){
+        //                 if(res[j].userId == this.state.concern[i]){
+        //                     this.setState({
+        //                         userId1:[...this.state.userId1,res[j].userId],
+        //                     })
+        //                 }
+        //             }
+        //         }
+        //         console.log("userId:",this.state.userId);
+        //     })
+        // fetch('/chat')
+        // .then((res)=>res.json())
+        // .then((res)=>{
+        //     for(var i =res.length-1;i>=0;i--){
+        //         if(res[i].acceptId==this.props.match.params.userId){
+        //             this.setState({
+        //                 arr:[...this.state.arr,res[i]]
+        //             })
+        //         }
+        //     }
+        //     console.log(arr);
+        // })
+    }
     render() {
         let {url} = this.props.match;
         return (

@@ -46,7 +46,7 @@ CREATE TABLE `activeinfo` (
 
 /*Data for the table `activeinfo` */
 
-insert  into `activeinfo`(`activeId`) values ('1');
+insert  into `activeinfo`(`activeId`) values ('2');
 
 /*Table structure for table `chat` */
 
@@ -61,6 +61,8 @@ CREATE TABLE `chat` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*Data for the table `chat` */
+
+insert  into `chat`(`chatId`,`sendId`,`acceptId`,`content`) values ('2019-12-18 6:49:54 P','2','4','你好'),('2019-12-18 6:51:20 P','4','2','你好');
 
 /*Table structure for table `city` */
 
@@ -85,7 +87,7 @@ CREATE TABLE `clockbianji` (
 
 /*Data for the table `clockbianji` */
 
-insert  into `clockbianji`(`clockId`) values ('4');
+insert  into `clockbianji`(`clockId`) values ('wuchong23828');
 
 /*Table structure for table `clockin` */
 
@@ -99,7 +101,7 @@ CREATE TABLE `clockin` (
   `userId` varchar(20) NOT NULL,
   `clockImg` varchar(100) DEFAULT NULL,
   `clockCycle` varchar(20) DEFAULT NULL,
-  `clockedNum` varchar(20) NOT NULL,
+  `clockedNum` int(20) NOT NULL,
   PRIMARY KEY (`clockId`),
   UNIQUE KEY `PK_ClockIn` (`clockId`),
   KEY `FK_ClockIn_UserInfo` (`userId`),
@@ -108,7 +110,7 @@ CREATE TABLE `clockin` (
 
 /*Data for the table `clockin` */
 
-insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`,`clockedNum`) values ('1','美容',3,'9：00','1','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日','5'),('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日','3'),('3','美容',3,'14:00','3','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日','4'),('4','美容',3,'15:00','4','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日','1');
+insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`,`clockedNum`) values ('1','美容',3,'9：00','1','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日',5),('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日',3),('3','美容',3,'14:00','3','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日',4),('4','美容a',0,'','4','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','',4),('wuchong23828','d o',0,'','4','https://liwenroul.github.io/Wuchong/img/avatar/avatar2.jpeg','',1);
 
 /*Table structure for table `denglu` */
 
@@ -121,7 +123,7 @@ CREATE TABLE `denglu` (
 
 /*Data for the table `denglu` */
 
-insert  into `denglu`(`userId`) values ('3'),('4');
+insert  into `denglu`(`userId`) values ('2'),('3'),('4');
 
 /*Table structure for table `dingwei` */
 
@@ -168,7 +170,7 @@ CREATE TABLE `editpet` (
 
 /*Data for the table `editpet` */
 
-insert  into `editpet`(`petId`) values ('1');
+insert  into `editpet`(`petId`) values ('pet910828');
 
 /*Table structure for table `guanzhu` */
 
