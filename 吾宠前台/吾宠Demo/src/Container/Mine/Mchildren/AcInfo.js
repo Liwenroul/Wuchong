@@ -29,6 +29,7 @@ export default class AcInfo extends React.Component{
         fetch("/signActive")
         .then((res)=>res.json())
         .then((res)=>{
+            console.log(res);
             for(var i=0;i<res.length;i++){
                 if(res[i].activeId==this.state.acInfoId){
                     this.setState({

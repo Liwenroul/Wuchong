@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 import { Modal } from 'antd';
 import { Grid , Button, WhiteSpace, WingBlank} from 'antd-mobile';
 const operation = Modal.operation;
@@ -7,10 +7,10 @@ const operation = Modal.operation;
 let data =[];
 const { confirm } = Modal;
 
-export default class Wochongxiu extends Component {
+class Wochongxiu extends Component {
     constructor(props){
         super(props);
-        console.log(props);
+        console.log(this.props);
         this.state={
             dengluId:this.props.match.params.dengluId,
             dynamicData:[],
@@ -31,7 +31,20 @@ export default class Wochongxiu extends Component {
                  .then( data => {
                      console.log(data);
                  });
-                 window.location="/wochongxiu"+this.state.dengluId;
+        //          fetch("/dynamic")
+        // .then((res)=>res.json())
+        // .then((res)=>{
+        //     for(var i=0;i<res.length;i++){
+        //         console.log(res[i].userId);
+        //         if(res[i].userId==this.state.dengluId){
+        //             this.setState({
+        //                 dynamicData:[...this.state.dynamicData,res[i]]
+        //             })
+        //         }
+        //     }
+        //     console.log(this.state.dynamicData);
+        // })
+                //  this.props.history.push("/wochongxiu/"+this.state.dengluId);
             },
             onCancel() {
               console.log('Cancel');
@@ -81,3 +94,5 @@ export default class Wochongxiu extends Component {
         )
     }
 }
+Wochongxiu =withRouter(Wochongxiu);
+export default Wochongxiu;

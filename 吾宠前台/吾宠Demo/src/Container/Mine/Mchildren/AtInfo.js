@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import { NavBar, Icon, Tabs,Carousel } from 'antd-mobile';
-// import img from '../../img/images/tou.png'
-// import { Grid } from 'antd-mobile';
-// import Chat from './chat'
 import '../../Guanzhu/guanzhu.css';
 
-// const data = Array.from(new Array(2)).map((_val, i) => ({
-//   icon: require('../../img/images/1.jpg'),
-//   text: `name${i}`,
-// }));
+
 
 const data1 = Array.from(new Array(2)).map(() => ({
   icon: 'https://gw.alipayobjects.com/zos/rmsportal/WXoqXTHrSnRcUwEaQgXJ.png',
@@ -18,6 +12,7 @@ const data1 = Array.from(new Array(2)).map(() => ({
 export default class AtInfo extends Component {
     constructor(props){
         super(props);
+        console.log(this.props);
         let start = this.props.location.search.indexOf("&&")
         console.log(this.props.location.search.slice(parseInt(start)+11));
         this.state={
@@ -48,14 +43,6 @@ export default class AtInfo extends Component {
                 this.setState({
                     points:'已关注'
                 })
-
-                // fetch('/denglu')
-                // .then((res)=>res.json())
-                // .then((res)=>{
-                //     // console.log(res)
-                //     this.setState({
-                //         ID:res[0].userId
-                //     })
                     const registerValue = {"Id":this.state.id,
                     "guanzhuId": this.state.userId,
                     "userId": this.state.ID}
@@ -70,22 +57,12 @@ export default class AtInfo extends Component {
                         .then( data => {
                             console.log(data);
                         });
-                        // }
-                    // this.props.history.push('/guanzhu');
-                    // })
                 
             }
             else{
                 this.setState({
                     points:'关注'
                 })
-                fetch('/denglu')
-                .then((res)=>res.json())
-                .then((res)=>{
-                    // console.log(res)
-                    this.setState({
-                        ID:res[0].userId
-                    })
                     fetch('guanzhu')
                     .then((res)=>res.json())
                     .then((res)=>{
@@ -110,21 +87,15 @@ export default class AtInfo extends Component {
                             .then( data => {
                                 console.log(data);
                             });
-                            // }
-                        // this.props.history.push('/guanzhu');
+                     
                     })
                     
-                })
             }
         })
     }
     componentDidMount(){
-        // let page = this.props.match.params.id;
-        // let id = this.props.match.params.userId;
-        // let id=1;
-        let ip0 =this.props.location.search;
-        let id = ip0.slice(8);
-        // console.log("ip:",ip);
+        let ip0 =this.props.location.search.split("&&");
+        let id = ip0[0].slice(8);
         fetch('/userinfo')
             .then((res)=>res.json())
             .then((res)=>{
