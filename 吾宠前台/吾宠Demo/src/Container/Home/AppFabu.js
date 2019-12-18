@@ -162,13 +162,8 @@ export default class AppFabu extends Component {
                 {/* <input type="submit" value="发布" /> */}
                 </form>
                 
-<<<<<<< Updated upstream
                 {/* <Route path='/weizhi' component={AppWeizhi} /> */}
                 {/* <Route  path='/tab' component={AppTab}/> */}
-=======
-                <Route path='/weizhi' component={AppWeizhi} />
-                <Route  path='/tab' component={Apptab}/>
->>>>>>> Stashed changes
             </div>
         )
     }

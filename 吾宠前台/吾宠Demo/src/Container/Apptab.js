@@ -18,7 +18,6 @@ export default class Tab extends Component {
       dengluId:this.props.match.params.userId
     };
   }
-<<<<<<< Updated upstream
   componentDidMount(){
     this.setState({
       selectedTab: this.state.selectedTab,
@@ -63,102 +62,101 @@ export default class Tab extends Component {
     );
   }
 
-  render() {
-    return (
-      <div style={ { position: 'fixed', height: '100%', width: '100%', top: 0 } }>
-        <TabBar
-          unselectedTintColor="#949494"
-          tintColor="rgb(29,174,169)"
-          barTintColor="white"
-        >
-          <TabBar.Item
-            title="首页"
-            key="Life"
-            icon={<i className='iconfont icon-shouye2'></i>
-            }
-            selectedIcon={//选中
-              <i className='iconfont icon-shouye2' style={{fontSize:22}}></i>
-            }
-            selected={this.state.selectedTab === 'home'}//判断点的谁
-            onPress={() => {
-              this.setState({
-                selectedTab: 'home',
-              });
-            }}
-          >
-          <AppHome dengluId={this.state.dengluId}/>
-          </TabBar.Item>
-          <TabBar.Item
-             icon={<i className='iconfont icon-chongwuwanju'></i>
-            }
-            selectedIcon={//选中
-              <i className='iconfont icon-chongwuwanju' style={{fontSize:22}}></i>
-            }
-            title="娱乐"
-            key="Koubei"
-            selected={this.state.selectedTab === 'yule'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'yule',
-              });
-            }}
-          >
-            <AppMe dengluId={this.state.dengluId}/>
-          </TabBar.Item>
-          <TabBar.Item
-            icon={<i className='iconfont icon-chongwu'></i>
-          }
-          selectedIcon={//选中
-            <i className='iconfont icon-chongwu' style={{fontSize:22}}></i>
-          }
-            title="打卡"
-            key="daka"
-            selected={this.state.selectedTab === 'daka'}
-            onPress={() => {
-              console.log('打卡')
-              this.setState({
-                selectedTab: 'daka',
-              });
-            }}
-          >
-            <ClockIn/>
-          </TabBar.Item>
-          <TabBar.Item
-            icon={<i className='iconfont icon-guanzhu'></i>
-          }
-          selectedIcon={//选中
-            <i className='iconfont icon-guanzhu' style={{fontSize:22}}></i>
-          }
-            title="关注"
-            key="Friend"
-            selected={this.state.selectedTab === 'guanzhu'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'guanzhu',
-              });
-            }}
-          >
-          <AppGuanzhu/>
-          </TabBar.Item>
-          <TabBar.Item
-            icon={<i className='iconfont icon-wode'></i>
-          }
-          selectedIcon={//选中
-            <i className='iconfont icon-wode' style={{fontSize:22}}></i>
-          }
-            title="我的"
-            key="my"
-            selected={this.state.selectedTab === 'wode'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'wode',
-              });
-            }}
-          >
-            <Mine dengluId={this.state.dengluId}/>
-          </TabBar.Item>
-        </TabBar>
-=======
+  // render() {
+  //   return (
+      // <div style={ { position: 'fixed', height: '100%', width: '100%', top: 0 } }>
+      //   <TabBar
+      //     unselectedTintColor="#949494"
+      //     tintColor="rgb(29,174,169)"
+      //     barTintColor="white"
+      //   >
+      //     <TabBar.Item
+      //       title="首页"
+      //       key="Life"
+      //       icon={<i className='iconfont icon-shouye2'></i>
+      //       }
+      //       selectedIcon={//选中
+      //         <i className='iconfont icon-shouye2' style={{fontSize:22}}></i>
+      //       }
+      //       selected={this.state.selectedTab === 'home'}//判断点的谁
+      //       onPress={() => {
+      //         this.setState({
+      //           selectedTab: 'home',
+      //         });
+      //       }}
+      //     >
+      //     <AppHome dengluId={this.state.dengluId}/>
+      //     </TabBar.Item>
+      //     <TabBar.Item
+      //        icon={<i className='iconfont icon-chongwuwanju'></i>
+      //       }
+      //       selectedIcon={//选中
+      //         <i className='iconfont icon-chongwuwanju' style={{fontSize:22}}></i>
+      //       }
+      //       title="娱乐"
+      //       key="Koubei"
+      //       selected={this.state.selectedTab === 'yule'}
+      //       onPress={() => {
+      //         this.setState({
+      //           selectedTab: 'yule',
+      //         });
+      //       }}
+      //     >
+      //       <AppMe dengluId={this.state.dengluId}/>
+      //     </TabBar.Item>
+      //     <TabBar.Item
+      //       icon={<i className='iconfont icon-chongwu'></i>
+      //     }
+      //     selectedIcon={//选中
+      //       <i className='iconfont icon-chongwu' style={{fontSize:22}}></i>
+      //     }
+      //       title="打卡"
+      //       key="daka"
+      //       selected={this.state.selectedTab === 'daka'}
+      //       onPress={() => {
+      //         console.log('打卡')
+      //         this.setState({
+      //           selectedTab: 'daka',
+      //         });
+      //       }}
+      //     >
+      //       <ClockIn/>
+      //     </TabBar.Item>
+      //     <TabBar.Item
+      //       icon={<i className='iconfont icon-guanzhu'></i>
+      //     }
+      //     selectedIcon={//选中
+      //       <i className='iconfont icon-guanzhu' style={{fontSize:22}}></i>
+      //     }
+      //       title="关注"
+      //       key="Friend"
+      //       selected={this.state.selectedTab === 'guanzhu'}
+      //       onPress={() => {
+      //         this.setState({
+      //           selectedTab: 'guanzhu',
+      //         });
+      //       }}
+      //     >
+      //     <AppGuanzhu/>
+      //     </TabBar.Item>
+      //     <TabBar.Item
+      //       icon={<i className='iconfont icon-wode'></i>
+      //     }
+      //     selectedIcon={//选中
+      //       <i className='iconfont icon-wode' style={{fontSize:22}}></i>
+      //     }
+      //       title="我的"
+      //       key="my"
+      //       selected={this.state.selectedTab === 'wode'}
+      //       onPress={() => {
+      //         this.setState({
+      //           selectedTab: 'wode',
+      //         });
+      //       }}
+      //     >
+      //       <Mine dengluId={this.state.dengluId}/>
+      //     </TabBar.Item>
+      //   </TabBar>
  
   render() {
     return (
@@ -195,7 +193,6 @@ export default class Tab extends Component {
                 </li></Link>
             </ul>
         </div>
->>>>>>> Stashed changes
       </div>
     );
   }
