@@ -27,10 +27,10 @@ class ClockIn extends Component {
         }
     }
     add = () => {
-        this.props.history.push('/add');
+        this.props.history.push('/add/'+this.state.dengluId);
     }
     add2 = () => {
-        this.props.history.push('/daka');
+        this.props.history.push('/tab'+this.state.dengluId);
     }
     // bianji = () => {
     //     this.props.history.push('/bianji');
@@ -141,32 +141,32 @@ class ClockIn extends Component {
                 }
             </div>
 
-<div style={{width:'100%',height:'60px',display:'inline-block',position:'fixed',bottom:0,backgroundColor:'#fff',}}>
-                <div style={{float:'left'}}>
+<div style={{width:'100%',height:'60px',display:'inline-block',position:'fixed',bottom:0,left:0,backgroundColor:'#fff',}}>
+                <div style={{float:'left',width:'20%',paddingLeft:'20px'}}>
                     <Link to={'/tab'+this.state.dengluId}>
                         <i className='iconfont icon-shouye2' style={{fontSize:22,}}></i>
                         <p >首页</p>
                     </Link>
                 </div>
-                <div style={{float:'left'}}>
+                <div style={{float:'left',width:'20%',paddingLeft:'20px'}}>
                     <Link to={'/activity/'+this.state.dengluId}>
                         <i className='iconfont icon-chongwuwanju' style={{fontSize:22,}}></i>
                         <p >娱乐</p>
                     </Link>
                 </div>
-                <div style={{float:'left'}}>
+                <div style={{float:'left',width:'20%',paddingLeft:'20px'}}>
                     <Link to={'/clockin/'+this.state.dengluId}>
                         <i className='iconfont icon-chongwu' style={{fontSize:22,}}></i>
                         <p >打卡</p>
                     </Link>
                 </div>
-                <div style={{float:'left'}}>
+                <div style={{float:'left',width:'20%',paddingLeft:'20px'}}>
                     <Link to={'/follow/'+this.state.dengluId}>
                         <i className='iconfont icon-guanzhu' style={{fontSize:22,}}></i>
                         <p >关注</p>
                     </Link>
                 </div>
-                <div style={{float:'left'}}>
+                <div style={{float:'left',width:'20%',paddingLeft:'20px'}}>
                     <Link to={'/mine/'+this.state.dengluId}>
                         <i className='iconfont icon-wode' style={{fontSize:22,}}></i>
                         <p >我的</p>
