@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.08 (64 bit)
-MySQL - 5.7.14 : Database - wuchong
+MySQL - 5.7.1-m11 : Database - wuchong
 *********************************************************************
 */
 
@@ -99,6 +99,7 @@ CREATE TABLE `clockin` (
   `userId` varchar(20) NOT NULL,
   `clockImg` varchar(100) DEFAULT NULL,
   `clockCycle` varchar(20) DEFAULT NULL,
+  `clockedNum` varchar(20) NOT NULL,
   PRIMARY KEY (`clockId`),
   UNIQUE KEY `PK_ClockIn` (`clockId`),
   KEY `FK_ClockIn_UserInfo` (`userId`),
@@ -107,7 +108,7 @@ CREATE TABLE `clockin` (
 
 /*Data for the table `clockin` */
 
-insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`) values ('1','美容',3,'9：00','1','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('3','美容',3,'14:00','3','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('4','美容',3,'15:00','4','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日');
+insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`,`clockedNum`) values ('1','美容',3,'9：00','1','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日','5'),('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日','3'),('3','美容',3,'14:00','3','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日','4'),('4','美容',3,'15:00','4','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日','1');
 
 /*Table structure for table `denglu` */
 
