@@ -57,7 +57,7 @@ export default class Play extends Component {
                 .then((res)=>{
                     // console.log(res)
                     this.setState({
-                        ID:this.props.match.params.userId,
+                        ID:this.props.location.search.slice(20),
                         id:parseInt(Math.random()*1000)
                     })
                     console.log("this.id:",this.state.id,"this.ID:",this.state.ID)
@@ -90,7 +90,7 @@ export default class Play extends Component {
                 .then((res)=>{
                     // console.log(res)
                     this.setState({
-                        ID:this.props.match.params.userId,
+                        ID:this.props.location.search.slice(20),
                     })
                     let ip0 =this.props.location.search;
                     let ip = ip0.slice(8,9);//截取当前页面的userID
