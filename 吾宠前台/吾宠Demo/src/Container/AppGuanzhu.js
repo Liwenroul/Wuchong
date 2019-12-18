@@ -33,7 +33,8 @@ class AppGuanzhu extends Component {
             display1:'none',
             userName2:'',
             userAvatar2:'',
-            userId2:''
+            userId2:'',
+            dengluId:this.props.match.params.userId
         }
     }
     // add=()=>{
@@ -49,7 +50,7 @@ class AppGuanzhu extends Component {
         this.manualFocusInst.focus();
       };
       change2 = () => {
-        this.props.history.push('/tab'+this.props.match.params.userId)
+        this.props.history.push('/tab'+this.state.dengluId)
       }
       handleChange =(e)=>{
         this.setState({val:e.target.value});
@@ -85,24 +86,18 @@ class AppGuanzhu extends Component {
         }
       }
       componentDidMount(){
-        //   console.log("网址URL",this.props.match.url)
         document.addEventListener("keydown", this.onKeyDown);
         // let page = this.props.match.params.id;
         // let id = 1;
         //获取登录的ID
-        // fetch('/denglu')
-        //     .then((res)=>res.json())
-        //     .then((res)=>{
-        //         console.log(res)
-        //         this.setState({
-        //             userId:res[0].userId
-        //         })
-        //     })
-        let dengluId = this.props.match.params.userId
-        this.setState({
-            userId:dengluId
-        })
-        // console.log(this.state.userId)
+        fetch('/denglu')
+            .then((res)=>res.json())
+            .then((res)=>{
+                console.log(res)
+                this.setState({
+                    userId:res[0].userId
+                })
+            })
             //获取关注的人的guanzhuID
             fetch('/guanzhu')
             .then((res)=>res.json())
@@ -115,7 +110,7 @@ class AppGuanzhu extends Component {
                         })
                     }
                 }
-                // console.log(this.state.guanzhuId)
+                console.log(this.state.guanzhuId)
                 for(var i = 0 ; i <this.state.guanzhuId.length;i++){
                     for(var j =0;j<res.length;j++){
                         if(res[j].guanzhuId == this.state.userId && res[j].userId == this.state.guanzhuId[i]){
@@ -126,20 +121,20 @@ class AppGuanzhu extends Component {
                         }
                     }
                 }
-                // console.log("concern:",this.state.concern)
-                // console.log("关注ID:",this.state.concern);
+                console.log("concern:",this.state.concern)
+                console.log("关注ID:",this.state.concern);
                 for(var i =0;i<this.state.concern.length;i++){
                     this.setState({
                         num:[...this.state.num,i]
                     })
                     
                 }
-                // console.log("num:",this.state.num);
+                console.log("num:",this.state.num);
             })
             fetch('/userinfo')
             .then((res)=>res.json())
             .then((res)=>{
-                // console.log(res);
+                console.log(res);
                 for(var i=0;i<this.state.concern.length;i++){
                     for(var j=0;j<res.length;j++){
                         if(res[j].userId == this.state.concern[i]){
@@ -161,6 +156,7 @@ class AppGuanzhu extends Component {
     render() {
         let {url} = this.props.match;
         return (
+            
             <div>
                 <NavBar
                     style={{width:'100%',height:50,backgroundColor:'rgb(29,174,169)',color:'#fff',fontSize:'20px'}}
@@ -190,14 +186,14 @@ class AppGuanzhu extends Component {
                     style={{display: this.state.display1}}
                     >
                         <div className='searchVal'>
-                            <Link to={url+`/chat?userId:`+this.state.userId2+"&&dengluId:"+this.props.match.params.userId}>
+                            <Link to={`/chat?userId:`+this.state.userId2}>
                             <img src={this.state.userAvatar2} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}}/>
                             </Link>
                             <div>
                                 <Item extra={''}>{this.state.userName2}</Item>
                                 <Item extra={'2分钟前'}>一条未读消息</Item>
                             </div>
-                            <Route path={url+'/chat?userId:userId'+"&&dengluId:"+this.props.match.params.userId} component={Chat}/>
+                            <Route path={url+'?userId:userId'} component={Chat}/>
                         </div>
                     </List>
 
@@ -213,14 +209,14 @@ class AppGuanzhu extends Component {
                             this.state.num.map((i)=>{
                                 return(
                                     <div>
-                                        <Link to={`/chat?userId:`+this.state.userId1[i]+"&&dengluId:"+this.props.match.params.userId}>
+                                        <Link to={`/chat?userId:`+this.state.userId1[i]}>
                                         <img src={this.state.userAvatar1[i]} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}}/>
                                         </Link>
                                         <div>
                                             <Item extra={''}>{this.state.userName1[i]}</Item>
                                             <Item extra={'2分钟前'}>一条未读消息</Item>
                                         </div>
-                                        <Route path={url+'/chat?userId:userId&&dengluId:dengluId'} component={Chat}/>
+                                        <Route path={url+'?userId:userId'} component={Chat}/>
                                     </div>
                                 )
                         
@@ -230,6 +226,37 @@ class AppGuanzhu extends Component {
                     {/* <Route exact path='/chat' component={Chat}/> */}
                 </div>
             </div>
+            <div style={{width:'100%',height:'60px',display:'inline-block',position:'fixed',bottom:0,backgroundColor:'#fff',}}>
+                <div style={{float:'left'}}>
+                    <Link to={'/tab'+this.state.dengluId}>
+                        <i className='iconfont icon-shouye2' style={{fontSize:22,}}></i>
+                        <p >首页</p>
+                    </Link>
+                </div>
+                <div style={{float:'left'}}>
+                    <Link to={'/activity/'+this.state.dengluId}>
+                        <i className='iconfont icon-chongwuwanju' style={{fontSize:22,}}></i>
+                        <p >娱乐</p>
+                    </Link>
+                </div>
+                <div style={{float:'left'}}>
+                    <Link to={'/clockin/'+this.state.dengluId}>
+                        <i className='iconfont icon-chongwu' style={{fontSize:22,}}></i>
+                        <p >打卡</p>
+                    </Link>
+                </div>
+                <div style={{float:'left'}}>
+                    <Link to={'/follow/'+this.state.dengluId}>
+                        <i className='iconfont icon-guanzhu' style={{fontSize:22,}}></i>
+                        <p >关注</p>
+                    </Link>
+                </div>
+                <div style={{float:'left'}}>
+                    <Link to={'/mine/'+this.state.dengluId}>
+                        <i className='iconfont icon-wode' style={{fontSize:22,}}></i>
+                        <p >我的</p>
+                    </Link>
+                </div></div>
         </div>
         )
     }

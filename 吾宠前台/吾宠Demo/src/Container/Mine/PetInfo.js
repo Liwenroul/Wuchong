@@ -45,7 +45,7 @@ export default class PetInfo extends Component {
             <div>
                 
                 <div style={{width:'100%',height:50,backgroundColor:'rgb(29,174,169)',paddingTop:10,color:'#fff',fontSize:'20px'}}>
-                    <Link to='/mine'><i className='iconfont icon-back' style={{color:"#fff"}}></i></Link>
+                    <Link to={'/mine/'+this.state.dengluId}><i className='iconfont icon-back' style={{color:"#fff"}}></i></Link>
                     <span style={{marginLeft:140}}>我的宠物</span>
                     <Link to={'/addpet/'+this.state.dengluId}><i className='iconfont icon-haibijiahao' style={{color:"#fff",float:'right',marginRight:15}}></i></Link>
                 </div>

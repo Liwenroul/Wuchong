@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router,Route,Redirect,Switch} from 'react-router-dom';
 import Apptab from './Container/Apptab';
-
+import AppHome from './Container/AppHome';
 import AppStart from './Container/AppStart';
 import AppFabu from './Container/Home/AppFabu';
 import AppWeizhi from './Container/Home/AppWeizhi';
@@ -48,36 +48,35 @@ export default class App extends Component {
         return (
             <Router>
                 <div>
-                    <Route path='/' component={AppStart} exact/>
-                    {/* <Route path='/home' component={Apptab}/> */}
+                <Route path='/' component={AppStart} exact/>
+                    <Route path='/tab:userId' component={AppHome}/>
                     <Route path='/login' component={AppLogin}/>
-                    <Route  path='/tab/:userId' component={Apptab}/>
+                    {/* <Route  path='/tab:userId' component={AppHome}/> */}
                     <Route  path='/zhuce' component={AppZhuce} />
                     <Route path='/wangji' component={AppForget} />
                     <Route  path='/petxinxi' component={AppPetXinxi} />
                     <Route path='/fabu:userId' component={AppFabu}/>
                     <Route path='/weizhi:userId' component={AppWeizhi} />
 
-                    <Route path='/all' component={Apptab}/>
-                    {/* <Route path='/activity/:dengluId' component={AppMe}/> */}
+                    {/* <Route path='/all' component={Apptab}/> */}
+                    <Route path='/activity/:dengluId' component={AppMe}/>
                     <Route path='/detail1/:dengluId' component={Detail1}/>
                     {/* <Route path='/signup/:activeId' component={Signup}/> */}
                     <Route path='/signup/:dengluId' component={Signup}/>
                     <Route path='/position'  component={Position}/>
 
-                    <Route path='/clockin' component={ClockIn}/>
-                    <Route path='/daka' component={Apptab}/>
+                    <Route path='/clockin/:userId' component={ClockIn}/>
+                    <Route path='/daka' component={ClockIn}/>
                     <Route path='/add' component={Add}/>
                     <Route path='/bianji' component={Bianji}/>
 
-                    
                     {/* <Route  path='/' component={AppTab} exact/> */}
-                    <Route path='/follow' component={AppGZ}/>
+                    <Route path='/follow/:userId' component={AppGZ}/>
                     <Route path ='/chat' component={Chat}/>
                     <Route path ='/play' component={Play}/>
 
                     {/* <Route path='/' component={Apptab} exact/> */}
-                    <Route path="/wode" component={Apptab}/>
+                    <Route path="/wode" component={Mine}/>
                     <Route path='/mine/:dengluId' component={Mine}/>
                     <Route path='/personalInfo/:dengluId' component={PersonalInfo}/>
                     <Route path='/petInfo/:dengluId' component={PetInfo}/>

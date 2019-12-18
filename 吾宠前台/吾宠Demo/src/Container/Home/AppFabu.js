@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { Icon} from 'antd-mobile';
 import {Link,Route} from 'react-router-dom'
 import AppWeizhi from './AppWeizhi';
-import Apptab from '../Apptab';
+import AppTab from '../Apptab';
 import { Upload, message } from 'antd';
 
 function getBase64(img, callback) {

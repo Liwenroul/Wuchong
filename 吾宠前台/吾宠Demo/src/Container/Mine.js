@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { List } from 'antd-mobile';
 // import {Consumer} from './Context';
 import { Avatar,Upload, Icon, message } from 'antd';
-import {withRouter} from 'react-router-dom';
+import {withRouter,Link} from 'react-router-dom';
 import UploadImg from './Mine/UploadImg';
 // import M1 from './Mine/Component/M1';
 
@@ -14,9 +14,8 @@ class Mine extends Component {
     constructor(props){
         super(props);
         console.log(this.props);
-        console.log(this.props.dengluId);
         this.state={
-            dengluId:this.props.dengluId,
+            dengluId:this.props.match.params.dengluId,
             imageUrl:"",
             data:[]
         }
@@ -118,7 +117,39 @@ class Mine extends Component {
                     >
                      设置
                     </Item>
-                </List>  
+                </List> 
+                <div style={{width:'100%',height:'60px',display:'inline-block',position:'fixed',bottom:0,backgroundColor:'#fff',}}>
+                <div style={{float:'left'}}>
+                    <Link to={'/tab'+this.state.dengluId}>
+                        <i className='iconfont icon-shouye2' style={{fontSize:22,}}></i>
+                        <p >首页</p>
+                    </Link>
+                </div>
+                <div style={{float:'left'}}>
+                    <Link to={'/activity/'+this.state.dengluId}>
+                        <i className='iconfont icon-chongwuwanju' style={{fontSize:22,}}></i>
+                        <p >娱乐</p>
+                    </Link>
+                </div>
+                <div style={{float:'left'}}>
+                    <Link to={'/clockin/'+this.state.dengluId}>
+                        <i className='iconfont icon-chongwu' style={{fontSize:22,}}></i>
+                        <p >打卡</p>
+                    </Link>
+                </div>
+                <div style={{float:'left'}}>
+                    <Link to={'/follow/'+this.state.dengluId}>
+                        <i className='iconfont icon-guanzhu' style={{fontSize:22,}}></i>
+                        <p >关注</p>
+                    </Link>
+                </div>
+                <div style={{float:'left'}}>
+                    <Link to={'/mine/'+this.state.dengluId}>
+                        <i className='iconfont icon-wode' style={{fontSize:22,}}></i>
+                        <p >我的</p>
+                    </Link>
+                </div>
+                </div> 
             </div>
         )
     }

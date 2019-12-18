@@ -12,23 +12,42 @@ export default class AppMe extends Component {
         super(props);
         this.state={
             city:'石家庄',
-            dengluId:'',
-            dengluId1:''
+            data:[],
+            dengluId:this.props.match.params.dengluId
         }
+        console.log(this.props)
     }
     componentDidMount(){
         fetch('/city').then((res)=>res.json()).then((res)=>{
             this.setState({
                 city:res[0].cityName
             })
-        });
-        this.setState({
-            dengluId:this.props.dengluId
+        });    
+        let url='/active';
+        fetch(url)
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res);
+            this.setState({
+                data:res
+            })
         })
-        // console.log(this.props.dengluId);
-        console.log(this.state.dengluId)
-        // console.log(this.props.match.params.dengluId);     
+        
     }
+    acInfo=(activeId)=>{
+        const registerValue = {"acInfoId":activeId}
+        fetch('/activeinfo', {
+            method: "POST",
+            headers: {
+                "Content-type":"application/json;charset=utf-8",
+            },
+            body:JSON.stringify(registerValue) ,
+       }).then( res => res.text())
+         .then( data => {
+             console.log(data);
+         });
+    }
+        
     render() {
         return (
             <div>
@@ -44,10 +63,56 @@ export default class AppMe extends Component {
                     </Link>
                 </NavBar>
                 <div className='container'>
-                    <ContentAc userId={this.state.dengluId}/>
+                <div>
+                {
+                    this.state.data.map((item)=>(
+                        <div onClick={()=>this.acInfo(item.activeId)} key={item.activeId} style={{height:'150px'}}>
+                            <WhiteSpace size="lg" />
+                                <Link to="/detail1">
+                                    <Flex>
+                                        <Flex.Item><img src={item.acImg} style={{width:'100%',height:'130px',borderRadius:'10px'}}/>
+                                        <h1 style={{color:'white',position:'relative',top:'-80px',left:'20px'}}>{item.activeName}</h1>
+                                        </Flex.Item>
+                                    </Flex>
+                                </Link>
+                        </div>
+                    ))
+                }
+            </div>
                     {/* <Route path='/detail1/:activeId' component={Detail1}/> */}
                 </div>
-                
+                <div style={{width:'100%',height:'60px',display:'inline-block',position:'fixed',bottom:0,backgroundColor:'#fff',}}>
+                <div style={{float:'left',width:'20%',paddingLeft:'20px'}}>
+                    <Link to={'/tab'+this.state.dengluId}>
+                        <i className='iconfont icon-shouye2' style={{fontSize:22,}}></i>
+                        <p >首页</p>
+                    </Link>
+                </div>
+                <div style={{float:'left',width:'20%',paddingLeft:'10px'}}>
+                    <Link to={'/activity/'+this.state.dengluId}>
+                        <i className='iconfont icon-chongwuwanju' style={{fontSize:22,}}></i>
+                        <p >娱乐</p>
+                    </Link>
+                </div>
+                <div style={{float:'left',width:'20%',paddingLeft:'10px'}}>
+                    <Link to={'/clockin/'+this.state.dengluId}>
+                        <i className='iconfont icon-chongwu' style={{fontSize:22,}}></i>
+                        <p >打卡</p>
+                    </Link>
+                </div>
+                <div style={{float:'left',width:'20%',paddingLeft:'10px'}}>
+                    <Link to={'/follow/'+this.state.dengluId}>
+                        <i className='iconfont icon-guanzhu' style={{fontSize:22,}}></i>
+                        <p >关注</p>
+                    </Link>
+                </div>
+                <div style={{float:'left',width:'20%',paddingLeft:'10px'}}>
+                    <Link to={'/mine/'+this.state.dengluId}>
+                        <i className='iconfont icon-wode' style={{fontSize:22,}}></i>
+                        <p >我的</p>
+                    </Link>
+                </div></div>
+
             </div>
         )
     }

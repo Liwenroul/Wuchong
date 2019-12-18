@@ -38,7 +38,7 @@ class PersonalInfo extends Component {
         return (
             <div>
                 <div style={{width:'100%',height:50,backgroundColor:'rgb(29,174,169)',paddingTop:10,color:'#fff',fontSize:'20px'}}>
-                    <Link to={'/tab'+this.state.dengluId}><i className='iconfont icon-back' style={{color:"#fff"}}></i></Link>
+                    <Link to={'/mine/'+this.state.dengluId}><i className='iconfont icon-back' style={{color:"#fff"}}></i></Link>
                     <span style={{marginLeft:140}}>个人信息</span>
                 </div>
                 <div style={{marginLeft:127,marginTop:10}}>
