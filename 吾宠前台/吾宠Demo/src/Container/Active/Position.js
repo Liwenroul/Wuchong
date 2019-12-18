@@ -174,9 +174,9 @@ export default class call extends Component {
                 {/* <i onClick={this.backTop} style={{color:'black',position:"absolute",fontSize:'100px'}} className='iconfont icon-fanhuidingbu4' key='backtop'></i> */}
                 <NavBar style={{backgroundColor:'#1daea9',color:'white',height:'80px'}}
                     leftContent={[
-                        <Link to='/activity' key='position'>
-                            <i style={{color:'white',fontSize:'30px'}} className='iconfont icon-back' key='close1'></i>
-                        </Link>
+                        // <Link to='/activity' key='position'>
+                            <i onClick={()=>{window.history.back();}} style={{color:'white',fontSize:'30px'}} className='iconfont icon-back' key='close1'></i>
+                        // </Link>
                     ]}>{this.state.city}
                 </NavBar>
             {/* 搜索框 */}

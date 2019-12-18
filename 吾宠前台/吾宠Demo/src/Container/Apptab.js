@@ -24,7 +24,7 @@ export default class Apptab extends Component {
     this.setState({
       selectedTab: this.state.selectedTab,
       hidden: false,
-      fullScreen: false,
+      fullScreen: false
     })
   }
   // componentDidUpdate(){
@@ -104,7 +104,7 @@ export default class Apptab extends Component {
               });
             }}
           >
-            <AppMe/>
+            <AppMe dengluId={this.state.dengluId}/>
           </TabBar.Item>
           <TabBar.Item
             icon={<i className='iconfont icon-chongwu'></i>

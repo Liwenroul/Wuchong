@@ -59,10 +59,10 @@ export default class App extends Component {
                     <Route path='/weizhi:userId' component={AppWeizhi} />
 
                     <Route path='/all' component={Apptab}/>
-                    <Route path='/activity' component={AppMe}/>
-                    <Route path='/detail1' component={Detail1}/>
+                    {/* <Route path='/activity/:dengluId' component={AppMe}/> */}
+                    <Route path='/detail1/:dengluId' component={Detail1}/>
                     {/* <Route path='/signup/:activeId' component={Signup}/> */}
-                    <Route path='/signup/' component={Signup}/>
+                    <Route path='/signup/:dengluId' component={Signup}/>
                     <Route path='/position'  component={Position}/>
 
                     <Route path='/clockin' component={ClockIn}/>

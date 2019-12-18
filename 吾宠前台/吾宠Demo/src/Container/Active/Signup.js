@@ -51,12 +51,12 @@ export default class Signup extends Component {
     }
 //获取UserID和活动ID
     componentDidMount(){
-        fetch('/denglu').then((res)=>res.json()).then((res=>{
-            console.log(res)
-            this.setState({
-                userId:res[0].userId
-            })
-        }))
+        // fetch('/denglu').then((res)=>res.json()).then((res=>{
+        //     console.log(res)
+        //     this.setState({
+        //         userId:res[0].userId
+        //     })
+        // }))
         fetch("/activeinfo")
         .then((res)=>res.json())
         .then((res)=>{
@@ -65,6 +65,11 @@ export default class Signup extends Component {
                 activeId:res[0].activeId
             })
         })
+        //userId
+        this.setState({
+            userId:this.props.match.params.dengluId
+        })
+        console.log(this.state.userId)
     }
 //提交报名信息到后台
     register=()=>{

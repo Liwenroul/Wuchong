@@ -6,7 +6,8 @@ export default class ContentAc extends Component {
     constructor(){
         super();
         this.state={
-            data:[]
+            data:[],
+            dengluId:''
         }           
     }
     acInfo=(activeId)=>{
@@ -29,10 +30,12 @@ export default class ContentAc extends Component {
         .then((res)=>{
             console.log(res);
             this.setState({
-                data:res
+                data:res,
+                dengluId:this.props.userId
             })
         })
-    }
+        console.log(this.props.userId);
+    }    
     render() {
         return (
             <div>
@@ -40,7 +43,7 @@ export default class ContentAc extends Component {
                     this.state.data.map((item)=>(
                         <div onClick={()=>this.acInfo(item.activeId)} key={item.activeId} style={{height:'150px'}}>
                             <WhiteSpace size="lg" />
-                                <Link to="/detail1">
+                                <Link to={'/detail1/'+this.state.dengluId}>
                                     <Flex>
                                         <Flex.Item><img src={item.acImg} style={{width:'100%',height:'130px',borderRadius:'10px'}}/>
                                         <h1 style={{color:'white',position:'relative',top:'-80px',left:'20px'}}>{item.activeName}</h1>

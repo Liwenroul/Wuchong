@@ -11,7 +11,9 @@ export default class AppMe extends Component {
     constructor(props){
         super(props);
         this.state={
-            city:'石家庄'
+            city:'石家庄',
+            dengluId:'',
+            dengluId1:''
         }
     }
     componentDidMount(){
@@ -19,13 +21,19 @@ export default class AppMe extends Component {
             this.setState({
                 city:res[0].cityName
             })
-        });        
+        });
+        this.setState({
+            dengluId:this.props.dengluId
+        })
+        // console.log(this.props.dengluId);
+        console.log(this.state.dengluId)
+        // console.log(this.props.match.params.dengluId);     
     }
     render() {
         return (
             <div>
                 <NavBar style={{width:'100%',height:50,backgroundColor:'rgb(29,174,169)',color:'#fff',fontSize:'20px'}}
-                    leftContent={[<Link to='/all' key='position'>
+                    leftContent={[<Link to={'/tab'+this.state.dengluId} key='position'>
                     <i style={{color:'white',fontSize:'30px'}} className='iconfont icon-back' key='close1'></i>
                   </Link>]}
                     >
@@ -36,7 +44,7 @@ export default class AppMe extends Component {
                     </Link>
                 </NavBar>
                 <div className='container'>
-                    <ContentAc/>
+                    <ContentAc userId={this.state.dengluId}/>
                     {/* <Route path='/detail1/:activeId' component={Detail1}/> */}
                 </div>
                 
