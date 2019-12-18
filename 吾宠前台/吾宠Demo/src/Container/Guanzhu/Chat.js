@@ -236,7 +236,7 @@ export default class Chat extends Component {
                             }
                         </div>
                         
-                    <div style={{position:'relative',top:'420px'}}>
+                    <div style={{position:'fixed',bottom:0}}>
                     <input type='text' style={{width:300,height:30,float:'left'}}
                      onChange={this.handleChange} ref='input' 
                     //  defaultValue={this.state.value}
