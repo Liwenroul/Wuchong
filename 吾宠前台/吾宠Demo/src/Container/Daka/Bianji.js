@@ -178,7 +178,7 @@ class Bianji extends Component {
                                 <img src={this.state.data.clockImg} style={{ width: '105px', height: '105px',borderRadius:'50%' }} alt=""/>
                                 
                             </div>
-                            <input type="text" id='clockName' onChange={this.clockNameChange} value={this.state.data.clockName} style={{textAlign:'center',marginLeft:'110px',marginTop:'20px',borderRadius:'5px',background:'#eee'}}/>
+                            <input type="text" id='clockName' onChange={this.clockNameChange} placeholder={this.state.data.clockName} style={{textAlign:'center',marginLeft:'110px',marginTop:'20px',borderRadius:'5px',background:'#eee'}}/>
                             {/* <input id='clockName' onChange={this.clockNameChange} style={{textAlign:'center',marginLeft:'110px',marginTop:'20px',borderRadius:'5px',background:'#eee'}} type='text' id='age' name='age' value={this.state.data.clockName} /> */}
 
                         </div>
