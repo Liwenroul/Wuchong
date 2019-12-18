@@ -158,7 +158,7 @@ export default class Play extends Component {
             .then((res)=>{
                 console.log(res)
                 for(var i = 0;i<res.length;i++){
-                    if(res[i].userid == this.state.userId){
+                    if(res[i].userId == this.state.userId){
                         this.setState({
                             dynamicImg:[...this.state.dynamicImg,res[i].dynamicImg],
                             dynamicContent:[...this.state.dynamicContent,res[i].dynamicContent]

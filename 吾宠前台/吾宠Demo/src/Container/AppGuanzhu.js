@@ -85,7 +85,7 @@ class AppGuanzhu extends Component {
         }
       }
       componentDidMount(){
-          console.log("网址URL",this.props.match.url)
+        //   console.log("网址URL",this.props.match.url)
         document.addEventListener("keydown", this.onKeyDown);
         // let page = this.props.match.params.id;
         // let id = 1;
@@ -102,7 +102,7 @@ class AppGuanzhu extends Component {
         this.setState({
             userId:dengluId
         })
-        console.log(this.state.userId)
+        // console.log(this.state.userId)
             //获取关注的人的guanzhuID
             fetch('/guanzhu')
             .then((res)=>res.json())
@@ -115,7 +115,7 @@ class AppGuanzhu extends Component {
                         })
                     }
                 }
-                console.log(this.state.guanzhuId)
+                // console.log(this.state.guanzhuId)
                 for(var i = 0 ; i <this.state.guanzhuId.length;i++){
                     for(var j =0;j<res.length;j++){
                         if(res[j].guanzhuId == this.state.userId && res[j].userId == this.state.guanzhuId[i]){
@@ -126,20 +126,20 @@ class AppGuanzhu extends Component {
                         }
                     }
                 }
-                console.log("concern:",this.state.concern)
-                console.log("关注ID:",this.state.concern);
+                // console.log("concern:",this.state.concern)
+                // console.log("关注ID:",this.state.concern);
                 for(var i =0;i<this.state.concern.length;i++){
                     this.setState({
                         num:[...this.state.num,i]
                     })
                     
                 }
-                console.log("num:",this.state.num);
+                // console.log("num:",this.state.num);
             })
             fetch('/userinfo')
             .then((res)=>res.json())
             .then((res)=>{
-                console.log(res);
+                // console.log(res);
                 for(var i=0;i<this.state.concern.length;i++){
                     for(var j=0;j<res.length;j++){
                         if(res[j].userId == this.state.concern[i]){

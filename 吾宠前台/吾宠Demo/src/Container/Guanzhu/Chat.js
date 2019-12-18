@@ -31,20 +31,20 @@ export default class Chat extends Component {
     }
     //更改input中的值
     handleChange=(e)=>{
-        console.log(this.state.num)
+        // console.log(this.state.num)
         this.setState({
             value:e.target.value,
         })
         this.setState({
             num:[...this.state.num,this.state.value]
         })
-        console.log("num:",this.state.num);
+        // console.log("num:",this.state.num);
     }
     componentWillMount() {
         fetch('/denglu')
         .then((res)=>res.json())
         .then((res)=>{
-            console.log(this.props.location.search.slice(8,9));
+            // console.log(this.props.location.search.slice(8,9));
             this.setState({
                 sendId:this.props.location.search.slice(8,9)
             })
@@ -60,8 +60,8 @@ export default class Chat extends Component {
         })
         let dengluId = this.props.location.search.slice(20);
         let lll=this.props.match.params.userId;
-        console.log("网址解决",lll)
-        console.log("dengluId:",dengluId);
+        // console.log("网址解决",lll)
+        // console.log("dengluId:",dengluId);
         const registerValue = {"sendId":this.state.userID,"acceptId": dengluId,"content": this.state.value}
         if(this.state.value!=""){
            fetch('/chatVal', {
@@ -95,8 +95,8 @@ export default class Chat extends Component {
                             })
                         }
                     }
-                    console.log(this.state.crr)
-                    console.log(this.state.allId)
+                    // console.log(this.state.crr)
+                    // console.log(this.state.allId)
                     for(var i =0;i<this.state.crr.length;i++){
                         this.setState({
                             allnum:[...this.state.allnum,i]
@@ -122,7 +122,7 @@ export default class Chat extends Component {
     }
 
         componentDidMount(){
-            console.log("网址2：",this.props.match)
+            // console.log("网址2：",this.props.match)
             let ip0 =this.props.location.search;
             let id = this.props.location.search.slice(8,9);
             fetch('/denglu')
@@ -133,7 +133,7 @@ export default class Chat extends Component {
                     userID:this.props.location.search.slice(8,9)
                 })
             })
-            console.log("userID",this.state.userID)
+            // console.log("userID",this.state.userID)
             fetch('/userinfo')
                 .then((res)=>res.json())
                 .then((res)=>{
@@ -170,8 +170,8 @@ export default class Chat extends Component {
                             })
                         }
                     }
-                    console.log(this.state.crr)
-                    console.log(this.state.allId)
+                    // console.log(this.state.crr)
+                    // console.log(this.state.allId)
                     for(var i =0;i<this.state.crr.length;i++){
                         this.setState({
                             allnum:[...this.state.allnum,i]
