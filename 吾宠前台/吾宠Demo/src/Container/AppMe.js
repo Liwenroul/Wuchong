@@ -15,7 +15,7 @@ export default class AppMe extends Component {
             data:[],
             dengluId:this.props.match.params.dengluId
         }
-        console.log(this.props)
+        console.log(this.state.dengluId)
     }
     componentDidMount(){
         fetch('/city').then((res)=>res.json()).then((res)=>{
@@ -68,7 +68,7 @@ export default class AppMe extends Component {
                     this.state.data.map((item)=>(
                         <div onClick={()=>this.acInfo(item.activeId)} key={item.activeId} style={{height:'150px'}}>
                             <WhiteSpace size="lg" />
-                                <Link to="/detail1">
+                                <Link to={"/detail1/"+this.state.dengluId}>
                                     <Flex>
                                         <Flex.Item><img src={item.acImg} style={{width:'100%',height:'130px',borderRadius:'10px'}}/>
                                         <h1 style={{color:'white',position:'relative',top:'-80px',left:'20px'}}>{item.activeName}</h1>
@@ -88,25 +88,25 @@ export default class AppMe extends Component {
                         <p >首页</p>
                     </Link>
                 </div>
-                <div style={{float:'left',width:'20%',paddingLeft:'10px'}}>
+                <div style={{float:'left',width:'20%',paddingLeft:'20px'}}>
                     <Link to={'/activity/'+this.state.dengluId}>
                         <i className='iconfont icon-chongwuwanju' style={{fontSize:22,}}></i>
                         <p >娱乐</p>
                     </Link>
                 </div>
-                <div style={{float:'left',width:'20%',paddingLeft:'10px'}}>
+                <div style={{float:'left',width:'20%',paddingLeft:'20px'}}>
                     <Link to={'/clockin/'+this.state.dengluId}>
                         <i className='iconfont icon-chongwu' style={{fontSize:22,}}></i>
                         <p >打卡</p>
                     </Link>
                 </div>
-                <div style={{float:'left',width:'20%',paddingLeft:'10px'}}>
+                <div style={{float:'left',width:'20%',paddingLeft:'20px'}}>
                     <Link to={'/follow/'+this.state.dengluId}>
                         <i className='iconfont icon-guanzhu' style={{fontSize:22,}}></i>
                         <p >关注</p>
                     </Link>
                 </div>
-                <div style={{float:'left',width:'20%',paddingLeft:'10px'}}>
+                <div style={{float:'left',width:'20%',paddingLeft:'20px'}}>
                     <Link to={'/mine/'+this.state.dengluId}>
                         <i className='iconfont icon-wode' style={{fontSize:22,}}></i>
                         <p >我的</p>

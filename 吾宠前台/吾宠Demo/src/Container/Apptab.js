@@ -164,7 +164,7 @@ export default class Tab extends Component {
         <div>
           {/* <AppHome/> */}
           <Route path={'/tab/'+this.state.dengluId} component={AppHome}/>
-          <Route path={'/tab/yule/'+this.state.dengluId} component={AppMe}/>
+          <Route exact path={'/tab/yule/:dengluId'+this.state.dengluId} component={AppMe}/>
           <Route path={'/tab/daka/'+this.state.dengluId} component={ClockIn}/>
           <Route path={'/tab/guanzhu/'+this.state.dengluId} component={AppGuanzhu}/>
           <Route path={'/tab/wode/'+this.state.dengluId} component={Mine}/>

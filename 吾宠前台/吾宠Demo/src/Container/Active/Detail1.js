@@ -49,16 +49,20 @@ export default class Detail1 extends React.Component{
             }
             console.log(this.state.data);
         })
-        var dengluId=this.props.match.params.dengluId;
+        // var dengluId=this.props.match.params.dengluId;
+        // this.setState({
+        //     dengluId:dengluId
+        // })
+        console.log(this.props.match.params.dengluId);
         this.setState({
-            dengluId:dengluId
+            dengluId:this.props.match.params.dengluId
         })
     }
     render(){
         return (
             <div>
             {/* 返回活动列表页 */}
-                <Link to={'/tab'+this.state.dengluId}>
+                <Link to={'/activity/'+this.state.dengluId}>
                     <i style={{float:'right',fontSize:'30px',color:'#1daea9'}} 
                     className='iconfont icon-icon-' key='close'></i>  
                 </Link>
