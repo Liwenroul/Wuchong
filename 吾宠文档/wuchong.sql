@@ -62,7 +62,7 @@ CREATE TABLE `chat` (
 
 /*Data for the table `chat` */
 
-insert  into `chat`(`chatId`,`sendId`,`acceptId`,`content`) values ('2019-12-16 4:55:08 P','4','2','123'),('2019-12-16 4:57:05 P','2','4','123'),('2019-12-16 4:58:28 P','3','1','123');
+insert  into `chat`(`chatId`,`sendId`,`acceptId`,`content`) values ('2019-12-18 8:45:49','2','4','我也很高兴 '),('2019-12-18 8:45:24','2','4','hello'),('2019-12-18 8:45:39','2','4','我是小黄 '),('2019-12-18 8:45:11','4','2','很高兴认识你'),('2019-12-18 8:44:59','4','2','我是小赵'),('2019-12-18 8:44:52','4','2','嗨'),('2019-12-18 8:46:27','1','4','小李，我是小黄'),('2019-12-18 8:46:36','1','4','Hello哦？');
 
 /*Table structure for table `city` */
 
@@ -122,7 +122,7 @@ CREATE TABLE `denglu` (
 
 /*Data for the table `denglu` */
 
-insert  into `denglu`(`userId`) values ('4');
+insert  into `denglu`(`userId`) values ('2'),('4');
 
 /*Table structure for table `dingwei` */
 
