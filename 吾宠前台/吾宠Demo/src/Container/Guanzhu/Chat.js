@@ -46,9 +46,10 @@ export default class Chat extends Component {
         .then((res)=>{
             // console.log(this.props.location.search.slice(8,9));
             this.setState({
-                sendId:this.props.location.search.slice(8,9)
+                sendId: this.props.match.params.userId
             })
         })
+
     }
     //点击事件
     postVal=(e)=>{
@@ -58,7 +59,7 @@ export default class Chat extends Component {
             allId:[],
             allAvatar:[]
         })
-        let dengluId = this.props.location.search.slice(20);
+        let dengluId = this.props.match.params.dengluId;
         let lll=this.props.match.params.userId;
         // console.log("网址解决",lll)
         // console.log("dengluId:",dengluId);
@@ -85,8 +86,8 @@ export default class Chat extends Component {
                     console.log(res)
                     for(var i =res.length-1;i>=0;i--){
                         // console.log(res[i])
-                        if((this.state.userID == res[i].sendId && this.props.location.search.slice(20) == res[i].acceptId)||
-                        (this.state.userID == res[i].acceptId && this.props.location.search.slice(20) == res[i].sendId))
+                        if((this.state.userID == res[i].sendId && this.props.match.params.dengluId == res[i].acceptId)||
+                        (this.state.userID == res[i].acceptId && this.props.match.params.dengluId == res[i].sendId))
                         {
                             // console.log(i)
                             this.setState({
@@ -122,15 +123,16 @@ export default class Chat extends Component {
     }
 
         componentDidMount(){
+            console.log(this.props.match.params.userId,this.props.match.params.dengluId)
             // console.log("网址2：",this.props.match)
             let ip0 =this.props.location.search;
-            let id = this.props.location.search.slice(8,9);
+            let id = this.props.match.params.userId;
             fetch('/denglu')
             .then((res)=>res.json())
             .then((res)=>{
                 // console.log(res)
                 this.setState({
-                    userID:this.props.location.search.slice(8,9)
+                    userID: this.props.match.params.userId
                 })
             })
             // console.log("userID",this.state.userID)
@@ -160,8 +162,8 @@ export default class Chat extends Component {
                     console.log(res)
                     for(var i =res.length-1;i>=0;i--){
                         // console.log(res[i])
-                        if((this.state.userID == res[i].sendId && this.props.location.search.slice(20) == res[i].acceptId)||
-                        (this.state.userID == res[i].acceptId && this.props.location.search.slice(20) == res[i].sendId))
+                        if((this.state.userID == res[i].sendId && this.props.match.params.dengluId == res[i].acceptId)||
+                        (this.state.userID == res[i].acceptId && this.props.match.params.dengluId == res[i].sendId))
                         {
                             // console.log(i)
                             this.setState({
@@ -205,7 +207,7 @@ export default class Chat extends Component {
         }
         //跳转页面
     change=()=>{
-        this.props.history.push('/tab'+this.props.location.search.slice(20))
+        this.props.history.push('/follow/'+this.props.match.params.dengluId)
     }
     render() {
         let {url} = this.props.match;
@@ -223,13 +225,13 @@ export default class Chat extends Component {
                             this.state.allnum.map((i)=>{
                                 return(
                                     <div>
-                                        <Link to={`/play?userId:`+this.state.allId[i]+`&&dengluId:`+this.props.location.search.slice(20)} className='userschat'>
+                                        <Link to={`/play/userId`+this.state.allId[i]+`/dengluId`+this.props.match.params.dengluId} className='userschat'>
                                         <div className='novel'>
                                         <img src={this.state.allAvatar[i]} style={{height:'40px',width:'40px'}}/>
                                             {this.state.crr[i]}
                                         </div>
                                         </Link> 
-                                        <Route path={'/play?userId:userId&&dengluId:dengluId'} component={Play}/>
+                                        <Route path={'/play/userId:userId/dengluId:dengluId'} component={Play}/>
                                     </div>
                             )
                         })
