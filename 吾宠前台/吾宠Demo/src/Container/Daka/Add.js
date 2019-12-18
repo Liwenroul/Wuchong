@@ -21,17 +21,18 @@ function getBase64(img, callback) {
   }
 
 export default class Add extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
           clockName:"",
           clockNum:"",
           clockTime:"",
-          userId:"",
+          userId:this.props.match.params.userId,
           clockImg:"",
           clockCycle:"",
           
       }
+      console.log(this.props)
     }
 
 
@@ -66,15 +67,15 @@ export default class Add extends Component {
     //     })
     // }
     componentWillMount(){
-      let url2 = '/denglu'
-        fetch(url2)
-            .then((res)=>res.json())
-            .then((res)=>{
-                console.log(res);
-                this.setState({
-                    userId:res[0].userId
-                })
-            })
+      // let url2 = '/denglu'
+      //   fetch(url2)
+      //       .then((res)=>res.json())
+      //       .then((res)=>{
+      //           console.log(res);
+      //           this.setState({
+      //               userId:res[0].userId
+      //           })
+      //       })
     }
 
     register=()=>{
@@ -94,7 +95,7 @@ export default class Add extends Component {
                   console.log(data);
               });
             // }
-        this.props.history.push('/clockin');
+        this.props.history.push('/clockin/'+this.state.userId);
 
        
     }
@@ -135,7 +136,7 @@ export default class Add extends Component {
     }
 
     clockin1 = () => {
-        this.props.history.push('/clockin');
+        this.props.history.push('/clockin/'+this.state.userId);
     }
 
 
