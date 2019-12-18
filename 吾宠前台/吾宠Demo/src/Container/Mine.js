@@ -13,7 +13,11 @@ const Brief = Item.Brief;
 class Mine extends Component {
     constructor(props){
         super(props);
+<<<<<<< Updated upstream
         console.log(this.props);
+=======
+        console.log(this.props.dengluId);
+>>>>>>> Stashed changes
         this.state={
             dengluId:this.props.dengluId,
             imageUrl:"",

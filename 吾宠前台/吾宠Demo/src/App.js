@@ -49,9 +49,9 @@ export default class App extends Component {
             <Router>
                 <div>
                     <Route path='/' component={AppStart} exact/>
-                    <Route path='/home' component={Apptab}/>
+                    {/* <Route path='/home' component={Apptab}/> */}
                     <Route path='/login' component={AppLogin}/>
-                    <Route  path='/tab:userId' component={Apptab}/>
+                    <Route  path='/tab/:userId' component={Apptab}/>
                     <Route  path='/zhuce' component={AppZhuce} />
                     <Route path='/wangji' component={AppForget} />
                     <Route  path='/petxinxi' component={AppPetXinxi} />

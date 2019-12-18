@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { Icon} from 'antd-mobile';
 import {Link,Route} from 'react-router-dom'
 import AppWeizhi from './AppWeizhi';
-import AppTab from '../Apptab';
+import Apptab from '../Apptab';
 import { Upload, message } from 'antd';
 
 function getBase64(img, callback) {
@@ -162,8 +162,13 @@ export default class AppFabu extends Component {
                 {/* <input type="submit" value="发布" /> */}
                 </form>
                 
+<<<<<<< Updated upstream
                 {/* <Route path='/weizhi' component={AppWeizhi} /> */}
                 {/* <Route  path='/tab' component={AppTab}/> */}
+=======
+                <Route path='/weizhi' component={AppWeizhi} />
+                <Route  path='/tab' component={Apptab}/>
+>>>>>>> Stashed changes
             </div>
         )
     }

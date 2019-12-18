@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { NavBar, Icon,TabBar,WingBlank} from 'antd-mobile';
-import {Link,Route} from 'react-router-dom'
+import {Link,Route,withRouter} from 'react-router-dom'
 
-import AppTab from './Apptab'
+import Apptab from './Apptab'
 import  AppZhuce from './Login/AppZhuce'
 import AppForget from './Login/AppForget';
 // import Data from '../data.json'
 let registerValue="";
-export default class AppLogin extends Component {
+class AppLogin extends Component {
     constructor(){
         super();
         this.state={
@@ -48,7 +48,7 @@ export default class AppLogin extends Component {
                      });
                    
                     alert("success!");
-                    window.location = '/tab'+this.state.data[i].userId;
+                    this.props.history.push("/tab/"+this.state.data[i].userId);
                     // window.location = '/tabb'
                 }
                 if(loginname.value===this.state.data[i].userName && password.value!==this.state.data[i].userPassword){
@@ -125,3 +125,5 @@ export default class AppLogin extends Component {
         )
     }
 }
+AppLogin =withRouter(AppLogin);
+export default AppLogin;

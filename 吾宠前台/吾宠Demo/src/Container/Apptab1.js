@@ -1,5 +1,4 @@
 import React,{Component}  from 'react';
-import {Link,Route} from "react-router-dom";
 import { TabBar } from 'antd-mobile';
 import Mine from './Mine'
 import AppHome from './AppHome';
@@ -10,30 +9,26 @@ import AppGuanzhu from './AppGuanzhu';
 
 // import GetCity from './GetCity/GetCity';
 
-export default class Tab extends Component {
+export default class Apptab extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props)
+    // this.props.location.state="home"
     this.state = {
-      dengluId:this.props.match.params.userId
+      selectedTab: 'home',
+      hidden: false,
+      fullScreen: false,
+      dengluId:this.props.match.params.userId,
     };
   }
-<<<<<<< Updated upstream
-  componentDidMount(){
-    this.setState({
-      selectedTab: this.state.selectedTab,
-      hidden: false,
-      fullScreen: false
-    })
-  }
-  // componentDidUpdate(){
-  //   if(this.state.selectedTab=='yule'){
-  //     this.setState({
-  //       selectedTab: 'yule',
-  //       hidden: false,
-  //       fullScreen: false,
-    
-    
+  //  
+  // componentWillMount(){
+  //   this.setState({
+  //     selectedTab: this.state.selectedTab,
+  //     hidden: false,
+  //     fullScreen: false,
+  //   },()=>{
+  //     console.log(this.state.selectedTab)
+  //   })
   // }
   renderContent(pageText) {
     return (
@@ -86,7 +81,7 @@ export default class Tab extends Component {
               });
             }}
           >
-          <AppHome dengluId={this.state.dengluId}/>
+          <AppHome/>
           </TabBar.Item>
           <TabBar.Item
              icon={<i className='iconfont icon-chongwuwanju'></i>
@@ -103,7 +98,7 @@ export default class Tab extends Component {
               });
             }}
           >
-            <AppMe dengluId={this.state.dengluId}/>
+            <AppMe/>
           </TabBar.Item>
           <TabBar.Item
             icon={<i className='iconfont icon-chongwu'></i>
@@ -158,44 +153,6 @@ export default class Tab extends Component {
             <Mine dengluId={this.state.dengluId}/>
           </TabBar.Item>
         </TabBar>
-=======
- 
-  render() {
-    return (
-      <div> 
-        <div>
-          {/* <AppHome/> */}
-          <Route path={'/tab/'+this.state.dengluId} component={AppHome}/>
-          <Route path={'/tab/yule/'+this.state.dengluId} component={AppMe}/>
-          <Route path={'/tab/daka/'+this.state.dengluId} component={ClockIn}/>
-          <Route path={'/tab/guanzhu/'+this.state.dengluId} component={AppGuanzhu}/>
-          <Route path={'/tab/wode/'+this.state.dengluId} component={Mine}/>
-        </div>
-        <div style={{position: 'fixed', height: '100%', width: '100%',top:"91%"}}>
-            <ul style={{listStyle:"none",width:"100%",height:50,background:"red"}}>
-                <Link to={"/tab/"+this.state.dengluId}><li style={{float:"left",width:50,height:40,textAlign:"center",background:"white",position:"relative",marginTop:5,marginLeft:"5%"}}>
-                    <i className='iconfont icon-shouye2'></i>
-                    <span style={{position:"absolute",left:10,top:20}}>首页</span>
-                </li></Link>
-                <Link to={"/tab/yule/"+this.state.dengluId}><li style={{float:"left",width:50,height:40,textAlign:"center",background:"white",position:"relative",marginTop:5,marginLeft:"6%"}}>
-                    <i className='iconfont icon-shouye2'></i>
-                    <span style={{position:"absolute",left:10,top:20}}>首页</span>
-                </li></Link>
-                <Link to={"/tab/daka/"+this.state.dengluId}><li style={{float:"left",width:50,height:40,textAlign:"center",background:"white",position:"relative",marginTop:5,marginLeft:"6%"}}>
-                    <i className='iconfont icon-shouye2'></i>
-                    <span style={{position:"absolute",left:10,top:20}}>首页</span>
-                </li></Link>
-                <Link to={"/tab/guanzhu/"+this.state.dengluId}><li style={{float:"left",width:50,height:40,textAlign:"center",background:"white",position:"relative",marginTop:5,marginLeft:"6%"}}>
-                    <i className='iconfont icon-shouye2'></i>
-                    <span style={{position:"absolute",left:10,top:20}}>首页</span>
-                </li></Link>
-                <Link to={"/tab/wode/"+this.state.dengluId}><li style={{float:"left",width:50,height:40,textAlign:"center",background:"white",position:"relative",marginTop:5,marginLeft:"6%"}}>
-                    <i className='iconfont icon-shouye2'></i>
-                    <span style={{position:"absolute",left:10,top:20}}>首页</span>
-                </li></Link>
-            </ul>
-        </div>
->>>>>>> Stashed changes
       </div>
     );
   }
