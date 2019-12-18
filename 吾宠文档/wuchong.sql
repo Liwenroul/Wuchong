@@ -46,7 +46,7 @@ CREATE TABLE `activeinfo` (
 
 /*Data for the table `activeinfo` */
 
-insert  into `activeinfo`(`activeId`) values ('2');
+insert  into `activeinfo`(`activeId`) values ('1');
 
 /*Table structure for table `chat` */
 
@@ -62,8 +62,6 @@ CREATE TABLE `chat` (
 
 /*Data for the table `chat` */
 
-insert  into `chat`(`chatId`,`sendId`,`acceptId`,`content`) values ('2019-12-18 8:45:49','2','4','我也很高兴 '),('2019-12-18 8:45:24','2','4','hello'),('2019-12-18 8:45:39','2','4','我是小黄 '),('2019-12-18 8:45:11','4','2','很高兴认识你'),('2019-12-18 8:44:59','4','2','我是小赵'),('2019-12-18 8:44:52','4','2','嗨'),('2019-12-18 8:46:27','1','4','小李，我是小黄'),('2019-12-18 8:46:36','4','1','Hello哦？'),('2019-12-18 8:49:24','4','2','11');
-
 /*Table structure for table `city` */
 
 DROP TABLE IF EXISTS `city`;
@@ -74,7 +72,7 @@ CREATE TABLE `city` (
 
 /*Data for the table `city` */
 
-insert  into `city`(`cityName`) values ('安阳');
+insert  into `city`(`cityName`) values ('石家庄');
 
 /*Table structure for table `clockbianji` */
 
@@ -87,7 +85,7 @@ CREATE TABLE `clockbianji` (
 
 /*Data for the table `clockbianji` */
 
-insert  into `clockbianji`(`clockId`) values ('0');
+insert  into `clockbianji`(`clockId`) values ('4');
 
 /*Table structure for table `clockin` */
 
@@ -109,7 +107,7 @@ CREATE TABLE `clockin` (
 
 /*Data for the table `clockin` */
 
-insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`) values ('1','美容',3,'9：00','1','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('3','美容',3,'14:00','3','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('4','美容',2,'15:00','4','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日');
+insert  into `clockin`(`clockId`,`clockName`,`clockNum`,`clockTime`,`userId`,`clockImg`,`clockCycle`) values ('1','美容',3,'9：00','1','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('2','美容',2,'16:29','2','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('3','美容',3,'14:00','3','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日'),('4','美容',3,'15:00','4','https://liwenroul.github.io/Wuchong/img/avatar/avatar3.jpeg','每日');
 
 /*Table structure for table `denglu` */
 
@@ -122,7 +120,7 @@ CREATE TABLE `denglu` (
 
 /*Data for the table `denglu` */
 
-insert  into `denglu`(`userId`) values ('2'),('4');
+insert  into `denglu`(`userId`) values ('3'),('4');
 
 /*Table structure for table `dingwei` */
 
@@ -135,7 +133,7 @@ CREATE TABLE `dingwei` (
 
 /*Data for the table `dingwei` */
 
-insert  into `dingwei`(`acCity`) values ('石家庄');
+insert  into `dingwei`(`acCity`) values ('ewf rdef reg');
 
 /*Table structure for table `dynamic` */
 
@@ -156,7 +154,7 @@ CREATE TABLE `dynamic` (
 
 /*Data for the table `dynamic` */
 
-insert  into `dynamic`(`dynamicId`,`dynamicImg`,`dynamicContent`,`likeNum`,`userId`,`acCity`) values ('2','https://liwenroul.github.io/Wuchong/img/dynamic/d2.jpeg','牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。',200,'1','正定'),('3','https://liwenroul.github.io/Wuchong/img/dynamic/d2.jpeg','今天带狗狗美容啦，可爱吗？',1,'4','河北师范大学'),('dynamic551563','https://liwenroul.github.io/Wuchong/img/dynamic/d3.jpeg','咋的啊',1,'4',NULL);
+insert  into `dynamic`(`dynamicId`,`dynamicImg`,`dynamicContent`,`likeNum`,`userId`,`acCity`) values ('2','https://liwenroul.github.io/Wuchong/img/dynamic/d2.jpeg','牙齿及口腔问题可以说是狗狗健 康状况的第一防线，它的优劣直接定 了毛小孩有一个怎样的生活品质？以 科普为核心，唤醒养宠人对宠物牙齿 问题的重视；提高大家对宠物口腔疾 病预防的意识。',201,'1','正定'),('3','https://liwenroul.github.io/Wuchong/img/dynamic/d2.jpeg','今天带狗狗美容啦，可爱吗？',0,'4','河北师范大学'),('dynamic551563','https://liwenroul.github.io/Wuchong/img/dynamic/d3.jpeg','咋的啊',1,'4',NULL);
 
 /*Table structure for table `editpet` */
 

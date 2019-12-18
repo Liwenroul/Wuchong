@@ -36,7 +36,7 @@ export default class Play extends Component {
     }
     
     change = () =>{
-        this.props.history.push('./chat?userId:'+this.state.guanzhuid);
+        window.history.back();
         console.log('./chat?userId:'+this.state.guanzhuid)
     }
     changeValue=()=>{
@@ -57,7 +57,7 @@ export default class Play extends Component {
                 .then((res)=>{
                     // console.log(res)
                     this.setState({
-                        ID:this.props.location.search.slice(20),
+                        ID:this.props.match.params.dengluId,
                         id:parseInt(Math.random()*1000)
                     })
                     console.log("this.id:",this.state.id,"this.ID:",this.state.ID)
@@ -90,12 +90,12 @@ export default class Play extends Component {
                 .then((res)=>{
                     // console.log(res)
                     this.setState({
-                        ID:this.props.location.search.slice(20),
+                        ID:this.props.match.params.dengluId,
                     })
-                    let ip0 =this.props.location.search;
-                    let ip = ip0.slice(8,9);//截取当前页面的userID
+                    // let ip0 =this.props.location.search;
+                    let ip = this.props.match.params.userId;//截取当前页面的userID
                     //通过登录用户的userId获取关注的人的关注ID
-                    fetch('guanzhu')
+                    fetch('/guanzhu')
                     .then((res)=>res.json())
                     .then((res)=>{
                         for(var i =0;i<res.length;i++){
@@ -128,11 +128,12 @@ export default class Play extends Component {
         })
     }
     componentDidMount(){
+        console.log(this.props.match)
         // let page = this.props.match.params.id;
         // let id = this.props.match.params.userId;
         // let id=1;
         let ip0 =this.props.location.search;
-        let id = ip0.slice(8,9);
+        let id = this.props.match.params.userId;
         this.setState({
             guanzhuid:id
         })
@@ -180,10 +181,10 @@ export default class Play extends Component {
                 <NavBar
                     style={{backgroundColor:'#3fcccb',color:'#000',height:'88px'}}
                     leftContent={[  
-                        <Link to={`/tab`+this.props.location.search.slice(20)}>
+                        // <Link to={`/tab`+this.props.location.search.slice(20)}>
                             <i style={{fontSize:22}} className='iconfont icon-back' onClick={this.change}>
                                 </i>
-                                </Link>
+                                // </Link>
                                 ,
                     ]}
     >{this.state.userName}的吾宠秀</NavBar>

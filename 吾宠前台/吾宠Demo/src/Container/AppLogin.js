@@ -32,7 +32,7 @@ export default class AppLogin extends Component {
         var password = document.getElementById("pwd");
         
         if(loginname.value!==null){
-            for(var i=1;i<this.state.data.length;i++){
+            for(var i=0;i<this.state.data.length;i++){
                 if(loginname.value===this.state.data[i].userName && password.value===this.state.data[i].userPassword){
                     registerValue = {"userId":this.state.data[i].userId}
                     this.setState({userId:this.state.data[i].userId})

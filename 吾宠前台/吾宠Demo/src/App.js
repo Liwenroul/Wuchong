@@ -72,8 +72,8 @@ export default class App extends Component {
 
                     {/* <Route  path='/' component={AppTab} exact/> */}
                     <Route path='/follow/:userId' component={AppGZ}/>
-                    <Route path ='/chat' component={Chat}/>
-                    <Route path ='/play' component={Play}/>
+                    <Route path ='/chat/userId:userId/dengluId:dengluId' component={Chat}/>
+                    <Route path ='/play/userId:userId/dengluId:dengluId' component={Play}/>
 
                     {/* <Route path='/' component={Apptab} exact/> */}
                     <Route path="/wode" component={Mine}/>
