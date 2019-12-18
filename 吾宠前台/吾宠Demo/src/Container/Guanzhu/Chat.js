@@ -105,11 +105,11 @@ export default class Chat extends Component {
                     fetch('/userinfo')
                     .then((res)=>res.json())
                     .then((res)=>{
-                        for(var i = 0;i<res.length;i++){
-                            for(var j = 0;j<this.state.allId.length;j++){
-                                if(res[i].userId == this.state.allId[j]){
+                        for(var i = 0;i<this.state.allId.length;i++){
+                            for(var j=0;j<res.length;j++){
+                                if(res[j].userId == this.state.allId[i]){
                                     this.setState({
-                                        allAvatar:[...this.state.allAvatar,res[i].userAvatar]
+                                        allAvatar:[...this.state.allAvatar,res[j].userAvatar]
                                     })
                                 }
                             }
@@ -180,16 +180,25 @@ export default class Chat extends Component {
                     fetch('/userinfo')
                     .then((res)=>res.json())
                     .then((res)=>{
-                        for(var i = 0;i<res.length;i++){
-                            for(var j = 0;j<this.state.allId.length;j++){
-                                if(res[i].userId == this.state.allId[j]){
+                        // for(var i = 0;i<res.length;i++){
+                        //     for(var j = 0;j<this.state.allId.length;j++){
+                        //         if(res[i].userId == this.state.allId[j]){
+                        //             this.setState({
+                        //                 allAvatar:[...this.state.allAvatar,res[i].userAvatar]
+                        //             })
+                        //         }
+                        //     }
+                        // }
+                        // console.log(this.state.allAvatar)
+                        for(var i = 0;i<this.state.allId.length;i++){
+                            for(var j=0;j<res.length;j++){
+                                if(res[j].userId == this.state.allId[i]){
                                     this.setState({
-                                        allAvatar:[...this.state.allAvatar,res[i].userAvatar]
+                                        allAvatar:[...this.state.allAvatar,res[j].userAvatar]
                                     })
                                 }
                             }
                         }
-                        console.log(this.state.allAvatar)
                     })
                     })
                     console.log(this.state.allAvatar)
