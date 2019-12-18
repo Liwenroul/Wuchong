@@ -22,7 +22,7 @@ export default class AtInfo extends Component {
             userName:'',
             userAvatar:'',
             userId:'',
-            dynamicImg:[],
+            dynamicData:[],
             dynamicContent:[],
             dynamicId:[],
             num:[],
@@ -119,18 +119,17 @@ export default class AtInfo extends Component {
                 for(var i = 0;i<res.length;i++){
                     if(res[i].userid == this.state.userId){
                         this.setState({
-                            dynamicImg:[...this.state.dynamicImg,res[i].dynamicImg],
-                            dynamicContent:[...this.state.dynamicContent,res[i].dynamicContent]
+                            dynamicData:[...this.state.dynamicImg,res[i]]
                         });
                     }
                 }
-                for(var i = 0;i<this.state.dynamicContent.length;i++){
-                    this.setState({
-                        num:[...this.state.num,i],
-                    })
-                }
-                console.log("dynamicImg:",this.state.dynamicImg,"dynamicContent:",this.state.dynamicContent);
-                console.log("num:",this.state.num)
+                // for(var i = 0;i<this.state.dynamicContent.length;i++){
+                //     this.setState({
+                //         num:[...this.state.num,i],
+                //     })
+                // }
+                // console.log("dynamicImg:",this.state.dynamicImg,"dynamicContent:",this.state.dynamicContent);
+                // console.log("num:",this.state.num)
             })
     }
     render() {
@@ -148,18 +147,19 @@ export default class AtInfo extends Component {
                     </div>
                 <div style={{fontSize:22,paddingTop:'30px',width:'200px',heigth:'100px',position:'relative',top:-90,left:280}} onClick={this.changeValue}>{this.state.points}</div>
                 </div>
-                <div className='userspace'>
-                    {
-                        this.state.num.map((i)=>{
-                            return(
-                                <div style={{height:175}}>
-                                    <img src={this.state.dynamicImg[i]} style={{ width: '135px', height: '100px' ,marginTop:0}} alt="" className='space'/>
-                                    <div style={{ color: '#888', fontSize: '14px', marginTop: '12px' }}>
-                                        {this.state.dynamicContent[i]}
-                                    </div>
+                <div >
+                {
+                        this.state.dynamicData.map((item,idx)=>(
+                            <div key={idx} style={{float:"left",border:'1px solid rgb(29,174,169)',width:150,height:200,marginLeft:10,marginRight:20,marginTop:20,borderRadius:10}}>
+                                <div style={{width:150,overflow:"hidden"}}> 
+                                    <img src={item.dynamicImg} style={{ width: '148px',backgroundColor:'blue',borderTopLeftRadius:10,borderTopRightRadius:10}}/>
                                 </div>
-                            )
-                        })
+                                <div>
+                                    <span style={{float:'left',marginLeft:10,marginTop:10,width:100,overflow:"hidden" ,whiteSpace: "nowrap",textOverflow: "ellipsis"}}>{item.dynamicContent}</span>
+                                    <i onClick={()=>this.delDynamic(item.dynamicId)} className="iconfont icon-lajixiang" style={{color:"rgb(29,174,169)",float:'right',marginRight:10,marginTop:10}}></i>
+                                </div>
+                            </div>
+                        ))
                     }
                 </div>
             </div>

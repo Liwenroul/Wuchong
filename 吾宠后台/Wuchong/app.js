@@ -310,9 +310,9 @@ app.post('/clockin',(req,res)=>{
     userId:data.userId,
     clockImg:data.clockImg,
     clockCycle:data.clockCycle,
-    
+    clockedNum:0
   }
-  con.query('insert into clockin(clockId,clockName,clockNum,clockTime,userId,clockImg,clockCycle) values(?,?,?,?,?,?,?)',[insertData.clockId,insertData.clockName,insertData.clockNum,insertData.clockTime,insertData.userId,insertData.clockImg,insertData.clockCycle],function(err,result){
+  con.query('insert into clockin(clockId,clockName,clockNum,clockTime,userId,clockImg,clockCycle,clockedNum) values(?,?,?,?,?,?,?,?)',[insertData.clockId,insertData.clockName,insertData.clockNum,insertData.clockTime,insertData.userId,insertData.clockImg,insertData.clockCycle,insertData.clockedNum],function(err,result){
     if(err){
           console.log(err);
       }
@@ -734,12 +734,12 @@ app.post('/chatVal',(req,res)=>{
 app.post('/clockdaka',(req,res)=>{
   let data=req.body;
   console.log(data);
-  con.query('select clockNum from clockin where clockId=?',[data.clockId],function(err,result){
+  con.query('select clockedNum from clockin where clockId=?',[data.clockId],function(err,result){
     if(err){
       console.log(err)
     }
     else{
-      con.query('update clockin set clockNum=? where clockId=?',[result[0].clockNum+1,data.clockId],function(err,result){
+      con.query('update clockin set clockedNum=? where clockId=?',[result[0].clockedNum+1,data.clockId],function(err,result){
         if(err){
               console.log(err);
           }

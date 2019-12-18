@@ -166,7 +166,11 @@
                                 }
                                 <div style={{width:'100%',margin:'auto'}}>
                                     <Link to={'/fabu'+this.state.userId}>
+<<<<<<< Updated upstream
                                         <i style={{float:'right',fontSize:60,lineHeight:'60px',margin:'20px 20px',color:'rgb(29,174,169)',position:'fixed',top:500,right:15}} className='iconfont icon-jiahao'></i>
+=======
+                                        <i style={{position:"fixed",float:'right',fontSize:60,lineHeight:'60px',margin:'20px 20px',color:'rgb(29,174,169)',top:500,right:15}} className='iconfont icon-jiahao'></i>
+>>>>>>> Stashed changes
                                     </Link>
                                 </div>
                                 <div style={{width:'100%',height:'60px',display:'inline-block',position:'fixed',bottom:0,backgroundColor:'#fff',}}>
