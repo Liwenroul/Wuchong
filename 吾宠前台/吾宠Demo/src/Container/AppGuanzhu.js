@@ -190,14 +190,14 @@ class AppGuanzhu extends Component {
                     style={{display: this.state.display1}}
                     >
                         <div className='searchVal'>
-                            <Link to={url+`/chat?userId:`+this.state.userId2+"&&dengluId:"+this.props.match.params.userId}>
+                            <Link to={`/chat/userId`+this.state.userId2+"/dengluId"+this.props.match.params.userId}>
                             <img src={this.state.userAvatar2} style={{height:'80px',width:'80px',float:'left',marginTop:'5px'}}/>
                             </Link>
                             <div>
                                 <Item extra={''}>{this.state.userName2}</Item>
                                 <Item extra={'2分钟前'}>一条未读消息</Item>
                             </div>
-                            <Route path={url+'/chat?userId:userId'+"&&dengluId:"+this.props.match.params.userId} component={Chat}/>
+                            <Route path={url+'/chat/userId:userId/dengluId:dengluId'} component={Chat}/>
                         </div>
                     </List>
 
