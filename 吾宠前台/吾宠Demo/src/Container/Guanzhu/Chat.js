@@ -41,14 +41,100 @@ export default class Chat extends Component {
         // console.log("num:",this.state.num);
     }
     componentWillMount() {
-        fetch('/denglu')
-        .then((res)=>res.json())
-        .then((res)=>{
-            // console.log(this.props.location.search.slice(8,9));
-            this.setState({
-                sendId: this.props.match.params.userId
-            })
+        this.setState({
+            allnum:[],
+            crr:[],
+            allId:[],
+            allAvatar:[]
         })
+        // fetch('/denglu')
+        // .then((res)=>res.json())
+        // .then((res)=>{
+        //     // console.log(this.props.location.search.slice(8,9));
+        //     this.setState({
+        //         sendId: this.props.match.params.userId
+        //     })
+        // })
+            let ip0 =this.props.location.search;
+            let id = this.props.match.params.userId;
+            fetch('/denglu')
+            .then((res)=>res.json())
+            .then((res)=>{
+                // console.log(res)
+                this.setState({
+                    userID: this.props.match.params.userId,
+                    sendId: this.props.match.params.userId
+                })
+            })
+            // console.log("userID",this.state.userID)
+            fetch('/userinfo')
+                .then((res)=>res.json())
+                .then((res)=>{
+                    // console.log(res)
+                    for(var i=0;i<res.length;i++){
+                        if(res[i].userId == id){
+                            this.setState({
+                                userName:res[i].userName,
+                                userAvatar:res[i].userAvatar,
+                                userId:res[i].userId
+                            });
+                        }
+                        if(res[i].userId == this.state.userID){
+                            this.setState({
+                                useravatar:res[i].userAvatar,
+                            })
+                        }
+                    }
+                    
+                })
+                fetch('/chat')
+                .then((res)=>res.json())
+                .then((res)=>{
+                    console.log(res)
+                    for(var i =res.length-1;i>=0;i--){
+                        // console.log(res[i])
+                        if((this.state.userID == res[i].sendId && this.props.match.params.dengluId == res[i].acceptId)||
+                        (this.state.userID == res[i].acceptId && this.props.match.params.dengluId == res[i].sendId))
+                        {
+                            // console.log(i)
+                            this.setState({
+                                crr:[...this.state.crr,res[i].content],
+                                allId:[...this.state.allId,res[i].acceptId],
+                            })
+                        }
+                    }
+                    // console.log(this.state.crr)
+                    // console.log(this.state.allId)
+                    for(var i =0;i<this.state.crr.length;i++){
+                        this.setState({
+                            allnum:[...this.state.allnum,i]
+                        })
+                    }
+                    fetch('/userinfo')
+                    .then((res)=>res.json())
+                    .then((res)=>{
+                        // for(var i = 0;i<res.length;i++){
+                        //     for(var j = 0;j<this.state.allId.length;j++){
+                        //         if(res[i].userId == this.state.allId[j]){
+                        //             this.setState({
+                        //                 allAvatar:[...this.state.allAvatar,res[i].userAvatar]
+                        //             })
+                        //         }
+                        //     }
+                        // }
+                        // console.log(this.state.allAvatar)
+                        for(var i = 0;i<this.state.allId.length;i++){
+                            for(var j=0;j<res.length;j++){
+                                if(res[j].userId == this.state.allId[i]){
+                                    this.setState({
+                                        allAvatar:[...this.state.allAvatar,res[j].userAvatar]
+                                    })
+                                }
+                            }
+                        }
+                    })
+                    })
+                    console.log(this.state.allAvatar)
 
     }
     //点击事件
@@ -125,85 +211,85 @@ export default class Chat extends Component {
         componentDidMount(){
             console.log(this.props.match.params.userId,this.props.match.params.dengluId)
             // console.log("网址2：",this.props.match)
-            let ip0 =this.props.location.search;
-            let id = this.props.match.params.userId;
-            fetch('/denglu')
-            .then((res)=>res.json())
-            .then((res)=>{
-                // console.log(res)
-                this.setState({
-                    userID: this.props.match.params.userId
-                })
-            })
-            // console.log("userID",this.state.userID)
-            fetch('/userinfo')
-                .then((res)=>res.json())
-                .then((res)=>{
-                    // console.log(res)
-                    for(var i=0;i<res.length;i++){
-                        if(res[i].userId == id){
-                            this.setState({
-                                userName:res[i].userName,
-                                userAvatar:res[i].userAvatar,
-                                userId:res[i].userId
-                            });
-                        }
-                        if(res[i].userId == this.state.userID){
-                            this.setState({
-                                useravatar:res[i].userAvatar,
-                            })
-                        }
-                    }
+            // let ip0 =this.props.location.search;
+            // let id = this.props.match.params.userId;
+            // fetch('/denglu')
+            // .then((res)=>res.json())
+            // .then((res)=>{
+            //     // console.log(res)
+            //     this.setState({
+            //         userID: this.props.match.params.userId
+            //     })
+            // })
+            // // console.log("userID",this.state.userID)
+            // fetch('/userinfo')
+            //     .then((res)=>res.json())
+            //     .then((res)=>{
+            //         // console.log(res)
+            //         for(var i=0;i<res.length;i++){
+            //             if(res[i].userId == id){
+            //                 this.setState({
+            //                     userName:res[i].userName,
+            //                     userAvatar:res[i].userAvatar,
+            //                     userId:res[i].userId
+            //                 });
+            //             }
+            //             if(res[i].userId == this.state.userID){
+            //                 this.setState({
+            //                     useravatar:res[i].userAvatar,
+            //                 })
+            //             }
+            //         }
                     
-                })
-                fetch('/chat')
-                .then((res)=>res.json())
-                .then((res)=>{
-                    console.log(res)
-                    for(var i =res.length-1;i>=0;i--){
-                        // console.log(res[i])
-                        if((this.state.userID == res[i].sendId && this.props.match.params.dengluId == res[i].acceptId)||
-                        (this.state.userID == res[i].acceptId && this.props.match.params.dengluId == res[i].sendId))
-                        {
-                            // console.log(i)
-                            this.setState({
-                                crr:[...this.state.crr,res[i].content],
-                                allId:[...this.state.allId,res[i].acceptId],
-                            })
-                        }
-                    }
-                    // console.log(this.state.crr)
-                    // console.log(this.state.allId)
-                    for(var i =0;i<this.state.crr.length;i++){
-                        this.setState({
-                            allnum:[...this.state.allnum,i]
-                        })
-                    }
-                    fetch('/userinfo')
-                    .then((res)=>res.json())
-                    .then((res)=>{
-                        // for(var i = 0;i<res.length;i++){
-                        //     for(var j = 0;j<this.state.allId.length;j++){
-                        //         if(res[i].userId == this.state.allId[j]){
-                        //             this.setState({
-                        //                 allAvatar:[...this.state.allAvatar,res[i].userAvatar]
-                        //             })
-                        //         }
-                        //     }
-                        // }
-                        // console.log(this.state.allAvatar)
-                        for(var i = 0;i<this.state.allId.length;i++){
-                            for(var j=0;j<res.length;j++){
-                                if(res[j].userId == this.state.allId[i]){
-                                    this.setState({
-                                        allAvatar:[...this.state.allAvatar,res[j].userAvatar]
-                                    })
-                                }
-                            }
-                        }
-                    })
-                    })
-                    console.log(this.state.allAvatar)
+            //     })
+            //     fetch('/chat')
+            //     .then((res)=>res.json())
+            //     .then((res)=>{
+            //         console.log(res)
+            //         for(var i =res.length-1;i>=0;i--){
+            //             // console.log(res[i])
+            //             if((this.state.userID == res[i].sendId && this.props.match.params.dengluId == res[i].acceptId)||
+            //             (this.state.userID == res[i].acceptId && this.props.match.params.dengluId == res[i].sendId))
+            //             {
+            //                 // console.log(i)
+            //                 this.setState({
+            //                     crr:[...this.state.crr,res[i].content],
+            //                     allId:[...this.state.allId,res[i].acceptId],
+            //                 })
+            //             }
+            //         }
+            //         // console.log(this.state.crr)
+            //         // console.log(this.state.allId)
+            //         for(var i =0;i<this.state.crr.length;i++){
+            //             this.setState({
+            //                 allnum:[...this.state.allnum,i]
+            //             })
+            //         }
+            //         fetch('/userinfo')
+            //         .then((res)=>res.json())
+            //         .then((res)=>{
+            //             // for(var i = 0;i<res.length;i++){
+            //             //     for(var j = 0;j<this.state.allId.length;j++){
+            //             //         if(res[i].userId == this.state.allId[j]){
+            //             //             this.setState({
+            //             //                 allAvatar:[...this.state.allAvatar,res[i].userAvatar]
+            //             //             })
+            //             //         }
+            //             //     }
+            //             // }
+            //             // console.log(this.state.allAvatar)
+            //             for(var i = 0;i<this.state.allId.length;i++){
+            //                 for(var j=0;j<res.length;j++){
+            //                     if(res[j].userId == this.state.allId[i]){
+            //                         this.setState({
+            //                             allAvatar:[...this.state.allAvatar,res[j].userAvatar]
+            //                         })
+            //                     }
+            //                 }
+            //             }
+            //         })
+            //         })
+            //         console.log(this.state.allAvatar)
         }
         //跳转页面
     change=()=>{
